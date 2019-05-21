@@ -53,18 +53,27 @@ const Fruits = props => {
   );
 };
 
+
+
+
 class App extends Component {
   render() {
+    const App = () => (
+      <div>
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route path='/list' component={List}/>
+          <Route path="/fruits" render={props => <Fruits {...props} />} />
+          <Redirect exact path="/" to="/fruits" />
+        </Switch>
+      </div>
+    )
     return (
-        <div style={{ padding: 10 }}>
-          <Switch>
-            <Route path="/fruits" render={props => <Fruits {...props} />} />
-            <Redirect exact path="/" to="/fruits" />
-          </Switch>
-        </div>
+      <Switch>
+        <App/>
+      </Switch>
     );
   }
 }
-
 
 export default App;
