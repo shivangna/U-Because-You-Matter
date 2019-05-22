@@ -10,7 +10,9 @@ class Navbarr extends Component {
     return (
       <div className="App">
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">U</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <img className="logo" src="../Images/sun.png" /> U
+          </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#Profil">Profil</Nav.Link>
