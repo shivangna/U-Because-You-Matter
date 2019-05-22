@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
 import { Jumbotron } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Form,Modal,Button } from "react-bootstrap";
 
 class Journal extends Component {
+  state = {
+    modalShow: false
+  };
   render() {
     return (
+      <Modal show={this.state.show} onHide={this.handleClose}>
       <div className="App">
         <Jumbotron>
           <h1>Journal</h1>
@@ -44,7 +47,17 @@ class Journal extends Component {
             <Button variant="outline-info">Submit</Button>
           </p>
         </Jumbotron>
+
       </div>
+          <Modal.Footer>
+        <Button variant="secondary" onClick={this.handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={this.handleClose}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+      </Modal>
     );
   }
 }
