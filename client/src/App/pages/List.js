@@ -5,7 +5,7 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
     };
   }
 
@@ -33,7 +33,7 @@ class List extends Component {
     // };
 
     return (
-      <div className="w3-modal" style={{ display: "block" }}>
+      <div className="w3-modal" style={{ display: "block" }} {...this.props}>
         <div className="w3-modal-content">
           <div className="w3-container">
             <h1>List of Items</h1>
@@ -42,6 +42,7 @@ class List extends Component {
                 return <div>{item}</div>;
               })}
             </div>
+            <button onClick={this.props.onHide}>Close</button>
           </div>
         </div>
       </div>
