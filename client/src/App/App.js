@@ -13,6 +13,8 @@ import {
 import Navbarr from "./pages/Navbarr.js";
 import Journal from "./pages/Journal.js";
 import Mood from "./pages/Mood.js";
+import Challenges from "./pages/Challenges.js";
+import Todo from "./pages/Todo.js";
 
 class App extends Component {
   state = {
@@ -24,10 +26,14 @@ class App extends Component {
     return (
       <div>
         <Navbarr />
-        <span onClick={() => this.setState({ modalShow: true })}>journal</span>
+        <span onClick={() => this.setState({ modalShow: true })} />
         <Journal show={this.state.modalShow} onHide={modalClose} />
-        <span onClick={() => this.setState({ modalShow: true })}>Mood</span>
+        <span onClick={() => this.setState({ modalShow: true })} />
         <Mood show={this.state.modalShow} onHide={modalClose} />
+        <span onClick={() => this.setState({ modalShow: true })} />
+        <Challenges show={this.state.modalShow} onHide={modalClose} />
+        <span onClick={() => this.setState({ modalShow: true })} />
+        <Todo show={this.state.modalShow} onHide={modalClose} />
       </div>
     );
   }
