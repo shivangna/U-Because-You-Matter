@@ -13,21 +13,28 @@ import {
 import Navbarr from "./pages/Navbarr.js";
 import Journal from "./pages/Journal.js";
 import Mood from "./pages/Mood.js";
+import Home from "./pages/Home.js";
+
+
+
 
 class App extends Component {
-  state = {
-    modalShow: false
-  };
+
   render() {
-    let modalClose = () => this.setState({ modalShow: false });
+    const App = () => (
+      <div>
+        <Switch>
+          <Route exact path = "/" component = {Home}/>
+          <Route path = '/journal' component = {Journal}/>
+          <Route path = '/mood' component = {Mood}/>
+        </Switch>
+      </div>
+    )
 
     return (
       <div>
         <Navbarr />
-        <span onClick={() => this.setState({ modalShow: true })}>journal</span>
-        <Journal show={this.state.modalShow} onHide={modalClose} />
-        <span onClick={() => this.setState({ modalShow: true })}>Mood</span>
-        <Mood show={this.state.modalShow} onHide={modalClose} />
+        <Home/>
       </div>
     );
   }

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form,Modal,Button } from "react-bootstrap";
 
 class Journal extends Component {
+  state = {
+    modalShow: false
+  };
   render() {
     return (
+      <Modal show={this.state.show} onHide={this.handleClose}>
       <div className="App">
         <h1>Journal</h1>
         <Form>
@@ -36,8 +40,16 @@ class Journal extends Component {
             <Form.Control as="textarea" rows="3" />
           </Form.Group>
         </Form>
-        ;
       </div>
+          <Modal.Footer>
+        <Button variant="secondary" onClick={this.handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={this.handleClose}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+      </Modal>
     );
   }
 }

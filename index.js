@@ -1,5 +1,14 @@
 const express = require('express');
 const path = require('path');
+const ENV         = process.env.ENV || "development";
+const express     = require("express");
+const app         = express();
+
+const knexConfig  = require("./knexfile");
+const knex        = require("knex")(knexConfig[ENV]);
+const knexLogger  = require('knex-logger');
+
+app.use(knexLogger(knex));
 
 const app = express();
 
