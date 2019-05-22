@@ -12,12 +12,12 @@ import {
   HashRouter,
   BrowserRouter
 } from "react-router-dom/cjs/react-router-dom";
+import Navbarr from "./pages/Navbarr.js";
 
 const Fruit = props => {
   const handleClose = () => {
     props.history.push(props.basePath);
   };
-
   return (
     <div className="w3-modal" style={{ display: "block" }}>
       <div className="w3-modal-content">
@@ -75,12 +75,9 @@ class App extends Component {
       </div>
     );
     return (
-      // <Switch>
-      //   <App />
-      // </Switch>
       <HashRouter>
+        <Navbarr />
         <div>
-          <h1>U</h1>
           <Container className="container">
             <Row>
               <div>
