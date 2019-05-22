@@ -11,7 +11,6 @@ import {
   BrowserRouter
 } from "react-router-dom/cjs/react-router-dom";
 import Journal from "./pages/Journal";
-import Mood from "./pages/Mood";
 
 class App extends Component {
   state = {
