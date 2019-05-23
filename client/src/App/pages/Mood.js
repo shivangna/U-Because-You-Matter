@@ -49,6 +49,7 @@ class Mood extends Component {
         ;
       </div>
       <Modal.Footer>
+
           <Button variant="secondary" onClick={this.props.onHide}>
             Close
           </Button>
