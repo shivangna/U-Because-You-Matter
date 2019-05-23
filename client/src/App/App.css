@@ -48,4 +48,10 @@ emoji-slider {
 
 .moduletitle {
   text-align: center;
+  font-size: 150%;
+  margin-bottom: 2px;
+}
+
+.row {
+  margin-top: 20px;
 }

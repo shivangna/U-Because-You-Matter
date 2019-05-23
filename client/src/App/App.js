@@ -39,7 +39,7 @@ class App extends Component {
       <div>
         <Navbarr />
         <Container>
-          <Row>
+          <Row className="row">
             <Col xs>
               <span onClick={() => this.setState({ modalShowJournal: true })}>
                 <p className="moduletitle">Journal</p>
@@ -89,7 +89,7 @@ class App extends Component {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="row">
             <Col xs>
               <span onClick={() => this.setState({ modalShowTodo: true })}>
                 <p className="moduletitle">Todo</p>
