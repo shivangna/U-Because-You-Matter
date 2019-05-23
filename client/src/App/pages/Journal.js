@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
+import Calendar from "./Calendar.js";
 
 class Journal extends Component {
   render() {
@@ -12,9 +13,10 @@ class Journal extends Component {
             <p>
               <Form>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title </Form.Label>
                   <Form.Control type="text" />
                 </Form.Group>
+                <Calendar />
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label>Select a date</Form.Label>
                   <Form.Control as="select">
@@ -57,4 +59,5 @@ class Journal extends Component {
     );
   }
 }
+
 export default Journal;
