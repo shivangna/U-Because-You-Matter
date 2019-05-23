@@ -6,19 +6,20 @@ const app = express();
 const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 const knexLogger = require("knex-logger");
+var bodyParser = require('body-parser');
 
 app.use(knexLogger(knex));
+app.use(bodyParser.json());
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
-// An api endpoint that returns a short list of items
-app.get("/api/getList", (req, res) => {
-  var list = ["item1", "item2", "item3"];
-  res.json(list);
-  console.log("Sent list of items");
-});
+//posts mood 
+app.post("/mood", (req,res) => {
+  console.log("post request mood", req.body)
+})
 
+//gets moods from db 
 app.get("/mood", (req, res) => {
   knex('users')
     .join('moods', 'users.id', '=', 'moods.user_id')
@@ -28,6 +29,9 @@ app.get("/mood", (req, res) => {
       res.json(results)
     })
 });
+
+
+
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {

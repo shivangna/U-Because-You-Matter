@@ -27,8 +27,20 @@ class Mood extends Component {
   createSetMood = mood => {
     return () => {
       console.log("clicked", mood);
+      fetch('/mood', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mood: mood,
+          date: Date.now()
+        })
+      }).then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
     };
   };
+
+  
 
   render() {
     return (
