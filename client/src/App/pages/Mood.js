@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Jumbotron } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 // import "../node_module/emoji-slider/bin/emoji-slider.js";
+import Heatmap from './heatmap.js';
 
 class Mood extends Component {
   constructor(props) {
@@ -25,9 +26,13 @@ class Mood extends Component {
 
   render() {
     return (
+      <Modal show={this.props.show} onHide={this.props.onHide}>
       <div>
         <Jumbotron className="App">
           <h1>Mood</h1>
+          <p>
+          <emoji-slider emoji="😍" />
+          </p>
           <div>
             {this.state.moods.map(item => {
               return <div key = {item.id}> mood {item.mood} 
@@ -39,9 +44,19 @@ class Mood extends Component {
           <p>
             <Button variant="outline-info">Submit</Button>
           </p>
+          <Heatmap values={this.state.moods}/>
         </Jumbotron>
         ;
       </div>
+      <Modal.Footer>
+          <Button variant="secondary" onClick={this.props.onHide}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.props.onHide}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }
