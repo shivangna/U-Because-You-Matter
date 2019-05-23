@@ -16,7 +16,7 @@ class Navbarr extends Component {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#Profil">Profil</Nav.Link>
-            <Nav.Link href="#Blabla">Blabla</Nav.Link>
+            <Nav.Link href="#Blabla">Logout</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
