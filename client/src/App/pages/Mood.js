@@ -8,18 +8,19 @@ class Mood extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      moods: []
     };
   }
 
   componentDidMount() {
     this.getList();
+    console.log("moods:", this.state)
   }
 
   getList = () => {
     fetch("/mood")
       .then(res => res.json())
-      .then(list => this.setState({ list }));
+      .then(results => this.setState( {moods:results}));
   };
 
   render() {
@@ -27,12 +28,12 @@ class Mood extends Component {
       <div>
         <Jumbotron className="App">
           <h1>Mood</h1>
-          <p>
-            <emoji-slider emoji="😍" />
-          </p>
           <div>
-            {this.state.list.map(item => {
-              return <div>{item}</div>;
+            {this.state.moods.map(item => {
+              return <div key = {item.id}> mood {item.mood} 
+                                           date  {item.mood_date}
+                                           id  {item.id}
+                     </div>;
             })}
           </div>
           <p>
