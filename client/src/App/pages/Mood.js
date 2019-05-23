@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 // import "../node_module/emoji-slider/bin/emoji-slider.js";
-import Heatmap from './heatmap.js';
+import Heatmap from "./heatmap.js";
 
 class Mood extends Component {
   constructor(props) {
@@ -15,41 +15,84 @@ class Mood extends Component {
 
   componentDidMount() {
     this.getList();
-    console.log("moods:", this.state)
+    console.log("moods:", this.state);
   }
 
   getList = () => {
     fetch("/mood")
       .then(res => res.json())
-      .then(results => this.setState( {moods:results}));
+      .then(results => this.setState({ moods: results }));
+  };
+
+  createSetMood = mood => {
+    return () => {
+      console.log("clicked", mood);
+    };
   };
 
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
-      <div>
-        <Jumbotron className="App">
-          <h1>Mood</h1>
-          <p>
-          <emoji-slider emoji="😍" />
-          </p>
-          <div>
-            {this.state.moods.map(item => {
-              return <div key = {item.id}> mood {item.mood} 
-                                           date  {item.mood_date}
-                                           id  {item.id}
-                     </div>;
-            })}
-          </div>
-          <p>
-            <Button variant="outline-info">Submit</Button>
-          </p>
-          <Heatmap values={this.state.moods}/>
-        </Jumbotron>
-        ;
-      </div>
-      <Modal.Footer>
-
+        <div>
+          <Jumbotron className="App">
+            <h1>Mood</h1>
+            <p>
+              <Button
+                onClick={this.createSetMood("ReallyGreat")}
+                variant="outline-info"
+              >
+                Really Great!
+              </Button>
+              <Button
+                onClick={this.createSetMood("Good")}
+                variant="outline-info"
+              >
+                Good!
+              </Button>
+              <Button onClick={this.createSetMood("Ok")} variant="outline-info">
+                Ok
+              </Button>
+            </p>
+            <p>
+              <Button
+                onClick={this.createSetMood("Bad")}
+                variant="outline-info"
+              >
+                Bad
+              </Button>
+              <Button
+                onClick={this.createSetMood("VeryBad")}
+                variant="outline-info"
+              >
+                Very Bad!
+              </Button>
+              <Button
+                onClick={this.createSetMood("Worst")}
+                variant="outline-info"
+              >
+                Worst
+              </Button>
+            </p>
+            <div>
+              {this.state.moods.map(item => {
+                return (
+                  <div key={item.id}>
+                    {" "}
+                    mood {item.mood}
+                    date {item.mood_date}
+                    id {item.id}
+                  </div>
+                );
+              })}
+            </div>
+            <p>
+              <Button variant="outline-info">Submit</Button>
+            </p>
+            <Heatmap values={this.state.moods} />
+          </Jumbotron>
+          ;
+        </div>
+        <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>
             Close
           </Button>
