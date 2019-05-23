@@ -1,33 +1,36 @@
-const express = require('express');
-const path = require('path');
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const app         = express();
+const express = require("express");
+const path = require("path");
+const ENV = process.env.ENV || "development";
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const knexLogger = require("knex-logger");
 
 app.use(knexLogger(knex));
 
-const app = express();
-
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 // An api endpoint that returns a short list of items
-app.get('/api/getList', (req,res) => {
-    var list = ["item1", "item2", "item3"];
-    res.json(list);
-    console.log('Sent list of items');
+app.get("/api/getList", (req, res) => {
+  var list = ["item1", "item2", "item3"];
+  res.json(list);
+  console.log("Sent list of items");
+});
+
+app.get("/mood", (req, res) => {
+  var list = ["happy", "neutral", "sad"];
+  res.json(list);
+  console.log("Mood sent");
 });
 
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log('App is listening on port ' + port);
+console.log("App is listening on port " + port);
