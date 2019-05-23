@@ -8,18 +8,19 @@ class Mood extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      moods: []
     };
   }
 
   componentDidMount() {
     this.getList();
+    console.log("moods:", this.state)
   }
 
   getList = () => {
     fetch("/mood")
       .then(res => res.json())
-      .then(list => this.setState({ list }));
+      .then(results => this.setState( {moods:results}));
   };
 
   render() {

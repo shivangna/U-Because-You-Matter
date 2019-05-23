@@ -20,9 +20,13 @@ app.get("/api/getList", (req, res) => {
 });
 
 app.get("/mood", (req, res) => {
-  var list = ["happy", "neutral", "sad"];
-  res.json(list);
-  console.log("Mood sent");
+  knex('users')
+    .join('moods', 'users.id', '=', 'moods.user_id')
+    .select('users.id', 'moods.mood', 'moods.mood_date')
+    .then((results) => {
+      console.log('this are the results', results)
+      res.json(results)
+    })
 });
 
 // Handles any requests that don't match the ones above
