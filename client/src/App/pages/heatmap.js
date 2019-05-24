@@ -15,15 +15,14 @@ class Heatmap extends Component {
       return newData;
     };
     let dataToRender = changeIncomingData(this.props.values);
-    // console.log('datatorender', dataToRender)
+    console.log('datatorender', dataToRender)
     return (
       <div className="heatmap">
         <CalendarHeatmap
-          startDate={new Date("2018-12-31")}
-          endDate={new Date("2019-12-31")}
+          startDate={new Date("2019-05-01")}
+          endDate={new Date("2019-06-31")}
           values={dataToRender}
           classForValue={value => {
-            console.log("value mood", value);
             if (!value) {
               return "color-empty";
             }
