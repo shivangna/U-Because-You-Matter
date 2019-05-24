@@ -3,8 +3,23 @@ import { Jumbotron } from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 
-class Todo extends Component {
+class TodoList extends Component {
+  componentDidUpdate() {
+    // this.props.currentItem.focus();
+  }
+  createTasks(item) {
+    return (
+      <li key={item.key}>
+        {item.text};
+        <span>
+          <i class="fa fa-trash" />
+        </span>{" "}
+      </li>
+    );
+  }
   render() {
+    const todoEntries = this.props.listEntries;
+    const listItems = todoEntries.map(this.createTasks);
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -17,28 +32,18 @@ class Todo extends Component {
                   <i class="fa fa-plus" />
                 </span>
               </h1>
-              <input type="text" placeholder="Add New Todo" />
+              <form onSubmit={this.props.addItem}>
+                <input
+                  ref={this.props.inputElement}
+                  value={this.props.currentItem.text}
+                  onChange={this.props.handleInput}
+                  type="text"
+                  placeholder="Add New Todo"
+                />
+                <button type="submit"> Add Task </button>
+              </form>
 
-              <ul>
-                <li>
-                  <span>
-                    <i class="fa fa-trash" />
-                  </span>{" "}
-                  Finish Final Project
-                </li>
-                <li>
-                  <span>
-                    <i class="fa fa-trash" />
-                  </span>{" "}
-                  Finish Final Project
-                </li>
-                <li>
-                  <span>
-                    <i class="fa fa-trash" />
-                  </span>{" "}
-                  Finish Final Project
-                </li>
-              </ul>
+              <ul className="thelist">{listItems}</ul>
             </div>
           </Jumbotron>{" "}
         </div>
@@ -54,4 +59,4 @@ class Todo extends Component {
     );
   }
 }
-export default Todo;
+export default TodoList;

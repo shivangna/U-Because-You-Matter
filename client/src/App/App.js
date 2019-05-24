@@ -8,12 +8,11 @@ import Navbarr from "./pages/Navbarr.js";
 import Journal from "./pages/Journal.js";
 import Mood from "./pages/Mood.js";
 import Challenges from "./pages/Challenges.js";
-import Todo from "./pages/Todo.js";
+import TodoList from "./pages/TodoList.js";
 import ButtonToolbar from "react-bootstrap/Container";
 import Button from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-
 import {
   Route,
   NavLink,
@@ -23,11 +22,34 @@ import {
 
 class App extends Component {
   state = {
-    modalShowJournal: false
+    modalShowJournal: false,
     // modalShowMood: false,
     // modalShowChallenges: false,
     // modalShowTodo: false
+    items: [],
+    currentItem: { text: "", key: "" }
   };
+  handleInput = e => {
+    const itemText = e.target.value;
+    const currentItem = { text: itemText, key: Date.now() };
+    this.setState({
+      currentItem
+    });
+  };
+
+  addItem = e => {
+    e.preventDefault();
+    const newItem = this.state.currentItem;
+    if (newItem.text !== "") {
+      console.log(newItem);
+      const items = [...this.state.items, newItem];
+      this.setState({
+        items: items,
+        currentItem: { text: "", key: "" }
+      });
+    }
+  };
+
   render() {
     let modalCloseJournal = () => this.setState({ modalShowJournal: false });
     let modalCloseMood = () => this.setState({ modalShowMood: false });
@@ -40,7 +62,6 @@ class App extends Component {
         <Navbarr />
         <Container>
           <Row className="row">
-
             <Col xs>
               <span onClick={() => this.setState({ modalShowJournal: true })}>
                 <p className="moduletitle">Journal</p>
@@ -100,7 +121,15 @@ class App extends Component {
                   roundedCircle
                 />
               </span>
-              <Todo show={this.state.modalShowTodo} onHide={modalCloseTodo} />
+              <TodoList
+                listEntries={this.state.items}
+                addItem={this.addItem}
+                inputElement={this.inputElement}
+                handleInput={this.handleInput}
+                currentItem={this.state.currentItem}
+                show={this.state.modalShowTodo}
+                onHide={modalCloseTodo}
+              />
             </Col>
 
             <Col xs>
@@ -112,7 +141,6 @@ class App extends Component {
                   roundedCircle
                 />
               </span>
-              <Todo show={this.state.modalShowTodo} onHide={modalCloseTodo} />
             </Col>
 
             <Col xs>
@@ -124,7 +152,6 @@ class App extends Component {
                   roundedCircle
                 />
               </span>
-              <Todo show={this.state.modalShowTodo} onHide={modalCloseTodo} />
             </Col>
           </Row>
         </Container>
@@ -134,4 +161,3 @@ class App extends Component {
   }
 }
 export default App;
-
