@@ -40,6 +40,7 @@ class App extends Component {
         <Navbarr />
         <Container>
           <Row className="row">
+
             <Col xs>
               <span onClick={() => this.setState({ modalShowJournal: true })}>
                 <p className="moduletitle">Journal</p>
@@ -133,3 +134,4 @@ class App extends Component {
   }
 }
 export default App;
+
