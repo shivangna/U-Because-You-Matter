@@ -12,7 +12,7 @@ class Journal extends Component {
             <p>
               <Form>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title </Form.Label>
                   <Form.Control type="text" />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlSelect1">
@@ -57,4 +57,5 @@ class Journal extends Component {
     );
   }
 }
+
 export default Journal;
