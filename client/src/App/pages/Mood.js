@@ -19,6 +19,15 @@ class Mood extends Component {
     };
   }
 
+  // componentDidUpdate(prevState) {
+  //   // Typical usage (don't forget to compare props):
+  //   console.log("previous props", prevState)
+  //   if (this.state.moods !== prevState.moods) {
+  //     console.log('are you in the ifff??')
+  //     this.getList() 
+  //   }
+  // }
+
   componentDidMount() {
     this.getList();
     console.log("moods:", this.state);
@@ -42,7 +51,10 @@ class Mood extends Component {
         })
       })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+          this.getList();
+          console.log(data);
+        })
         .catch(err => console.log(err));
     };
   };
@@ -90,19 +102,7 @@ class Mood extends Component {
                 Worst
               </Button>
             </p>
-            <div>
-              {this.state.moods.map(item => {
-                return (
-                  <div key={item.id}>
-                    {" "}
-                    mood: {item.mood} | date: {item.mood_date.split("T")[0]} |
-                    id: {item.id}
-                  </div>
-                );
-              })}
-            </div>
             <p>
-              <Button variant="outline-info">Submit</Button>
             </p>
             <Heatmap values={this.state.moods} />
           </Jumbotron>
@@ -111,9 +111,6 @@ class Mood extends Component {
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>
             Close
-          </Button>
-          <Button variant="primary" onClick={this.props.onHide}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
