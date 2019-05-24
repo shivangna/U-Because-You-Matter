@@ -4,49 +4,49 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       return Promise.all([
         knex("moods").insert({
-          mood: "happy",
+          mood: "ReallyGreat",
+          mood_date: "2019-05-24",
+          user_id: 1
+        }),
+        knex("moods").insert({
+          mood: "ReallyGreat",
+          mood_date: "2019-05-23",
+          user_id: 1
+        }),
+        knex("moods").insert({
+          mood: "ReallyGreat",
+          mood_date: "2019-05-21",
+          user_id: 1
+        }),
+        knex("moods").insert({
+          mood: "Good",
           mood_date: "2019-05-20",
           user_id: 1
         }),
         knex("moods").insert({
-          mood: "happy",
+          mood: "Good",
           mood_date: "2019-05-19",
           user_id: 1
         }),
         knex("moods").insert({
-          mood: "happy",
+          mood: "Ok",
           mood_date: "2019-05-18",
           user_id: 1
         }),
         knex("moods").insert({
-          mood: "sad",
-          mood_date: "2019-05-18",
-          user_id: 2
-        }),
-        knex("moods").insert({
-          mood: "neutral",
+          mood: "Bad",
           mood_date: "2019-05-17",
-          user_id: 2
+          user_id: 1
         }),
         knex("moods").insert({
-          mood: "happy",
+          mood: "VeryBad",
+          mood_date: "2019-05-16",
+          user_id: 1
+        }),
+        knex("moods").insert({
+          mood: "Worst",
           mood_date: "2019-05-15",
-          user_id: 2
-        }),
-        knex("moods").insert({
-          mood: "neutral",
-          mood_date: "2019-05-08",
-          user_id: 3
-        }),
-        knex("moods").insert({
-          mood: "neutral",
-          mood_date: "2019-05-01",
-          user_id: 3
-        }),
-        knex("moods").insert({
-          mood: "sad",
-          mood_date: "2019-05-05",
-          user_id: 3
+          user_id: 1
         })
       ]);
     });

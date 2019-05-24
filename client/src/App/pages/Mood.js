@@ -5,6 +5,12 @@ import { Form, Modal, Button } from "react-bootstrap";
 // import "../node_module/emoji-slider/bin/emoji-slider.js";
 import Heatmap from "./heatmap.js";
 
+let today = new Date();
+let dd = String(today.getDate()).padStart(2, "0");
+let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+let yyyy = today.getFullYear();
+today = mm + "/" + dd + "/" + yyyy;
+
 class Mood extends Component {
   constructor(props) {
     super(props);
@@ -27,20 +33,19 @@ class Mood extends Component {
   createSetMood = mood => {
     return () => {
       console.log("clicked", mood);
-      fetch('/mood', {
-        method: 'POST',
+      fetch("/mood", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           mood: mood,
-          date: Date.now()
+          date: today
         })
-      }).then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err))
+      })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
     };
   };
-
-  
 
   render() {
     return (
@@ -90,9 +95,8 @@ class Mood extends Component {
                 return (
                   <div key={item.id}>
                     {" "}
-                    mood {item.mood}
-                    date {item.mood_date}
-                    id {item.id}
+                    mood: {item.mood} | date: {item.mood_date.split("T")[0]} |
+                    id: {item.id}
                   </div>
                 );
               })}
