@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
+import Wordgraph from "./wordgraph.js"
 
 class Journal extends Component {
   render() {
@@ -40,6 +41,7 @@ class Journal extends Component {
                 </Form.Group>
               </Form>
             </p>
+            <Wordgraph/>
             <p>
               <Button variant="outline-info">Submit</Button>
             </p>
