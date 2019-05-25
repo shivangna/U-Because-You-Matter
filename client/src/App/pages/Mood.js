@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Jumbotron } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 // import "../node_module/emoji-slider/bin/emoji-slider.js";
 import Heatmap from "./heatmap.js";
 
@@ -24,7 +23,7 @@ class Mood extends Component {
   //   console.log("previous props", prevState)
   //   if (this.state.moods !== prevState.moods) {
   //     console.log('are you in the ifff??')
-  //     this.getList() 
+  //     this.getList()
   //   }
   // }
 
@@ -102,8 +101,7 @@ class Mood extends Component {
                 Worst
               </Button>
             </p>
-            <p>
-            </p>
+            <p />
             <Heatmap values={this.state.moods} />
           </Jumbotron>
           ;

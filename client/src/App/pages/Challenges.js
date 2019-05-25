@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 class Challenges extends Component {
   render() {
@@ -9,9 +9,7 @@ class Challenges extends Component {
         <div className="App">
           <Jumbotron className="App">
             <h1>Challenge</h1>
-            <p>
-              <emoji-slider emoji="😍" />
-            </p>
+            <p />
             <p>
               <Button variant="outline-info">Submit</Button>
             </p>

@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
-import { ListGroup } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 class TodoList extends Component {
   componentDidUpdate() {
-    // this.props.currentItem.focus();
+    //  this.props.currentItem.focus();
   }
+
   createTasks(item) {
     return (
-      <li key={item.key}>
-        {item.text};
+      <li key={item.key} onClick={() => this.props.deleteItem(item.key)}>
+        {item.text}
         <span>
-          <i class="fa fa-trash" />
+          <i className="fa fa-trash" />
         </span>{" "}
       </li>
     );
   }
+
   render() {
     const todoEntries = this.props.listEntries;
     const listItems = todoEntries.map(this.createTasks);
@@ -29,7 +30,7 @@ class TodoList extends Component {
               <h1>
                 To-Do List{" "}
                 <span id="toggle-form">
-                  <i class="fa fa-plus" />
+                  <i className="fa fa-plus" />
                 </span>
               </h1>
               <form onSubmit={this.props.addItem}>
@@ -40,9 +41,7 @@ class TodoList extends Component {
                   type="text"
                   placeholder="Add New Todo"
                 />
-                <button type="submit"> Add Task </button>
               </form>
-
               <ul className="thelist">{listItems}</ul>
             </div>
           </Jumbotron>{" "}

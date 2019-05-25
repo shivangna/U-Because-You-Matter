@@ -28,15 +28,15 @@ app.post("/mood", (req, res) => {
         return knex("moods")
           .where({ mood_date: req.body.date, user_id: 1 })
           .update({ mood: req.body.mood })
-          .then(() => (res.json({msg: 'send ok!'})))
+          .then(() => res.json({ msg: "send ok!" }));
       } else {
         knex("moods")
           .insert({ user_id: 1, mood: req.body.mood, mood_date: req.body.date })
-          .then(() => (res.json({msg: 'send ok!'})));
+          .then(() => res.json({ msg: "send ok!" }));
       }
     })
     .catch(function(ex) {
-      res.send('err')
+      res.send("err");
       console.log("err", ex);
     });
 });
