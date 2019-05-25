@@ -4,22 +4,34 @@ import { ListGroup } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 
 class TodoList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: []
+    };
+  }
+
+  componentDidMount() {
+    this.getList();
+    console.log("todos:", this.state);
+  }
+
   componentDidUpdate() {
     // this.props.currentItem.focus();
   }
-  createTasks(item) {
-    return (
-      <li key={item.key}>
-        {item.text};
-        <span>
-          <i class="fa fa-trash" />
-        </span>{" "}
-      </li>
-    );
-  }
+
+  getList = () => {
+    fetch("/todo")
+      .then(res => res.json())
+      .then(results => {
+        this.setState({ todos: results });
+      });
+  };
+
   render() {
-    const todoEntries = this.props.listEntries;
-    const listItems = todoEntries.map(this.createTasks);
+    const todoEntries = this.state.todos;
+    const listItems = todoEntries.map(todo => todo.task);
+    console.log(this.state.todos);
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -29,21 +41,23 @@ class TodoList extends Component {
               <h1>
                 To-Do List{" "}
                 <span id="toggle-form">
-                  <i class="fa fa-plus" />
+                  <i className="fa fa-plus" />
                 </span>
               </h1>
-              <form onSubmit={this.props.addItem}>
-                <input
-                  ref={this.props.inputElement}
-                  value={this.props.currentItem.text}
-                  onChange={this.props.handleInput}
-                  type="text"
-                  placeholder="Add New Todo"
-                />
+              <form>
+                <input type="text" placeholder="Add New Todo" />
                 <button type="submit"> Add Task </button>
               </form>
-
-              <ul className="thelist">{listItems}</ul>
+              <ul className="thelist">
+                {listItems}
+                <li>
+                  {listItems}
+                  {/* {this.state.todos} */}
+                  <span>
+                    <i className="fa fa-trash" />
+                  </span>{" "}
+                </li>
+              </ul>
             </div>
           </Jumbotron>{" "}
         </div>
@@ -59,4 +73,5 @@ class TodoList extends Component {
     );
   }
 }
+
 export default TodoList;
