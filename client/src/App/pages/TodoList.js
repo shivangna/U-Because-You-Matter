@@ -30,7 +30,16 @@ class TodoList extends Component {
 
   render() {
     const todoEntries = this.state.todos;
-    const listItems = todoEntries.map(todo => todo.task);
+    const listItems = todoEntries.map(todo => {
+      return (
+        <li>
+          {todo.task}
+          <span>
+            <i className="fa fa-trash" />
+          </span>{" "}
+        </li>
+      );
+    });
     console.log(this.state.todos);
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
@@ -48,16 +57,7 @@ class TodoList extends Component {
                 <input type="text" placeholder="Add New Todo" />
                 <button type="submit"> Add Task </button>
               </form>
-              <ul className="thelist">
-                {listItems}
-                <li>
-                  {listItems}
-                  {/* {this.state.todos} */}
-                  <span>
-                    <i className="fa fa-trash" />
-                  </span>{" "}
-                </li>
-              </ul>
+              <ul className="thelist">{listItems}</ul>
             </div>
           </Jumbotron>{" "}
         </div>
