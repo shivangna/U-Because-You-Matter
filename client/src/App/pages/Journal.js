@@ -3,6 +3,13 @@ import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 import Wordgraph from "./wordgraph.js"
 
+let today = new Date();
+let dd = String(today.getDate()).padStart(2, "0");
+let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+let yyyy = today.getFullYear();
+today = mm + "/" + dd + "/" + yyyy;
+
+
 class Journal extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +21,7 @@ class Journal extends Component {
 
   componentDidMount() {
     this.getList();
-    console.log("entries:", this.state);
+    console.log("component did mount entries:", this.state);
   }
 
   getList = () => {
@@ -25,8 +32,22 @@ class Journal extends Component {
 
 
   handleSubmit = (event) => {
-    alert('An entry was submitted: ' + this.state.value);
     event.preventDefault();
+    console.log("clicked", this.state.value);
+    fetch("/journal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        entry: this.state.value,
+        date: today
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      //this.getList();
+      console.log("this is the data", data);
+    })
+    .catch(err => console.log(err));
   }
 
 
@@ -36,8 +57,6 @@ class Journal extends Component {
   
 
   render() {
-
-
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">

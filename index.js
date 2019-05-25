@@ -67,25 +67,27 @@ app.get("/journal", (req, res) => {
 //posts journal entries to db
 app.post("/journal", (req, res) => {
   console.log("post request journal date", req.body.date);
-  console.log("post request journal entry", req.body.mood);
-  return knex("moods")
+  console.log("post request journal entry", req.body.entry);
+  let user_id = 2;
+  return knex("journal_entries")
     .select()
-    .where({ mood_date: req.body.date, user_id: 1 })
+    .where({ journal_date: req.body.date, user_id: user_id})
     .then(function(rows) {
       if (rows && rows.length) {
         // no matching records found
-        return knex("moods")
-          .where({ mood_date: req.body.date, user_id: 1 })
-          .update({ mood: req.body.mood })
+        return knex("journal_entries")
+          .where({ journal_date: req.body.date, user_id: user_id })
+          .update({ journal_entry: req.body.entry })
           .then(() => res.json({ msg: "send ok!" }));
       } else {
-        knex("moods")
-          .insert({ user_id: 1, mood: req.body.mood, mood_date: req.body.date })
+        console.log('inserting journal entries')
+        knex("journal_entries")
+          .insert({ user_id: user_id, journal_entry: req.body.entry, journal_date: req.body.date })
           .then(() => res.json({ msg: "send ok!" }));
       }
     })
     .catch(function(ex) {
-      res.send("err");
+      res.send({error: "err"});
       console.log("err", ex);
     });
 });
