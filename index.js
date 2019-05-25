@@ -27,15 +27,15 @@ app.post("/mood", (req, res) => {
         return knex("moods")
           .where({ mood_date: req.body.date, user_id: 1 })
           .update({ mood: req.body.mood })
-          .then(() => (res.json({msg: 'send ok!'})))
+          .then(() => res.json({ msg: "send ok!" }));
       } else {
         knex("moods")
           .insert({ user_id: 1, mood: req.body.mood, mood_date: req.body.date })
-          .then(() => (res.json({msg: 'send ok!'})));
+          .then(() => res.json({ msg: "send ok!" }));
       }
     })
     .catch(function(ex) {
-      res.send('err')
+      res.send("err");
       console.log("err", ex);
     });
 });
@@ -50,12 +50,15 @@ app.get("/mood", (req, res) => {
     });
 });
 
-
 //gets journal entries from db
 app.get("/journal", (req, res) => {
   knex("users")
     .join("journal_entries", "users.id", "=", "journal_entries.user_id")
-    .select("users.id", "journal_entries.journal_entry", "journal_entries.journal_date")
+    .select(
+      "users.id",
+      "journal_entries.journal_entry",
+      "journal_entries.journal_date"
+    )
     .then(results => {
       res.json(results);
     });
@@ -74,22 +77,33 @@ app.post("/journal", (req, res) => {
         return knex("moods")
           .where({ mood_date: req.body.date, user_id: 1 })
           .update({ mood: req.body.mood })
-          .then(() => (res.json({msg: 'send ok!'})))
+          .then(() => res.json({ msg: "send ok!" }));
       } else {
         knex("moods")
           .insert({ user_id: 1, mood: req.body.mood, mood_date: req.body.date })
-          .then(() => (res.json({msg: 'send ok!'})));
+          .then(() => res.json({ msg: "send ok!" }));
       }
     })
     .catch(function(ex) {
-      res.send('err')
+      res.send("err");
       console.log("err", ex);
     });
 });
 
-
-
-
+//gets Todotasks from db
+app.get("/todo", (req, res) => {
+  knex("users")
+    .join("todo_tasks", "users.id", "=", "todo_tasks.user_id")
+    .select(
+      "users.id",
+      "todo_tasks.task",
+      "todo_tasks.title",
+      "todo_tasks.task_state"
+    )
+    .then(results => {
+      res.json(results);
+    });
+});
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
