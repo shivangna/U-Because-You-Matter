@@ -157,6 +157,10 @@ input:focus {
 
 /* DAILY CHALLENGES */
 
+.circleOutside {
+  align-self: center;
+}
+
 .ciclegraph {
   position: relative;
   width: 500px;
