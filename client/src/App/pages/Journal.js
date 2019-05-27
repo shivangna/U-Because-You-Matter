@@ -44,7 +44,7 @@ class Journal extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      //this.getList();
+      this.getList();
       console.log("this is the data", data);
     })
     .catch(err => console.log(err));
@@ -57,6 +57,7 @@ class Journal extends Component {
   
 
   render() {
+    console.log("these are the values", this.state.entries)
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -88,7 +89,7 @@ class Journal extends Component {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} defaultValue={this.state.value}>
                 <label> add your text 
                   <input type='text' value = {this.state.value} onChange={this.handleChange} />
                 </label>
