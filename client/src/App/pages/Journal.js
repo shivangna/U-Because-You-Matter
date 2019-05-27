@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
-import Wordgraph from "./wordgraph.js"
+import Wordgraph from "./wordgraph.js";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -9,13 +9,12 @@ let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 let yyyy = today.getFullYear();
 today = mm + "/" + dd + "/" + yyyy;
 
-
 class Journal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       entries: [],
-      value:''
+      value: ""
     };
   }
 
@@ -30,8 +29,7 @@ class Journal extends Component {
       .then(results => this.setState({ entries: results }));
   };
 
-
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     console.log("clicked", this.state.value);
     fetch("/journal", {
@@ -42,19 +40,17 @@ class Journal extends Component {
         date: today
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      //this.getList();
-      console.log("this is the data", data);
-    })
-    .catch(err => console.log(err));
-  }
+      .then(res => res.json())
+      .then(data => {
+        //this.getList();
+        console.log("this is the data", data);
+      })
+      .catch(err => console.log(err));
+  };
 
-
-  handleChange = (event) => {
-    this.setState({value: event.target.value});
-  }
-  
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
 
   render() {
     return (
@@ -88,26 +84,29 @@ class Journal extends Component {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                <form onSubmit={this.handleSubmit}>
-                <label> add your text 
-                  <input type='text' value = {this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type ='submit' value = 'Submit' />
-                </form>
+                  <form onSubmit={this.handleSubmit}>
+                    <label>
+                      {" "}
+                      add your text
+                      <input
+                        type="text"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                    <input type="submit" value="Submit" />
+                  </form>
                 </Form.Group>
               </Form>
             </p>
-            <Wordgraph/>
+            <Wordgraph />
 
             {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Label>How is your day going?</Form.Label>
                   <Form.Control as="textarea" rows="3" />
                 </Form.Group> */}
 
-                
-            <p>
-              
-            </p>
+            <p />
           </Jumbotron>
         </div>
         <Modal.Footer>

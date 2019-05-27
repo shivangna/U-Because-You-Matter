@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
-import { ListGroup } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 class TodoList extends Component {
   constructor(props) {
@@ -60,8 +59,8 @@ class TodoList extends Component {
       .then(res => res.json())
       .then(data => {
         this.getList();
-      })
-      .catch(err => console.log(err));
+      });
+    this.setState({ tasks: "" });
   };
 
   render() {

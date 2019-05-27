@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 // import { BrowserRouter, Route, Redirect, Link, Switch } from "react-router-dom";
-import { Link, Switch } from "react-router-dom";
 import "./App.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,16 +8,8 @@ import Journal from "./pages/Journal.js";
 import Mood from "./pages/Mood.js";
 import Challenges from "./pages/Challenges.js";
 import TodoList from "./pages/TodoList.js";
-import ButtonToolbar from "react-bootstrap/Container";
-import Button from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import {
-  Route,
-  NavLink,
-  HashRouter,
-  BrowserRouter
-} from "react-router-dom/cjs/react-router-dom";
 
 class App extends Component {
   state = {
