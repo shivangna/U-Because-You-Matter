@@ -7,28 +7,76 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: ""
+      task: "",
+      todos: [],
+      currentItem: { text: "", key: "" }
     };
   }
+  componentDidMount() {
+    this.getList();
+  }
+
+  getList = () => {
+    fetch("/todo")
+      .then(res => res.json())
+      .then(results => {
+        this.setState({ todos: results });
+      });
+  };
+
+  deleteHandler = key => {
+    console.log("i m here");
+    console.log("key", key);
+    fetch("/todo", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        key: key
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+      })
+      .catch(err => console.log(err));
+  };
 
   submitHandler = e => {
-    console.log("e =", e.target.value);
+    if (e.key === "Enter") console.log("e =", e.target.value);
     this.setState({ task: e.target.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
+    e.target.value = "";
     fetch("/todo", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         task: this.state.task,
-        task_state: 0
+        task_state: "incomplete"
       })
-    });
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
+    const todoEntries = this.state.todos;
+    console.log("todoEntries", todoEntries);
+    const listItems = todoEntries.map(todos => {
+      return (
+        <li>
+          {todos.task}
+          <span onClick={() => this.deleteHandler(todos.id)}>
+            <i className="fa fa-trash" key={todos.id} />
+          </span>{" "}
+        </li>
+      );
+    });
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -38,9 +86,10 @@ class TodoList extends Component {
               <h1>
                 To-Do List
                 <span id="toggle-form">
-                  <i className="fa fa-plus" />
+                  <i className="fa fa-plus" name="removeTask" />
                 </span>
               </h1>
+
               <form onSubmit={this.handleSubmit}>
                 <input
                   onChange={this.submitHandler}
@@ -49,7 +98,7 @@ class TodoList extends Component {
                 />
                 <button type="submit"> Add Task </button>
               </form>
-              <ul className="thelist" />
+              <ul className="thelist">{listItems}</ul>
             </div>
           </Jumbotron>
         </div>
