@@ -16,54 +16,113 @@ class Challenges extends Component {
       color5: "white",
       color6: "white",
       color7: "green",
-      count: 1,
+      count: 0,
       value: 0
     };
   }
 
   render() {
-    const changeCount = () => {
-      let arr = Object.values(this.state);
-      // console.log("ObjArr: ", objArr);
-      var counts = {};
-
-      for (var i = 0; i < arr.length; i++) {
-        var num = arr[i];
-        counts[num] = counts[num] ? counts[num] + 1 : 1;
-      }
-      console.log("Green count: ", counts["green"]);
-      this.setState({ count: counts["green"] });
-      return this.setState({ value: (this.state.count / 6).toFixed(2) });
-    };
     const changeColor1 = () => {
       var newColor = this.state.color1 === "white" ? "green" : "white";
       this.setState({ color1: newColor });
-      changeCount();
+      if (this.state.color1 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor2 = () => {
       var newColor = this.state.color2 === "white" ? "green" : "white";
       this.setState({ color2: newColor });
-      changeCount();
+      if (this.state.color2 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor3 = () => {
       var newColor = this.state.color3 === "white" ? "green" : "white";
       this.setState({ color3: newColor });
-      changeCount();
+      if (this.state.color3 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor4 = () => {
       var newColor = this.state.color4 === "white" ? "green" : "white";
       this.setState({ color4: newColor });
-      changeCount();
+      if (this.state.color4 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor5 = () => {
       var newColor = this.state.color5 === "white" ? "green" : "white";
       this.setState({ color5: newColor });
-      changeCount();
+      if (this.state.color5 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor6 = () => {
       var newColor = this.state.color6 === "white" ? "green" : "white";
       this.setState({ color6: newColor });
-      changeCount();
+      if (this.state.color6 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
 
     return (
