@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
+// import { VictoryPie, VictoryAnimation, VictoryLabel } from "victory";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 class Challenges extends Component {
   constructor(props) {
@@ -11,34 +14,115 @@ class Challenges extends Component {
       color3: "white",
       color4: "white",
       color5: "white",
-      color6: "white"
+      color6: "white",
+      color7: "green",
+      count: 0,
+      value: 0
     };
   }
 
   render() {
     const changeColor1 = () => {
-      var newColor = this.state.color1 == "white" ? "green" : "white";
+      var newColor = this.state.color1 === "white" ? "green" : "white";
       this.setState({ color1: newColor });
+      if (this.state.color1 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor2 = () => {
-      var newColor = this.state.color2 == "white" ? "green" : "white";
+      var newColor = this.state.color2 === "white" ? "green" : "white";
       this.setState({ color2: newColor });
+      if (this.state.color2 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor3 = () => {
-      var newColor = this.state.color3 == "white" ? "green" : "white";
+      var newColor = this.state.color3 === "white" ? "green" : "white";
       this.setState({ color3: newColor });
+      if (this.state.color3 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor4 = () => {
-      var newColor = this.state.color4 == "white" ? "green" : "white";
+      var newColor = this.state.color4 === "white" ? "green" : "white";
       this.setState({ color4: newColor });
+      if (this.state.color4 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor5 = () => {
-      var newColor = this.state.color5 == "white" ? "green" : "white";
+      var newColor = this.state.color5 === "white" ? "green" : "white";
       this.setState({ color5: newColor });
+      if (this.state.color5 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
     const changeColor6 = () => {
-      var newColor = this.state.color6 == "white" ? "green" : "white";
+      var newColor = this.state.color6 === "white" ? "green" : "white";
       this.setState({ color6: newColor });
+      if (this.state.color6 === "white") {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count + 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      } else {
+        new Promise((resolve, reject) => {
+          resolve(this.setState({ count: this.state.count - 1 }));
+        }).then(() => {
+          this.setState({ value: (this.state.count / 6).toFixed(2) });
+        });
+      }
     };
 
     return (
@@ -53,12 +137,19 @@ class Challenges extends Component {
           </Jumbotron>{" "}
         </div>
         <div className="circleOutside">
+          <CircularProgressbar
+            value={this.state.value}
+            maxValue={1}
+            text={`${this.state.value * 100}%`}
+          />
           <div className="ciclegraph">
             <div
               id="color1"
               className="circle"
               style={{ backgroundColor: this.state.color1 }}
-              onClick={changeColor1}
+              onClick={() => {
+                changeColor1();
+              }}
             >
               <p>Take 3 deeps breaths</p>
             </div>

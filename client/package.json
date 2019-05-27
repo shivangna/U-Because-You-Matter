@@ -8,10 +8,12 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-calendar-heatmap": "^1.8.0",
+    "react-circular-progressbar": "^2.0.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "0.9.5",
-    "recharts": "^1.6.2"
+    "recharts": "^1.6.2",
+    "victory": "^32.2.3"
   },
   "devDependencies": {},
   "scripts": {
