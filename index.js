@@ -18,7 +18,6 @@ app.use(express.static(path.join(__dirname, "client/build")));
 app.post("/mood", (req, res) => {
   console.log("post request date", req.body.date);
   console.log("post request mood", req.body.mood);
-
   return knex("moods")
     .select()
     .where({ mood_date: req.body.date, user_id: 1 })
@@ -28,15 +27,15 @@ app.post("/mood", (req, res) => {
         return knex("moods")
           .where({ mood_date: req.body.date, user_id: 1 })
           .update({ mood: req.body.mood })
-          .then(() => (res.json({msg: 'send ok!'})))
+          .then(() => res.json({ msg: "send ok!" }));
       } else {
         knex("moods")
           .insert({ user_id: 1, mood: req.body.mood, mood_date: req.body.date })
-          .then(() => (res.json({msg: 'send ok!'})));
+          .then(() => res.json({ msg: "send ok!" }));
       }
     })
     .catch(function(ex) {
-      res.send('err')
+      res.send("err");
       console.log("err", ex);
     });
 });
@@ -47,7 +46,63 @@ app.get("/mood", (req, res) => {
     .join("moods", "users.id", "=", "moods.user_id")
     .select("users.id", "moods.mood", "moods.mood_date")
     .then(results => {
-      console.log("this are the results", results);
+      res.json(results);
+    });
+});
+
+//gets journal entries from db
+app.get("/journal", (req, res) => {
+  knex("users")
+    .join("journal_entries", "users.id", "=", "journal_entries.user_id")
+    .select(
+      "users.id",
+      "journal_entries.journal_entry",
+      "journal_entries.journal_date"
+    )
+    .then(results => {
+      res.json(results);
+    });
+});
+
+//posts journal entries to db
+app.post("/journal", (req, res) => {
+  console.log("post request journal date", req.body.date);
+  console.log("post request journal entry", req.body.entry);
+  let user_id = 2;
+  return knex("journal_entries")
+    .select()
+    .where({ journal_date: req.body.date, user_id: user_id})
+    .then(function(rows) {
+      if (rows && rows.length) {
+        // no matching records found
+        return knex("journal_entries")
+          .where({ journal_date: req.body.date, user_id: user_id })
+          .update({ journal_entry: req.body.entry })
+          .then(() => res.json({ msg: "send ok!" }));
+      } else {
+        console.log('inserting journal entries')
+        knex("journal_entries")
+          .insert({ user_id: user_id, journal_entry: req.body.entry, journal_date: req.body.date })
+          .then(() => res.json({ msg: "send ok!" }));
+      }
+    })
+    .catch(function(ex) {
+      res.send({error: "err"});
+      console.log("err", ex);
+    });
+});
+
+//gets Todotasks from db
+app.get("/todo", (req, res) => {
+  knex("users")
+    .join("todo_tasks", "users.id", "=", "todo_tasks.user_id")
+    .select(
+      "users.id",
+      "todo_tasks.task",
+      "todo_tasks.title",
+      "todo_tasks.task_state"
+    )
+    .then(results => {
       res.json(results);
     });
 });

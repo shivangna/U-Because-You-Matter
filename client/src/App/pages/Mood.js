@@ -24,7 +24,7 @@ class Mood extends Component {
   //   console.log("previous props", prevState)
   //   if (this.state.moods !== prevState.moods) {
   //     console.log('are you in the ifff??')
-  //     this.getList() 
+  //     this.getList()
   //   }
   // }
 
@@ -102,8 +102,7 @@ class Mood extends Component {
                 Worst
               </Button>
             </p>
-            <p>
-            </p>
+            <p />
             <Heatmap values={this.state.moods} />
           </Jumbotron>
           ;

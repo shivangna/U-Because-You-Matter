@@ -38,7 +38,7 @@ class TodoList extends Component {
               <h1>
                 To-Do List
                 <span id="toggle-form">
-                  <i class="fa fa-plus" />
+                  <i className="fa fa-plus" />
                 </span>
               </h1>
               <form onSubmit={this.handleSubmit}>
@@ -65,4 +65,5 @@ class TodoList extends Component {
     );
   }
 }
+
 export default TodoList;

@@ -154,3 +154,93 @@ input:focus {
   color: gray;
   text-decoration: line-through;
 }
+
+/* DAILY CHALLENGES */
+
+.circleOutside {
+  align-self: center;
+}
+
+.ciclegraph {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: calc(100px / 2 + 0px);
+}
+
+.ciclegraph:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* border: 10px solid rebeccapurple; */
+  width: calc(100% - 2px * 2);
+  height: calc(100% - 2px * 2);
+  border-radius: 50%;
+  border: 5px solid rebeccapurple;
+}
+
+.ciclegraph .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  margin: calc(-150px / 2);
+  /* background: teal; */
+  border-radius: 50%;
+  border: 2px solid teal;
+  background-color: white;
+  text-align: center;
+  line-height: 150px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.ciclegraph .circle p {
+  /* vertical-align: middle; */
+  visibility: hidden;
+  /* word-wrap: break-word; */
+  line-height: 1.5;
+  display: inline-block;
+  vertical-align: middle;
+}
+.ciclegraph .circle:hover p {
+  visibility: visible;
+}
+/* .ciclegraph .circle:hover {
+  vertical-align: middle;
+} */
+
+.ciclegraph .circle:nth-child(1) {
+  transform: rotate(0deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(2) {
+  transform: rotate(60deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(2) p {
+  transform: rotate(-60deg);
+}
+.ciclegraph .circle:nth-child(3) {
+  transform: rotate(120deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(3) p {
+  transform: rotate(-120deg);
+}
+.ciclegraph .circle:nth-child(4) {
+  transform: rotate(180deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(4) p {
+  transform: rotate(-180deg);
+}
+.ciclegraph .circle:nth-child(5) {
+  transform: rotate(240deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(5) p {
+  transform: rotate(-240deg);
+}
+.ciclegraph .circle:nth-child(6) {
+  transform: rotate(300deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(6) p {
+  transform: rotate(-300deg);
+}
