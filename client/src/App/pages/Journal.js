@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 import Wordgraph from "./wordgraph.js"
+import { parse } from "url";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -10,13 +11,29 @@ let yyyy = today.getFullYear();
 today = mm + "/" + dd + "/" + yyyy;
 
 
+
+
 class Journal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       entries: [],
-      value:''
+      value:'',
+      entry_today: {journal_entry: ""}
     };
+  }
+
+  renderTodaysJournal = (entries) => {
+    entries.forEach (element => {
+      let journalDateSpliced = element['journal_date'].split("T")[0];
+      console.log("ths is it", journalDateSpliced)
+      if (journalDateSpliced === today) {
+        console.log("ths is it", journalDateSpliced)
+        return element['journal_entry']
+      } else {
+        return null
+      }
+    })
   }
 
   componentDidMount() {
@@ -27,7 +44,23 @@ class Journal extends Component {
   getList = () => {
     fetch("/journal")
       .then(res => res.json())
-      .then(results => this.setState({ entries: results }));
+      .then(results => {
+        const entry_today = results.find((entry) => {
+          const parsedEntryDate = new Date(entry.journal_date)
+          const today = new Date()
+          return parsedEntryDate.getDate() + 1 == today.getDate() && 
+            parsedEntryDate.getFullYear() == today.getFullYear() && 
+            parsedEntryDate.getMonth() == today.getMonth() 
+        })
+        
+        this.setState({ entries: results})
+        if (entry_today) {
+          this.setState({ 
+            entry_today: entry_today,
+            value: entry_today.journal_entry
+          })
+        }
+      });
   };
 
 
@@ -89,9 +122,9 @@ class Journal extends Component {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                <form onSubmit={this.handleSubmit} defaultValue={this.state.value}>
+                <form onSubmit={this.handleSubmit}>
                 <label> add your text 
-                  <input type='text' value = {this.state.value} onChange={this.handleChange} />
+                  <input type='text' value = {this.state.value} defaultValue={this.state.entry_today.journal_entry} onChange={this.handleChange} />
                 </label>
                 <input type ='submit' value = 'Submit' />
                 </form>
