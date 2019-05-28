@@ -4,6 +4,9 @@ import { Form, Modal, Button } from "react-bootstrap";
 //import ChartViewer from "./wordgraph.js"
 import ChartViewer from "./final-wordgraph.js"
 import { parse } from "url";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -17,14 +20,21 @@ class Journal extends Component {
     this.state = {
       entries: [],
       value:'',
-      entry_today: {journal_entry: ""}
+      entry_today: {journal_entry: ""},
+      startDate: new Date()
     };
+  }
+
+  handleDateChange = (date) => {
+    this.setState({
+      startDate: date
+    });
   }
 
   renderTodaysJournal = (entries) => {
     entries.forEach (element => {
       let journalDateSpliced = element['journal_date'].split("T")[0];
-      if (journalDateSpliced === today) {
+      if (journalDateSpliced === this.state.startDate) {
         return element['journal_entry']
       } else {
         return null
@@ -36,13 +46,26 @@ class Journal extends Component {
     this.getList();
   }
 
+  componentDidUpdate() {
+    let parsedEntryDate = new Date(this.state.entry_today.journal_date)
+    let today = new Date(this.state.startDate)
+    console.log('parsed entry date, today', parsedEntryDate, today)
+    if (parsedEntryDate.getDate() + 1 == today.getDate() && 
+      parsedEntryDate.getFullYear() == today.getFullYear() && 
+      parsedEntryDate.getMonth() == today.getMonth() ) {
+        return
+      }
+    this.getList()
+  }
+
   getList = () => {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
-        const entry_today = results.find((entry) => {
-          const parsedEntryDate = new Date(entry.journal_date)
-          const today = new Date()
+        let entry_today = results.find((entry) => {
+          let parsedEntryDate = new Date(entry.journal_date)
+          let today = new Date(this.state.startDate)
+          console.log('parsed entry date, today', parsedEntryDate, today)
           return parsedEntryDate.getDate() + 1 == today.getDate() && 
             parsedEntryDate.getFullYear() == today.getFullYear() && 
             parsedEntryDate.getMonth() == today.getMonth() 
@@ -53,8 +76,13 @@ class Journal extends Component {
           this.setState({ 
             entry_today: entry_today,
             value: entry_today.journal_entry
-          })
-        }
+          }) }
+          else {
+            this.setState({
+              value:""
+            } 
+            )
+          }
       });
   };
 
@@ -86,19 +114,13 @@ class Journal extends Component {
         <div className="App">
           <Jumbotron>
             <h1>Journal</h1>
-            <p>
+        
+            <DatePicker
+                 selected={this.state.startDate}
+                 onChange={this.handleDateChange}/>
+
               <Form>
-                <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>Select a date</Form.Label>
-                  <Form.Control as="select">
-                    <option>Date</option>
-                    <option>Date</option>
-                    <option>Date</option>
-                    <option>Date</option>
-                    <option>Date</option>
-                    <option>Date</option>
-                  </Form.Control>
-                </Form.Group>
+
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                 <form onSubmit={this.handleSubmit}>
                 <label> add your text 
@@ -107,8 +129,8 @@ class Journal extends Component {
                 <input type ='submit' value = 'Submit' />
                 </form>
                 </Form.Group>
-              </Form>
-            </p>
+           
+        
             <ChartViewer dataArray={this.state.entries}/>
 
 
@@ -116,8 +138,9 @@ class Journal extends Component {
               <Form.Label>How is your day going?</Form.Label>
               <Form.Control as="textarea" rows="3" />
             </Form.Group>
+            </Form>
 
-            <p />
+        
           </Jumbotron>
         </div>
         <Modal.Footer>
