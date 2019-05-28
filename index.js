@@ -3,6 +3,8 @@ const path = require("path");
 const ENV = process.env.ENV || "development";
 const app = express();
 
+const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1.js");
+
 const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 const knexLogger = require("knex-logger");
@@ -13,6 +15,10 @@ app.use(bodyParser.json());
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
+
+const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
+  version: "2018-11-16"
+});
 
 //posts mood
 app.post("/mood", (req, res) => {
@@ -66,6 +72,23 @@ app.get("/journal", (req, res) => {
 
 //posts journal entries to db
 app.post("/journal", (req, res) => {
+  const analyzeParams = {
+    text: req.body.entry,
+    features: {
+      emotion: {
+        document: true
+      }
+    }
+  };
+
+  naturalLanguageUnderstanding
+    .analyze(analyzeParams)
+    .then(analysisResults => {
+      console.log(JSON.stringify(analysisResults, null, 2));
+    })
+    .catch(err => {
+      console.log("error:", err);
+    });
   console.log("post request journal date", req.body.date);
   console.log("post request journal entry", req.body.entry);
   let user_id = 2;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 //import ChartViewer from "./wordgraph.js"
-import ChartViewer from "./final-wordgraph.js"
+import ChartViewer from "./final-wordgraph.js";
 import { parse } from "url";
 
 let today = new Date();
@@ -16,21 +16,21 @@ class Journal extends Component {
     super(props);
     this.state = {
       entries: [],
-      value:'',
-      entry_today: {journal_entry: ""}
+      value: "",
+      entry_today: { journal_entry: "" }
     };
   }
 
-  renderTodaysJournal = (entries) => {
-    entries.forEach (element => {
-      let journalDateSpliced = element['journal_date'].split("T")[0];
+  renderTodaysJournal = entries => {
+    entries.forEach(element => {
+      let journalDateSpliced = element["journal_date"].split("T")[0];
       if (journalDateSpliced === today) {
-        return element['journal_entry']
+        return element["journal_entry"];
       } else {
-        return null
+        return null;
       }
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.getList();
@@ -40,20 +40,22 @@ class Journal extends Component {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
-        const entry_today = results.find((entry) => {
-          const parsedEntryDate = new Date(entry.journal_date)
-          const today = new Date()
-          return parsedEntryDate.getDate() + 1 == today.getDate() && 
-            parsedEntryDate.getFullYear() == today.getFullYear() && 
-            parsedEntryDate.getMonth() == today.getMonth() 
-        })
-        
-        this.setState({ entries: results})
+        const entry_today = results.find(entry => {
+          const parsedEntryDate = new Date(entry.journal_date);
+          const today = new Date();
+          return (
+            parsedEntryDate.getDate() + 1 == today.getDate() &&
+            parsedEntryDate.getFullYear() == today.getFullYear() &&
+            parsedEntryDate.getMonth() == today.getMonth()
+          );
+        });
+
+        this.setState({ entries: results });
         if (entry_today) {
-          this.setState({ 
+          this.setState({
             entry_today: entry_today,
             value: entry_today.journal_entry
-          })
+          });
         }
       });
   };
@@ -68,13 +70,12 @@ class Journal extends Component {
         date: today
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      this.getList();
-    })
-    .catch(err => console.log(err));
-  }
-
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+      })
+      .catch(err => console.log(err));
+  };
 
   handleChange = event => {
     this.setState({ value: event.target.value });
@@ -100,23 +101,28 @@ class Journal extends Component {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                <form onSubmit={this.handleSubmit}>
-                <label> add your text 
-                  <input type='text' value = {this.state.value} defaultValue={this.state.entry_today.journal_entry} onChange={this.handleChange} />
-                </label>
-                <input type ='submit' value = 'Submit' />
-                </form>
+                  <form onSubmit={this.handleSubmit}>
+                    <label>
+                      {" "}
+                      add your text
+                      <input
+                        type="text"
+                        value={this.state.value}
+                        defaultValue={this.state.entry_today.journal_entry}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                    <input type="submit" value="Submit" />
+                  </form>
                 </Form.Group>
               </Form>
             </p>
-            <ChartViewer dataArray={this.state.entries}/>
-
+            <ChartViewer dataArray={this.state.entries} />
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Label>How is your day going?</Form.Label>
               <Form.Control as="textarea" rows="3" />
             </Form.Group>
-
             <p />
           </Jumbotron>
         </div>
