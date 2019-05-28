@@ -106,7 +106,7 @@ li:nth-child(2n) {
 }
 
 li span {
-  background: #e74c3c;
+  background: green;
   height: 40px;
   margin-right: 20px;
   text-align: center;

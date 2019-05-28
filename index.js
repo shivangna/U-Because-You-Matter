@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const ENV = process.env.ENV || "development";
 const app = express();
+const unirest = require("unirest");
 
 const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
@@ -136,6 +137,19 @@ app.delete("/todo", (req, res) => {
       res.json(results);
     });
 });
+
+unirest
+  .get(
+    "https://healthruwords.p.rapidapi.com/v1/quotes/?id=731&t=Wisdom&maxR=1&size=medium"
+  )
+  .header("X-RapidAPI-Host", "healthruwords.p.rapidapi.com")
+  .header(
+    "X-RapidAPI-Key",
+    "7ddf67bbefmsh634a1066c34c468p17a252jsn4c4953b420eb"
+  )
+  .end(function(result) {
+    console.log(result.status, result.headers, result.body);
+  });
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {

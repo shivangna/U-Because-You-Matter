@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 //import ChartViewer from "./wordgraph.js"
-import ChartViewer from "./final-wordgraph.js"
+import ChartViewer from "./final-wordgraph.js";
 import { parse } from "url";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,10 +37,10 @@ class Journal extends Component {
       if (journalDateSpliced === this.state.startDate) {
         return element['journal_entry']
       } else {
-        return null
+        return null;
       }
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.getList();
@@ -73,9 +73,10 @@ class Journal extends Component {
         
         this.setState({ entries: results})
         if (entry_today) {
-          this.setState({ 
+          this.setState({
             entry_today: entry_today,
             value: entry_today.journal_entry
+
           }) }
           else {
             this.setState({
@@ -96,13 +97,12 @@ class Journal extends Component {
         date: this.state.startDate
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      this.getList();
-    })
-    .catch(err => console.log(err));
-  }
-
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+      })
+      .catch(err => console.log(err));
+  };
 
   handleChange = event => {
     this.setState({ value: event.target.value });
@@ -122,16 +122,25 @@ class Journal extends Component {
               <Form>
 
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                <form onSubmit={this.handleSubmit}>
-                <label> add your text 
-                  <input type='text' value = {this.state.value} defaultValue={this.state.entry_today.journal_entry} onChange={this.handleChange} />
-                </label>
-                <input type ='submit' value = 'Submit' />
-                </form>
+                  <form onSubmit={this.handleSubmit}>
+                    <label>
+                      {" "}
+                      add your text
+                      <input
+                        type="text"
+                        value={this.state.value}
+                        defaultValue={this.state.entry_today.journal_entry}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                    <input type="submit" value="Submit" />
+                  </form>
                 </Form.Group>
+
            
         
             <ChartViewer dataArray={this.state.entries}/>
+
 
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
