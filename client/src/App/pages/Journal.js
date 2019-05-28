@@ -93,7 +93,7 @@ class Journal extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         entry: this.state.value,
-        date: today
+        date: this.state.startDate
       })
     })
     .then(res => res.json())
