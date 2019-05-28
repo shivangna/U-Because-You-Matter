@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
-import Wordgraph from "./wordgraph.js";
+//import ChartViewer from "./wordgraph.js"
+import ChartViewer from "./test.js";
+import { parse } from "url";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -14,24 +16,52 @@ class Journal extends Component {
     super(props);
     this.state = {
       entries: [],
-      value: ""
+      value: "",
+      entry_today: { journal_entry: "" }
     };
   }
 
+  renderTodaysJournal = entries => {
+    entries.forEach(element => {
+      let journalDateSpliced = element["journal_date"].split("T")[0];
+      if (journalDateSpliced === today) {
+        return element["journal_entry"];
+      } else {
+        return null;
+      }
+    });
+  };
+
   componentDidMount() {
     this.getList();
-    console.log("component did mount entries:", this.state);
   }
 
   getList = () => {
     fetch("/journal")
       .then(res => res.json())
-      .then(results => this.setState({ entries: results }));
+      .then(results => {
+        const entry_today = results.find(entry => {
+          const parsedEntryDate = new Date(entry.journal_date);
+          const today = new Date();
+          return (
+            parsedEntryDate.getDate() + 1 == today.getDate() &&
+            parsedEntryDate.getFullYear() == today.getFullYear() &&
+            parsedEntryDate.getMonth() == today.getMonth()
+          );
+        });
+
+        this.setState({ entries: results });
+        if (entry_today) {
+          this.setState({
+            entry_today: entry_today,
+            value: entry_today.journal_entry
+          });
+        }
+      });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log("clicked", this.state.value);
     fetch("/journal", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,8 +72,7 @@ class Journal extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        //this.getList();
-        console.log("this is the data", data);
+        this.getList();
       })
       .catch(err => console.log(err));
   };
@@ -58,47 +87,37 @@ class Journal extends Component {
         <div className="App">
           <Jumbotron>
             <h1>Journal</h1>
-            <Form>
-              <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Title </Form.Label>
-                <Form.Control type="text" />
-              </Form.Group>
-              <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Select a date</Form.Label>
-                <Form.Control as="select">
-                  <option>Date</option>
-                  <option>Date</option>
-                  <option>Date</option>
-                  <option>Date</option>
-                  <option>Date</option>
-                  <option>Date</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="exampleForm.ControlSelect2">
-                <Form.Label>Select a time</Form.Label>
-                <Form.Control as="select">
-                  <option>Morning</option>
-                  <option>Afternoon</option>
-                  <option>Evening</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group
-                controlId="exampleForm.ControlTextarea1"
-                onSubmit={this.handleSubmit}
-              >
-                <label>
-                  {" "}
-                  add your text
-                  <input
-                    type="text"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                  />
-                </label>
-                <input type="submit" value="Submit" />
-              </Form.Group>
-            </Form>
-            <Wordgraph />
+            <p>
+              <Form>
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label>Select a date</Form.Label>
+                  <Form.Control as="select">
+                    <option>Date</option>
+                    <option>Date</option>
+                    <option>Date</option>
+                    <option>Date</option>
+                    <option>Date</option>
+                    <option>Date</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                  <form onSubmit={this.handleSubmit}>
+                    <label>
+                      {" "}
+                      add your text
+                      <input
+                        type="text"
+                        value={this.state.value}
+                        defaultValue={this.state.entry_today.journal_entry}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                    <input type="submit" value="Submit" />
+                  </form>
+                </Form.Group>
+              </Form>
+            </p>
+            <ChartViewer data={this.state.dataArray} />
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Label>How is your day going?</Form.Label>
