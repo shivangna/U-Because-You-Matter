@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
-
 class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +73,7 @@ class TodoList extends Component {
         <li key={todos.id}>
           {todos.task}
           <span onClick={() => this.deleteHandler(todos.id)}>
-            <i className="fa fa-check-square-o" key={todos.id} />
+            <i className="fas fa-check-square" key={todos.id} />
           </span>{" "}
         </li>
       );
@@ -85,13 +84,6 @@ class TodoList extends Component {
           <Jumbotron className="App">
             <h1>To Do</h1>
             <div id="container">
-              <h1>
-                To-Do List
-                <span id="toggle-form">
-                  <i className="fa fa-plus" name="removeTask" />
-                </span>
-              </h1>
-
               <form onSubmit={this.handleSubmit}>
                 <input
                   id="input1"
