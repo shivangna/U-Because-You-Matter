@@ -11,9 +11,6 @@ let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 let yyyy = today.getFullYear();
 today = mm + "/" + dd + "/" + yyyy;
 
-
-
-
 class Journal extends Component {
   constructor(props) {
     super(props);
@@ -61,8 +58,7 @@ class Journal extends Component {
       });
   };
 
-
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     fetch("/journal", {
       method: "POST",
@@ -80,10 +76,9 @@ class Journal extends Component {
   }
 
 
-  handleChange = (event) => {
-    this.setState({value: event.target.value});
-  }
-  
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
 
   render() {
     return (
@@ -121,10 +116,7 @@ class Journal extends Component {
                   <Form.Control as="textarea" rows="3" />
                 </Form.Group> */}
 
-                
-            <p>
-              
-            </p>
+            <p />
           </Jumbotron>
         </div>
         <Modal.Footer>

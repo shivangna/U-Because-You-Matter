@@ -8,10 +8,13 @@
     "@progress/kendo-react-intl": "^2.11.0",
     "@types/fusioncharts": "^3.11.5",
     "bootstrap": "^4.3.1",
+<<<<<<< HEAD
     "d3-time-format": "^2.1.3",
     "emoji-slider": "^0.2.0",
     "fusioncharts": "^3.13.4",
     "hammerjs": "^2.0.8",
+=======
+>>>>>>> 1c3185787c066d49e51904f0f5c3f61bf169701b
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-calendar-heatmap": "^1.8.0",

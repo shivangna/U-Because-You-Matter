@@ -29,11 +29,6 @@
   }
 }
 
-emoji-slider {
-  --emoji-slider-bar-color: red;
-  --emoji-slider-bar-active-color: green;
-}
-
 .todopic,
 .moodpic,
 .journalpic,

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Jumbotron } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
-// import "../node_module/emoji-slider/bin/emoji-slider.js";
+import { Modal, Button } from "react-bootstrap";
 import Heatmap from "./heatmap.js";
 
 let today = new Date();
