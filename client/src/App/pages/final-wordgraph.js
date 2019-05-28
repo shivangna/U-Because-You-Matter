@@ -20,12 +20,14 @@ function countWords (incomingData) {
     return words;
   };  
 
-  
+ 
 
 class ChartViewer extends React.Component {
+  
     
   constructor(props) {
     super(props);
+    console.log(props.dataArray)
     this.state = {
       timeseriesDs: {
         type: 'column2d',
@@ -36,34 +38,24 @@ class ChartViewer extends React.Component {
         dataSource: {
             caption: { text: 'Online Sales of a SuperStore in the US' },
             chart: {
-                "caption": "Countries With Most Oil Reserves [2017-18]",
-                "subCaption": "In MMbbl = One Million barrels",
-                "xAxisName": "Country",
+                "caption": "Word Count by Date",
+                "subCaption": "Write Write Write...",
+                "xAxisName": "Date",
                 "yAxisName": "Word Count",
                 "numberSuffix": "",
                 "theme": "fusion"
             },
-            data: [
-                {
-                    "label": "2019-01-01",
-                    "value": "201"
-                },
-                {
-                    "label": "2019-02-01",
-                    "value": "260"
-                },
-                {
-                    "label": "2019-03-01",
-                    "value": "180"
-                }
-            ],
+            data: props.dataArray.sort(function(a, b) {
+              return new Date(a.journal_date) - new Date(b.journal_date)
+          })
+            .map(function (entry){ return {label: entry.journal_date,
+                                                          value: superCounter(entry.journal_entry) }} )
         }
       }
     };
   }
 
   render() {
-    const dataReceived= this.props.dataArray;
 
     return (
       <div>
