@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 //import ChartViewer from "./wordgraph.js"
-import ChartViewer from "./test.js"
+import ChartViewer from "./final-wordgraph.js"
 import { parse } from "url";
 
 let today = new Date();
@@ -109,7 +109,7 @@ class Journal extends Component {
                 </Form.Group>
               </Form>
             </p>
-            <ChartViewer data={this.state.dataArray}/>
+            <ChartViewer dataArray={this.state.entries}/>
 
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
