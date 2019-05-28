@@ -82,10 +82,12 @@ app.post("/journal", (req, res) => {
     }
   };
 
+  let emotions = {};
+
   naturalLanguageUnderstanding
     .analyze(analyzeParams)
     .then(analysisResults => {
-      console.log(JSON.stringify(analysisResults, null, 2));
+      emotions = JSON.stringify(analysisResults, null, 2);
     })
     .catch(err => {
       console.log("error:", err);
@@ -101,7 +103,7 @@ app.post("/journal", (req, res) => {
         // no matching records found
         return knex("journal_entries")
           .where({ journal_date: req.body.date, user_id: user_id })
-          .update({ journal_entry: req.body.entry })
+          .update({ journal_entry: req.body.entry, emotion: emotions })
           .then(() => res.json({ msg: "send ok!" }));
       } else {
         console.log("inserting journal entries");
