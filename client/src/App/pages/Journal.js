@@ -111,10 +111,11 @@ class Journal extends Component {
             </p>
             <ChartViewer data={this.state.dataArray}/>
 
-            {/* <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>How is your day going?</Form.Label>
-                  <Form.Control as="textarea" rows="3" />
-                </Form.Group> */}
+
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label>How is your day going?</Form.Label>
+              <Form.Control as="textarea" rows="3" />
+            </Form.Group>
 
             <p />
           </Jumbotron>
