@@ -10,6 +10,7 @@ import Challenges from "./pages/Challenges.js";
 import TodoList from "./pages/TodoList.js";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import Api from "./pages/Api.js";
 
 class App extends Component {
   state = {
@@ -29,6 +30,7 @@ class App extends Component {
     return (
       <div>
         <Navbarr />
+        <Api />
         <Container>
           <Row className="row">
             <Col xs>
