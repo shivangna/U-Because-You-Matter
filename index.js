@@ -71,7 +71,7 @@ app.post("/journal", (req, res) => {
   let user_id = 2;
   return knex("journal_entries")
     .select()
-    .where({ journal_date: req.body.date, user_id: user_id})
+    .where({ journal_date: req.body.date, user_id: user_id })
     .then(function(rows) {
       if (rows && rows.length) {
         // no matching records found
@@ -80,14 +80,18 @@ app.post("/journal", (req, res) => {
           .update({ journal_entry: req.body.entry })
           .then(() => res.json({ msg: "send ok!" }));
       } else {
-        console.log('inserting journal entries')
+        console.log("inserting journal entries");
         knex("journal_entries")
-          .insert({ user_id: user_id, journal_entry: req.body.entry, journal_date: req.body.date })
+          .insert({
+            user_id: user_id,
+            journal_entry: req.body.entry,
+            journal_date: req.body.date
+          })
           .then(() => res.json({ msg: "send ok!" }));
       }
     })
     .catch(function(ex) {
-      res.send({error: "err"});
+      res.send({ error: "err" });
       console.log("err", ex);
     });
 });
@@ -98,10 +102,36 @@ app.get("/todo", (req, res) => {
     .join("todo_tasks", "users.id", "=", "todo_tasks.user_id")
     .select(
       "users.id",
+      "todo_tasks.id",
       "todo_tasks.task",
       "todo_tasks.title",
       "todo_tasks.task_state"
     )
+    .then(results => {
+      res.json(results);
+    });
+});
+
+app.post("/todo", (req, res) => {
+  console.log("task", req.body.task);
+  console.log("task state", req.body.task_state);
+  return knex("todo_tasks")
+    .insert({
+      task: req.body.task,
+      task_state: req.body.task_state,
+      user_id: 1
+    })
+    .then(() => res.json({ msg: "todo task!" }))
+    .catch(function() {
+      res.send({ error: "err" });
+    });
+});
+
+app.delete("/todo", (req, res) => {
+  console.log("the key", req.body.key);
+  return knex("todo_tasks")
+    .where("todo_tasks.id", req.body.key)
+    .del()
     .then(results => {
       res.json(results);
     });

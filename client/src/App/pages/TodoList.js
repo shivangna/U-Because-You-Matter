@@ -1,23 +1,18 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
-import { ListGroup } from "react-bootstrap";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: []
+      task: "",
+      todos: [],
+      currentItem: { text: "", key: "" }
     };
   }
-
   componentDidMount() {
     this.getList();
-    console.log("todos:", this.state);
-  }
-
-  componentDidUpdate() {
-    // this.props.currentItem.focus();
   }
 
   getList = () => {
@@ -28,19 +23,59 @@ class TodoList extends Component {
       });
   };
 
+  deleteHandler = key => {
+    console.log("i m here");
+    console.log("key", key);
+    fetch("/todo", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        key: key
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+      })
+      .catch(err => console.log(err));
+  };
+
+  submitHandler = e => {
+    // if (e.key === "Enter") console.log("e =", e.target.value);
+    this.setState({ task: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    e.target.value = "";
+    fetch("/todo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        task: this.state.task,
+        task_state: "incomplete"
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+        this.setState({ task: "" });
+      });
+  };
+
   render() {
     const todoEntries = this.state.todos;
-    const listItems = todoEntries.map(todo => {
+    console.log("todoEntries", todoEntries);
+    const listItems = todoEntries.map(todos => {
       return (
         <li>
-          {todo.task}
-          <span>
-            <i className="fa fa-trash" />
+          {todos.task}
+          <span onClick={() => this.deleteHandler(todos.id)}>
+            <i className="fa fa-trash" key={todos.id} />
           </span>{" "}
         </li>
       );
     });
-    console.log(this.state.todos);
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -48,18 +83,25 @@ class TodoList extends Component {
             <h1>To Do</h1>
             <div id="container">
               <h1>
-                To-Do List{" "}
+                To-Do List
                 <span id="toggle-form">
-                  <i className="fa fa-plus" />
+                  <i className="fa fa-plus" name="removeTask" />
                 </span>
               </h1>
-              <form>
-                <input type="text" placeholder="Add New Todo" />
+
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  id="input1"
+                  onChange={this.submitHandler}
+                  type="text"
+                  value={this.state.task}
+                  placeholder="Add New Todo"
+                />
                 <button type="submit"> Add Task </button>
               </form>
               <ul className="thelist">{listItems}</ul>
             </div>
-          </Jumbotron>{" "}
+          </Jumbotron>
         </div>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>
