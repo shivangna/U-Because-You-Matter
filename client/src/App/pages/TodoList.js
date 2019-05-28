@@ -45,6 +45,10 @@ class TodoList extends Component {
     this.setState({ task: e.target.value });
   };
 
+  handleComplete = e => {
+    alert("trying to complete item with an id of " + this.props.id);
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     e.target.value = "";
@@ -65,11 +69,15 @@ class TodoList extends Component {
 
   render() {
     const todoEntries = this.state.todos;
-    console.log("todoEntries", todoEntries);
+    // console.log("todoEntries", todos.id);
+    // task_state = this.todos.task_state;
     const listItems = todoEntries.map(todos => {
       return (
-        <li>
+        <li key={todos.id}>
           {todos.task}
+          <span className="complete-button" onClick={this.handleComplete}>
+            {"\u2714"}
+          </span>
           <span onClick={() => this.deleteHandler(todos.id)}>
             <i className="fa fa-trash" key={todos.id} />
           </span>{" "}
