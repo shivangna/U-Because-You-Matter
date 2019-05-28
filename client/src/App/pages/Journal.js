@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
-import Wordgraph from "./wordgraph.js"
+//import ChartViewer from "./wordgraph.js"
+import ChartViewer from "./test.js"
 import { parse } from "url";
 
 let today = new Date();
@@ -26,9 +27,7 @@ class Journal extends Component {
   renderTodaysJournal = (entries) => {
     entries.forEach (element => {
       let journalDateSpliced = element['journal_date'].split("T")[0];
-      console.log("ths is it", journalDateSpliced)
       if (journalDateSpliced === today) {
-        console.log("ths is it", journalDateSpliced)
         return element['journal_entry']
       } else {
         return null
@@ -38,7 +37,6 @@ class Journal extends Component {
 
   componentDidMount() {
     this.getList();
-    console.log("component did mount entries:", this.state);
   }
 
   getList = () => {
@@ -66,7 +64,6 @@ class Journal extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("clicked", this.state.value);
     fetch("/journal", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -78,7 +75,6 @@ class Journal extends Component {
     .then(res => res.json())
     .then(data => {
       this.getList();
-      console.log("this is the data", data);
     })
     .catch(err => console.log(err));
   }
@@ -90,7 +86,6 @@ class Journal extends Component {
   
 
   render() {
-    console.log("these are the values", this.state.entries)
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -98,10 +93,6 @@ class Journal extends Component {
             <h1>Journal</h1>
             <p>
               <Form>
-                <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Title </Form.Label>
-                  <Form.Control type="text" />
-                </Form.Group>
                 <Form.Group controlId="exampleForm.ControlSelect1">
                   <Form.Label>Select a date</Form.Label>
                   <Form.Control as="select">
@@ -111,14 +102,6 @@ class Journal extends Component {
                     <option>Date</option>
                     <option>Date</option>
                     <option>Date</option>
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlSelect2">
-                  <Form.Label>Select a time</Form.Label>
-                  <Form.Control as="select">
-                    <option>Morning</option>
-                    <option>Afternoon</option>
-                    <option>Evening</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -131,7 +114,7 @@ class Journal extends Component {
                 </Form.Group>
               </Form>
             </p>
-            <Wordgraph/>
+            <ChartViewer data={this.state.dataArray}/>
 
             {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Label>How is your day going?</Form.Label>
