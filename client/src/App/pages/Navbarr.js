@@ -14,9 +14,9 @@ class Navbarr extends Component {
             <img className="logo" src="../Images/sun.png" alt="logo" /> U
           </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#Profil">Profil</Nav.Link>
-            <Nav.Link href="#Blabla">Logout</Nav.Link>
+            {/* <Nav.Link href="#">Home</Nav.Link>
+            <Nav.Link href="#">Profil</Nav.Link>
+            <Nav.Link href="#">Logout</Nav.Link> */}
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
