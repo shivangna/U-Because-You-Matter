@@ -41,7 +41,7 @@ class TodoList extends Component {
   };
 
   submitHandler = e => {
-    if (e.key === "Enter") console.log("e =", e.target.value);
+    // if (e.key === "Enter") console.log("e =", e.target.value);
     this.setState({ task: e.target.value });
   };
 
@@ -59,8 +59,8 @@ class TodoList extends Component {
       .then(res => res.json())
       .then(data => {
         this.getList();
+        this.setState({ task: "" });
       });
-    this.setState({ tasks: "" });
   };
 
   render() {
@@ -91,8 +91,10 @@ class TodoList extends Component {
 
               <form onSubmit={this.handleSubmit}>
                 <input
+                  id="input1"
                   onChange={this.submitHandler}
                   type="text"
+                  value={this.state.task}
                   placeholder="Add New Todo"
                 />
                 <button type="submit"> Add Task </button>
