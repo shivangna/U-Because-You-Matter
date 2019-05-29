@@ -73,53 +73,58 @@ app.get("/journal", (req, res) => {
 
 //posts journal entries to db
 app.post("/journal", (req, res) => {
-  const analyzeParams = {
-    text: req.body.entry,
-    features: {
-      emotion: {
-        document: true
-      }
-    }
-  };
-
-  let emotions = {};
-
-  naturalLanguageUnderstanding
-    .analyze(analyzeParams)
-    .then(analysisResults => {
-      emotions = JSON.stringify(analysisResults, null, 2);
-    })
-    .catch(err => {
-      console.log("error:", err);
-    });
-  console.log("post request journal date", req.body.date);
-  console.log("post request journal entry", req.body.entry);
-  let user_id = 2;
-  return knex("journal_entries")
-    .select()
-    .where({ journal_date: req.body.date, user_id: user_id })
-    .then(function(rows) {
-      if (rows && rows.length) {
-        // no matching records found
-        return knex("journal_entries")
-          .where({ journal_date: req.body.date, user_id: user_id })
-          .update({ journal_entry: req.body.entry, emotion: emotions })
-          .then(() => res.json({ msg: "send ok!" }));
-      } else {
-        console.log("inserting journal entries");
-        knex("journal_entries")
-          .insert({
-            user_id: user_id,
-            journal_entry: req.body.entry,
-            journal_date: req.body.date
+  new Promise((resolve, reject) => {
+    resolve(
+      naturalLanguageUnderstanding
+        .analyze(
+          JSON.stringify({
+            text: req.body.entry,
+            features: {
+              emotion: {
+                document: true
+              }
+            }
           })
-          .then(() => res.json({ msg: "send ok!" }));
-      }
-    })
-    .catch(function(ex) {
-      res.send({ error: "err" });
-      console.log("err", ex);
+        )
+        .then(analysisResults => {
+          emotions = JSON.stringify(analysisResults, null, 2);
+        })
+        .catch(err => {
+          console.log("error:", err);
+        })
+    ).then(() => {
+      knex("journal_entries")
+        .select()
+        .where({ journal_date: req.body.date, user_id: 2 })
+        .then(function(rows) {
+          if (rows && rows.length) {
+            // no matching records found
+            console.log("post request journal date", req.body.date);
+            console.log("post request journal entry", req.body.entry);
+            console.log("post request journal emotion", emotions);
+            knex("journal_entries")
+              .where({ journal_date: req.body.date, user_id: 2 })
+              .update({ journal_entry: req.body.entry, emotion: emotions })
+              .then(() => res.json({ msg: "send ok!" }));
+          } else {
+            console.log("post request journal date", req.body.date);
+            console.log("post request journal entry", req.body.entry);
+            console.log("post request journal emotion", emotions);
+            knex("journal_entries")
+              .insert({
+                user_id: 2,
+                journal_entry: req.body.entry,
+                journal_date: req.body.date
+              })
+              .then(() => res.json({ msg: "send ok!" }));
+          }
+        })
+        .catch(function(ex) {
+          res.send({ error: "err" });
+          console.log("err", ex);
+        });
     });
+  });
 });
 
 //gets Todotasks from db

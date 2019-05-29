@@ -15,7 +15,6 @@ class Challenges extends Component {
       color4: "white",
       color5: "white",
       color6: "white",
-      color7: "green",
       count: 0,
       value: 0
     };
