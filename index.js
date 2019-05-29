@@ -71,21 +71,20 @@ app.get("/journal", (req, res) => {
     });
 });
 
+let emotions = "";
 //posts journal entries to db
 app.post("/journal", (req, res) => {
   new Promise((resolve, reject) => {
     resolve(
       naturalLanguageUnderstanding
-        .analyze(
-          JSON.stringify({
-            text: req.body.entry,
-            features: {
-              emotion: {
-                document: true
-              }
+        .analyze({
+          text: req.body.entry,
+          features: {
+            emotion: {
+              document: true
             }
-          })
-        )
+          }
+        })
         .then(analysisResults => {
           emotions = JSON.stringify(analysisResults, null, 2);
         })
