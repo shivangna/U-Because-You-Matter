@@ -15,7 +15,7 @@ class Heatmap extends Component {
       return newData;
     };
     let dataToRender = changeIncomingData(this.props.values);
-    console.log('datatorender', dataToRender)
+    console.log("datatorender", dataToRender);
     return (
       <div className="heatmap">
         <CalendarHeatmap

@@ -8,7 +8,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LiquidGauge from "./gauge";
 
+
 // Format the date input to MM/DD/YYYY
+
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
 let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -26,7 +28,9 @@ class Journal extends Component {
     };
   }
 
+
   // Sets and format dates and also get journal entry for the chosen day
+
   handleDateChange = date => {
     this.setState({
       startDate: date
@@ -44,6 +48,7 @@ class Journal extends Component {
   };
 
   //Query through all entries of journal and display for the chosen date
+
   renderTodaysJournal = entries => {
     entries.forEach(element => {
       let journalDateSpliced = element["journal_date"].split("T")[0];
@@ -59,7 +64,35 @@ class Journal extends Component {
     this.getList();
   }
 
+
   // Call backend to get journal entries and set State
+
+  componentDidUpdate() {
+    let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+    let today = new Date(this.state.startDate);
+    console.log("parsed entry date, today", parsedEntryDate, today);
+    if (
+      parsedEntryDate.getDate() + 1 == today.getDate() &&
+      parsedEntryDate.getFullYear() == today.getFullYear() &&
+      parsedEntryDate.getMonth() == today.getMonth()
+    ) {
+      return;
+    }
+    this.getList();
+  }
+  // componentDidUpdate() {
+  //   let parsedEntryDate = new Date(this.state.entry_today.journal_date)
+  //   let today = new Date(this.state.startDate)
+  //   console.log('parsed entry date, today', parsedEntryDate, today)
+  //   if (parsedEntryDate.getDate() + 1 == today.getDate() && 
+  //     parsedEntryDate.getFullYear() == today.getFullYear() && 
+  //     parsedEntryDate.getMonth() == today.getMonth() ) {
+  //       return
+  //     }
+  //   this.getList()
+  // }
+
+
   getList = () => {
     fetch("/journal")
       .then(res => res.json())
@@ -67,6 +100,7 @@ class Journal extends Component {
         let entry_today = results.find(entry => {
           let parsedEntryDate = new Date(entry.journal_date);
           let today = new Date(this.state.startDate);
+
           //console.log('parsed entry date, today', parsedEntryDate, today)
           return (
             parsedEntryDate.getDate() + 1 == today.getDate() &&
@@ -137,7 +171,7 @@ class Journal extends Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
+      <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
           <Jumbotron>
             <h1>Journal</h1>

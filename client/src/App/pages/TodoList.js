@@ -66,7 +66,7 @@ class TodoList extends Component {
 
   render() {
     const todoEntries = this.state.todos;
-    console.log("todoEntries", this.state.tasks);
+    console.log("todoEntries", this.state.todos);
     // task_state = this.todos.task_state;
     const listItems = todoEntries.map(todos => {
       return (
@@ -79,7 +79,7 @@ class TodoList extends Component {
       );
     });
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
+      <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
           <Jumbotron className="App">
             <h1>To Do</h1>

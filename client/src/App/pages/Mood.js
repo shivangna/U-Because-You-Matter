@@ -60,7 +60,7 @@ class Mood extends Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
+      <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div>
           <Jumbotron className="App">
             <h1>Mood</h1>
