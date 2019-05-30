@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Navbarr from "./pages/Navbarr.js";
 import Journal from "./pages/Journal.js";
 import Mood from "./pages/Mood.js";
 import Challenges from "./pages/Challenges.js";
 import TodoList from "./pages/TodoList.js";
-import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Api from "./pages/Api.js";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 
 class App extends Component {
   constructor(props, context) {
@@ -35,11 +30,11 @@ class App extends Component {
         <Container>
           <div className="journal">
             <span onClick={() => this.setState({ lgShowJournal: true })}>
-              <div class="svg-wrapper">
+              <div className="svg-wrapper">
                 <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect class="shape" height="60" width="320" />
+                  <rect className="shape" height="60" width="320" />
                 </svg>
-                <div class="text">Journal</div>
+                <div className="text">Journal</div>
                 <Image
                   className="modalpic"
                   src="./Images/journal.png"
@@ -53,11 +48,11 @@ class App extends Component {
 
           <div className="mood">
             <span onClick={() => this.setState({ lgShowMood: true })}>
-              <div class="svg-wrapper">
+              <div className="svg-wrapper">
                 <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect class="shape" height="60" width="320" />
+                  <rect className="shape" height="60" width="320" />
                 </svg>
-                <div class="text">Mood</div>
+                <div className="text">Mood</div>
 
                 <Image
                   className="modalpic"
@@ -71,11 +66,11 @@ class App extends Component {
 
           <div className="challenges">
             <span onClick={() => this.setState({ lgShowChallenges: true })}>
-              <div class="svg-wrapper">
+              <div className="svg-wrapper">
                 <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect class="shape" height="60" width="320" />
+                  <rect className="shape" height="60" width="320" />
                 </svg>
-                <div class="text">Challenges</div>
+                <div className="text">Challenges</div>
 
                 <Image
                   className="modalpic"
@@ -93,11 +88,11 @@ class App extends Component {
 
           <div className="todo">
             <span onClick={() => this.setState({ lgShowTodo: true })}>
-              <div class="svg-wrapper">
+              <div className="svg-wrapper">
                 <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect class="shape" height="60" width="320" />
+                  <rect className="shape" height="60" width="320" />
                 </svg>
-                <div class="text">Todo</div>
+                <div className="text">Todo</div>
 
                 <Image
                   className="modalpic"
@@ -111,11 +106,11 @@ class App extends Component {
 
           <div className="new">
             <span onClick={() => this.setState({ modalShowTodo: true })}>
-              <div class="svg-wrapper">
+              <div className="svg-wrapper">
                 <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect class="shape" height="60" width="320" />
+                  <rect className="shape" height="60" width="320" />
                 </svg>
-                <div class="text">New</div>
+                <div className="text">New</div>
 
                 <Image
                   className="modalpic"

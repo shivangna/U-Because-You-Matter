@@ -29,7 +29,6 @@ class Mood extends Component {
 
   componentDidMount() {
     this.getList();
-    console.log("moods:", this.state);
   }
 
   getList = () => {

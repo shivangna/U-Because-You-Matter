@@ -23,8 +23,6 @@ const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
 
 //posts mood
 app.post("/mood", (req, res) => {
-  console.log("post request date", req.body.date);
-  console.log("post request mood", req.body.mood);
   return knex("moods")
     .select()
     .where({ mood_date: req.body.date, user_id: 1 })
@@ -90,10 +88,6 @@ app.post("/journal", (req, res) => {
         .analyze(analyzeParams)
         .then(analysisResults => {
           emotions = analysisResults.emotion.document.emotion;
-          // console.log(
-          //   "Watson Results: ",
-          //   analysisResults.emotion.document.emotion
-          // );
         })
         .catch(err => {
           console.log("error:", err);
@@ -108,17 +102,11 @@ app.post("/journal", (req, res) => {
       .then(function(rows) {
         if (rows && rows.length) {
           // no matching records found
-          console.log("post request journal date", req.body.date);
-          console.log("post request journal entry", req.body.entry);
-          console.log("post request journal emotion", emotions);
           knex("journal_entries")
             .where({ journal_date: req.body.date, user_id: 2 })
             .update({ journal_entry: req.body.entry, emotion: emotions })
             .then(() => res.json({ msg: "send ok!" }));
         } else {
-          console.log("post request journal date", req.body.date);
-          console.log("post request journal entry", req.body.entry);
-          console.log("post request journal emotion", emotions);
           knex("journal_entries")
             .insert({
               user_id: 2,
@@ -153,8 +141,6 @@ app.get("/todo", (req, res) => {
 });
 
 app.post("/todo", (req, res) => {
-  console.log("task", req.body.task);
-  console.log("task state", req.body.task_state);
   return knex("todo_tasks")
     .insert({
       task: req.body.task,
@@ -168,7 +154,6 @@ app.post("/todo", (req, res) => {
 });
 
 app.delete("/todo", (req, res) => {
-  console.log("the key", req.body.key);
   return knex("todo_tasks")
     .where("todo_tasks.id", req.body.key)
     .del()
@@ -176,19 +161,6 @@ app.delete("/todo", (req, res) => {
       res.json(results);
     });
 });
-
-unirest
-  .get(
-    "https://healthruwords.p.rapidapi.com/v1/quotes/?id=731&t=Wisdom&maxR=1&size=medium"
-  )
-  .header("X-RapidAPI-Host", "healthruwords.p.rapidapi.com")
-  .header(
-    "X-RapidAPI-Key",
-    "7ddf67bbefmsh634a1066c34c468p17a252jsn4c4953b420eb"
-  )
-  .end(function(result) {
-    console.log(result.status, result.headers, result.body);
-  });
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
