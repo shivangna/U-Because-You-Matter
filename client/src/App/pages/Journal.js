@@ -29,6 +29,16 @@ class Journal extends Component {
       startDate: date
     });
   };
+    let parsedEntryDate = new Date(this.state.entry_today.journal_date)
+    let today = new Date(this.state.startDate)
+    //console.log('parsed entry date, today', parsedEntryDate, today)
+    if (parsedEntryDate.getDate() + 1 == today.getDate() && 
+      parsedEntryDate.getFullYear() == today.getFullYear() && 
+      parsedEntryDate.getMonth() == today.getMonth() ) {
+        return 
+      }
+    this.getList()
+  }
 
   renderTodaysJournal = entries => {
     entries.forEach(element => {
@@ -58,23 +68,32 @@ class Journal extends Component {
     }
     this.getList();
   }
+  // componentDidUpdate() {
+  //   let parsedEntryDate = new Date(this.state.entry_today.journal_date)
+  //   let today = new Date(this.state.startDate)
+  //   console.log('parsed entry date, today', parsedEntryDate, today)
+  //   if (parsedEntryDate.getDate() + 1 == today.getDate() && 
+  //     parsedEntryDate.getFullYear() == today.getFullYear() && 
+  //     parsedEntryDate.getMonth() == today.getMonth() ) {
+  //       return
+  //     }
+  //   this.getList()
+  // }
 
   getList = () => {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
-        let entry_today = results.find(entry => {
-          let parsedEntryDate = new Date(entry.journal_date);
-          let today = new Date(this.state.startDate);
-          console.log("parsed entry date, today", parsedEntryDate, today);
-          return (
-            parsedEntryDate.getDate() + 1 == today.getDate() &&
-            parsedEntryDate.getFullYear() == today.getFullYear() &&
-            parsedEntryDate.getMonth() == today.getMonth()
-          );
-        });
 
-        this.setState({ entries: results });
+        let entry_today = results.find((entry) => {
+          let parsedEntryDate = new Date(entry.journal_date)
+          let today = new Date(this.state.startDate)
+          //console.log('parsed entry date, today', parsedEntryDate, today)
+          return parsedEntryDate.getDate() + 1 == today.getDate() && 
+            parsedEntryDate.getFullYear() == today.getFullYear() && 
+            parsedEntryDate.getMonth() == today.getMonth() 
+        })
+        this.setState({ entries: results})
         if (entry_today) {
           this.setState({
             entry_today: entry_today,
@@ -101,9 +120,11 @@ class Journal extends Component {
       .then(res => res.json())
       .then(data => {
         this.getList();
+        console.log(data);
       })
       .catch(err => console.log(err));
   };
+
 
   handleChange = event => {
     this.setState({ value: event.target.value });

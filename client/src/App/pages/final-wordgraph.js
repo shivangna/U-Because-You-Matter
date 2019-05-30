@@ -28,7 +28,10 @@ class ChartViewer extends React.Component {
   constructor(props) {
     super(props);
     console.log(props.dataArray)
-    this.state = {
+  }
+
+  render() {
+    const graphInfo = {
       timeseriesDs: {
         type: 'column2d',
         // renderAt: 'container',
@@ -45,7 +48,7 @@ class ChartViewer extends React.Component {
                 "numberSuffix": "",
                 "theme": "fusion"
             },
-            data: props.dataArray.sort(function(a, b) {
+            data: this.props.dataArray.sort(function(a, b) {
               return new Date(a.journal_date) - new Date(b.journal_date)
           })
             .map(function (entry){ return {label: entry.journal_date,
@@ -53,14 +56,11 @@ class ChartViewer extends React.Component {
         }
       }
     };
-  }
-
-  render() {
 
     return (
       <div>
-        {this.state.timeseriesDs.dataSource.data ? (
-          <ReactFC {...this.state.timeseriesDs} />
+        {graphInfo.timeseriesDs.dataSource.data ? (
+          <ReactFC {...graphInfo.timeseriesDs} />
         ) : (
           'loading'
         )}
