@@ -28,7 +28,6 @@ class Journal extends Component {
     this.setState({
       startDate: date
     });
-  };
     let parsedEntryDate = new Date(this.state.entry_today.journal_date)
     let today = new Date(this.state.startDate)
     //console.log('parsed entry date, today', parsedEntryDate, today)
