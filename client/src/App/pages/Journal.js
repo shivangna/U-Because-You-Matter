@@ -7,7 +7,6 @@ import { parse } from "url";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
 let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -19,13 +18,13 @@ class Journal extends Component {
     super(props);
     this.state = {
       entries: [],
-      value:'',
-      entry_today: {journal_entry: ""},
+      value: "",
+      entry_today: { journal_entry: "" },
       startDate: new Date()
     };
   }
 
-  handleDateChange = (date) => {
+  handleDateChange = date => {
     this.setState({
       startDate: date
     });
@@ -40,11 +39,11 @@ class Journal extends Component {
     this.getList()
   }
 
-  renderTodaysJournal = (entries) => {
-    entries.forEach (element => {
-      let journalDateSpliced = element['journal_date'].split("T")[0];
+  renderTodaysJournal = entries => {
+    entries.forEach(element => {
+      let journalDateSpliced = element["journal_date"].split("T")[0];
       if (journalDateSpliced === this.state.startDate) {
-        return element['journal_entry']
+        return element["journal_entry"];
       } else {
         return null;
       }
@@ -55,6 +54,19 @@ class Journal extends Component {
     this.getList();
   }
 
+  componentDidUpdate() {
+    let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+    let today = new Date(this.state.startDate);
+    console.log("parsed entry date, today", parsedEntryDate, today);
+    if (
+      parsedEntryDate.getDate() + 1 == today.getDate() &&
+      parsedEntryDate.getFullYear() == today.getFullYear() &&
+      parsedEntryDate.getMonth() == today.getMonth()
+    ) {
+      return;
+    }
+    this.getList();
+  }
   // componentDidUpdate() {
   //   let parsedEntryDate = new Date(this.state.entry_today.journal_date)
   //   let today = new Date(this.state.startDate)
@@ -71,6 +83,7 @@ class Journal extends Component {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
+
         let entry_today = results.find((entry) => {
           let parsedEntryDate = new Date(entry.journal_date)
           let today = new Date(this.state.startDate)
@@ -84,14 +97,12 @@ class Journal extends Component {
           this.setState({
             entry_today: entry_today,
             value: entry_today.journal_entry
-
-          }) }
-          else {
-            this.setState({
-              value:""
-            } 
-            )
-          }
+          });
+        } else {
+          this.setState({
+            value: ""
+          });
+        }
       });
   };
 
@@ -120,46 +131,34 @@ class Journal extends Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
+      <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
           <Jumbotron>
             <h1>Journal</h1>
-        
+
             <DatePicker
-                 selected={this.state.startDate}
-                 onChange={this.handleDateChange}/>
+              selected={this.state.startDate}
+              onChange={this.handleDateChange}
+            />
 
-              <Form>
-
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <form onSubmit={this.handleSubmit}>
-                    <label>
-                      {" "}
-                      add your text
-                      <input
-                        type="text"
-                        value={this.state.value}
-                        defaultValue={this.state.entry_today.journal_entry}
-                        onChange={this.handleChange}
-                      />
-                    </label>
-                    <input type="submit" value="Submit" />
-                  </form>
-                </Form.Group>
-
-           
-        
-            <ChartViewer dataArray={this.state.entries}/>
-
-
-
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>How is your day going?</Form.Label>
-              <Form.Control as="textarea" rows="3" />
-            </Form.Group>
+            <Form>
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                <form onSubmit={this.handleSubmit}>
+                  <label>
+                    {" "}
+                    add your text
+                    <input
+                      type="text"
+                      value={this.state.value}
+                      defaultValue={this.state.entry_today.journal_entry}
+                      onChange={this.handleChange}
+                    />
+                  </label>
+                  <input type="submit" value="Submit" />
+                </form>
+              </Form.Group>
+              <ChartViewer dataArray={this.state.entries} />
             </Form>
-
-        
           </Jumbotron>
         </div>
         <Modal.Footer>

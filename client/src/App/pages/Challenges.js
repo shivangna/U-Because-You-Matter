@@ -127,6 +127,7 @@ class Challenges extends Component {
 
     return (
       <Modal
+        size="lg"
         dialogClassName="modal-90%w"
         show={this.props.show}
         onHide={this.props.onHide}

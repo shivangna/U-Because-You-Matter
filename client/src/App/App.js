@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { BrowserRouter, Route, Redirect, Link, Switch } from "react-router-dom";
 import "./App.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -11,117 +10,155 @@ import TodoList from "./pages/TodoList.js";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Api from "./pages/Api.js";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 class App extends Component {
-  state = {
-    modalShowJournal: false
-    // modalShowMood: false,
-    // modalShowChallenges: false,
-    // modalShowTodo: false
-  };
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      lgShow: false
+    };
+  }
 
   render() {
-    let modalCloseJournal = () => this.setState({ modalShowJournal: false });
-    let modalCloseMood = () => this.setState({ modalShowMood: false });
-    let modalCloseChallenges = () =>
-      this.setState({ modalShowChallenges: false });
-    let modalCloseTodo = () => this.setState({ modalShowTodo: false });
+    let lgCloseJournal = () => this.setState({ lgShowJournal: false });
+    let lgCloseMood = () => this.setState({ lgShowMood: false });
+    let lgCloseChallenges = () => this.setState({ lgShowChallenges: false });
+    let lgCloseTodo = () => this.setState({ lgShowTodo: false });
 
     return (
       <div>
         <Navbarr />
-        <Api />
         <Container>
           <Row className="row">
-            <Col xs>
-              <span onClick={() => this.setState({ modalShowJournal: true })}>
-                <p className="moduletitle">Journal</p>
-
-                <Image
-                  className="journalpic"
-                  src="./Images/journal.png"
-                  roundedCircle
-                />
+            <Col className="colr">
+              <span onClick={() => this.setState({ lgShowJournal: true })}>
+                <div class="svg-wrapper">
+                  <svg
+                    height="60"
+                    width="320"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect class="shape" height="60" width="320" />
+                  </svg>
+                  <div class="text">Journal</div>
+                  <Image
+                    className="modalpic"
+                    src="./Images/journal.png"
+                    roundedCircle
+                    alt="Journal"
+                  />
+                </div>{" "}
               </span>
               <Journal
-                show={this.state.modalShowJournal}
-                onHide={modalCloseJournal}
+                show={this.state.lgShowJournal}
+                onHide={lgCloseJournal}
               />
             </Col>
 
-            <Col xs={{ order: 12 }}>
-              <span onClick={() => this.setState({ modalShowMood: true })}>
-                <p className="moduletitle">Mood</p>
+            <Col className="colr">
+              <span onClick={() => this.setState({ lgShowMood: true })}>
+                <div class="svg-wrapper">
+                  <svg
+                    height="60"
+                    width="320"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect class="shape" height="60" width="320" />
+                  </svg>
+                  <div class="text">Mood</div>
 
-                <Image
-                  className="moodpic"
-                  src="./Images/mood.png"
-                  roundedCircle
-                />
+                  <Image
+                    className="modalpic"
+                    src="./Images/mood.png"
+                    roundedCircle
+                  />
+                </div>{" "}
               </span>
-              <Mood show={this.state.modalShowMood} onHide={modalCloseMood} />
+              <Mood show={this.state.lgShowMood} onHide={lgCloseMood} />
             </Col>
 
-            <Col xs={{ order: 12 }}>
-              <span
-                onClick={() => this.setState({ modalShowChallenges: true })}
-              >
-                <p className="moduletitle">Challenges</p>
+            <Col className="colr">
+              <span onClick={() => this.setState({ lgShowChallenges: true })}>
+                <div class="svg-wrapper">
+                  <svg
+                    height="60"
+                    width="320"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect class="shape" height="60" width="320" />
+                  </svg>
+                  <div class="text">Challenges</div>
 
-                <Image
-                  className="challengespic"
-                  src="./Images/challenges.png"
-                  roundedCircle
-                />
+                  <Image
+                    className="modalpic"
+                    src="./Images/challenges.png"
+                    roundedCircle
+                  />
+                </div>{" "}
               </span>
 
               <Challenges
-                show={this.state.modalShowChallenges}
-                onHide={modalCloseChallenges}
+                show={this.state.lgShowChallenges}
+                onHide={lgCloseChallenges}
               />
             </Col>
           </Row>
 
-          <Row className="row">
-            <Col xs>
-              <span onClick={() => this.setState({ modalShowTodo: true })}>
-                <p className="moduletitle">Todo</p>
-                <Image
-                  className="todopic"
-                  src="./Images/todo.png"
-                  roundedCircle
-                />
-              </span>
-              <TodoList
-                show={this.state.modalShowTodo}
-                onHide={modalCloseTodo}
-              />
-            </Col>
+          <Row className="row2">
+            <div className="div1" />
 
-            <Col xs>
-              <span onClick={() => this.setState({ modalShowTodo: true })}>
-                <p className="moduletitle">New</p>
-                <Image
-                  className="newpic"
-                  src="./Images/new.png"
-                  roundedCircle
-                />
-              </span>
-            </Col>
+            <Col className="div2">
+              <span onClick={() => this.setState({ lgShowTodo: true })}>
+                <div class="svg-wrapper">
+                  <svg
+                    height="60"
+                    width="320"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect class="shape" height="60" width="320" />
+                  </svg>
+                  <div class="text">Todo</div>
 
-            <Col xs>
+                  <Image
+                    className="modalpic"
+                    src="./Images/todo.png"
+                    roundedCircle
+                  />
+                </div>{" "}
+              </span>
+              <TodoList show={this.state.lgShowTodo} onHide={lgCloseTodo} />
+            </Col>
+            <div className="div3" />
+
+            <Col className="div4">
               <span onClick={() => this.setState({ modalShowTodo: true })}>
-                <p className="moduletitle">New</p>
-                <Image
-                  className="newpic"
-                  src="./Images/new.png"
-                  roundedCircle
-                />
+                <div class="svg-wrapper">
+                  <svg
+                    height="60"
+                    width="320"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect class="shape" height="60" width="320" />
+                  </svg>
+                  <div class="text">New</div>
+
+                  <Image
+                    className="modalpic"
+                    src="./Images/new.png"
+                    roundedCircle
+                  />
+                </div>{" "}
               </span>
             </Col>
+            <div className="div5" />
           </Row>
+          <Api />
         </Container>
-        ;
+        <div />
       </div>
     );
   }
