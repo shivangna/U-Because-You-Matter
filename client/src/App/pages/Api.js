@@ -101,14 +101,13 @@ class Api extends Component {
 
   render() {
     return (
-      <div id="main">
+      <div className="quotebox" onClick={this.handleClick}>
         <div class="translucent-form-overlay">
           <style />
-          <h2 id="title">Random Quote Machine</h2>
           <div id="quote-box">
             <p id="text">{this.state.text}</p>
             <p id="author"> - {this.state.author}</p>
-            <button
+            {/* <button
               id="tweet-quote"
               className="primary button expanded search-button"
               onClick={this.shareOnTwitter}
@@ -121,7 +120,7 @@ class Api extends Component {
               onClick={this.handleClick}
             >
               New Quote
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

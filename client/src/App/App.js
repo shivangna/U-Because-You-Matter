@@ -33,129 +33,99 @@ class App extends Component {
       <div>
         <Navbarr />
         <Container>
-          <Row className="row">
-            <Col className="colr">
-              <span onClick={() => this.setState({ lgShowJournal: true })}>
-                <div class="svg-wrapper">
-                  <svg
-                    height="60"
-                    width="320"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect class="shape" height="60" width="320" />
-                  </svg>
-                  <div class="text">Journal</div>
-                  <Image
-                    className="modalpic"
-                    src="./Images/journal.png"
-                    roundedCircle
-                    alt="Journal"
-                  />
-                </div>{" "}
-              </span>
-              <Journal
-                show={this.state.lgShowJournal}
-                onHide={lgCloseJournal}
-              />
-            </Col>
+          <div className="journal">
+            <span onClick={() => this.setState({ lgShowJournal: true })}>
+              <div class="svg-wrapper">
+                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="60" width="320" />
+                </svg>
+                <div class="text">Journal</div>
+                <Image
+                  className="modalpic"
+                  src="./Images/journal.png"
+                  roundedCircle
+                  alt="Journal"
+                />
+              </div>{" "}
+            </span>
+            <Journal show={this.state.lgShowJournal} onHide={lgCloseJournal} />
+          </div>
 
-            <Col className="colr">
-              <span onClick={() => this.setState({ lgShowMood: true })}>
-                <div class="svg-wrapper">
-                  <svg
-                    height="60"
-                    width="320"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect class="shape" height="60" width="320" />
-                  </svg>
-                  <div class="text">Mood</div>
+          <div className="mood">
+            <span onClick={() => this.setState({ lgShowMood: true })}>
+              <div class="svg-wrapper">
+                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="60" width="320" />
+                </svg>
+                <div class="text">Mood</div>
 
-                  <Image
-                    className="modalpic"
-                    src="./Images/mood.png"
-                    roundedCircle
-                  />
-                </div>{" "}
-              </span>
-              <Mood show={this.state.lgShowMood} onHide={lgCloseMood} />
-            </Col>
+                <Image
+                  className="modalpic"
+                  src="./Images/mood.png"
+                  roundedCircle
+                />
+              </div>{" "}
+            </span>
+            <Mood show={this.state.lgShowMood} onHide={lgCloseMood} />
+          </div>
 
-            <Col className="colr">
-              <span onClick={() => this.setState({ lgShowChallenges: true })}>
-                <div class="svg-wrapper">
-                  <svg
-                    height="60"
-                    width="320"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect class="shape" height="60" width="320" />
-                  </svg>
-                  <div class="text">Challenges</div>
+          <div className="challenges">
+            <span onClick={() => this.setState({ lgShowChallenges: true })}>
+              <div class="svg-wrapper">
+                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="60" width="320" />
+                </svg>
+                <div class="text">Challenges</div>
 
-                  <Image
-                    className="modalpic"
-                    src="./Images/challenges.png"
-                    roundedCircle
-                  />
-                </div>{" "}
-              </span>
+                <Image
+                  className="modalpic"
+                  src="./Images/challenges.png"
+                  roundedCircle
+                />
+              </div>{" "}
+            </span>
 
-              <Challenges
-                show={this.state.lgShowChallenges}
-                onHide={lgCloseChallenges}
-              />
-            </Col>
-          </Row>
+            <Challenges
+              show={this.state.lgShowChallenges}
+              onHide={lgCloseChallenges}
+            />
+          </div>
 
-          <Row className="row2">
-            <div className="div1" />
+          <div className="todo">
+            <span onClick={() => this.setState({ lgShowTodo: true })}>
+              <div class="svg-wrapper">
+                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="60" width="320" />
+                </svg>
+                <div class="text">Todo</div>
 
-            <Col className="div2">
-              <span onClick={() => this.setState({ lgShowTodo: true })}>
-                <div class="svg-wrapper">
-                  <svg
-                    height="60"
-                    width="320"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect class="shape" height="60" width="320" />
-                  </svg>
-                  <div class="text">Todo</div>
+                <Image
+                  className="modalpic"
+                  src="./Images/todo.png"
+                  roundedCircle
+                />
+              </div>{" "}
+            </span>
+            <TodoList show={this.state.lgShowTodo} onHide={lgCloseTodo} />
+          </div>
 
-                  <Image
-                    className="modalpic"
-                    src="./Images/todo.png"
-                    roundedCircle
-                  />
-                </div>{" "}
-              </span>
-              <TodoList show={this.state.lgShowTodo} onHide={lgCloseTodo} />
-            </Col>
-            <div className="div3" />
+          <div className="new">
+            <span onClick={() => this.setState({ modalShowTodo: true })}>
+              <div class="svg-wrapper">
+                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="60" width="320" />
+                </svg>
+                <div class="text">New</div>
 
-            <Col className="div4">
-              <span onClick={() => this.setState({ modalShowTodo: true })}>
-                <div class="svg-wrapper">
-                  <svg
-                    height="60"
-                    width="320"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect class="shape" height="60" width="320" />
-                  </svg>
-                  <div class="text">New</div>
+                <Image
+                  className="modalpic"
+                  src="./Images/new.png"
+                  roundedCircle
+                />
+              </div>{" "}
+            </span>
+          </div>
 
-                  <Image
-                    className="modalpic"
-                    src="./Images/new.png"
-                    roundedCircle
-                  />
-                </div>{" "}
-              </span>
-            </Col>
-            <div className="div5" />
-          </Row>
           <Api />
         </Container>
         <div />

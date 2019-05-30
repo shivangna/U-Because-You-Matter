@@ -7,18 +7,16 @@ import Api from "./Api.js";
 class Navbarr extends Component {
   render() {
     return (
-      <div>
-        <nav>
+      <nav class="navbar sticky-top navbar-light bg-light">
+        <div className="navbar">
           <div className="navWide" />
           <div className="navNarrow">
-            <div className="narrowLinks">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
+            <a class="navbar-brand" href="#">
+              U{" "}
+            </a>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     );
   }
 }
