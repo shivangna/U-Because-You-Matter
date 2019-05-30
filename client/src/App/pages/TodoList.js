@@ -66,7 +66,6 @@ class TodoList extends Component {
 
   render() {
     const todoEntries = this.state.todos;
-    console.log("todoEntries", this.state.todos);
     // task_state = this.todos.task_state;
     const listItems = todoEntries.map(todos => {
       return (

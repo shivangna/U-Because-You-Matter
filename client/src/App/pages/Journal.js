@@ -3,11 +3,9 @@ import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 //import ChartViewer from "./wordgraph.js"
 import ChartViewer from "./final-wordgraph.js";
-import { parse } from "url";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LiquidGauge from "./gauge";
-
 
 // Format the date input to MM/DD/YYYY
 
@@ -28,7 +26,6 @@ class Journal extends Component {
     };
   }
 
-
   // Sets and format dates and also get journal entry for the chosen day
 
   handleDateChange = date => {
@@ -38,9 +35,9 @@ class Journal extends Component {
     let parsedEntryDate = new Date(this.state.entry_today.journal_date);
     let today = new Date(this.state.startDate);
     if (
-      parsedEntryDate.getDate() + 1 == today.getDate() &&
-      parsedEntryDate.getFullYear() == today.getFullYear() &&
-      parsedEntryDate.getMonth() == today.getMonth()
+      parsedEntryDate.getDate() + 1 === today.getDate() &&
+      parsedEntryDate.getFullYear() === today.getFullYear() &&
+      parsedEntryDate.getMonth() === today.getMonth()
     ) {
       return;
     }
@@ -64,17 +61,15 @@ class Journal extends Component {
     this.getList();
   }
 
-
   // Call backend to get journal entries and set State
 
   componentDidUpdate() {
     let parsedEntryDate = new Date(this.state.entry_today.journal_date);
     let today = new Date(this.state.startDate);
-    console.log("parsed entry date, today", parsedEntryDate, today);
     if (
-      parsedEntryDate.getDate() + 1 == today.getDate() &&
-      parsedEntryDate.getFullYear() == today.getFullYear() &&
-      parsedEntryDate.getMonth() == today.getMonth()
+      parsedEntryDate.getDate() + 1 === today.getDate() &&
+      parsedEntryDate.getFullYear() === today.getFullYear() &&
+      parsedEntryDate.getMonth() === today.getMonth()
     ) {
       return;
     }
@@ -84,14 +79,13 @@ class Journal extends Component {
   //   let parsedEntryDate = new Date(this.state.entry_today.journal_date)
   //   let today = new Date(this.state.startDate)
   //   console.log('parsed entry date, today', parsedEntryDate, today)
-  //   if (parsedEntryDate.getDate() + 1 == today.getDate() && 
-  //     parsedEntryDate.getFullYear() == today.getFullYear() && 
+  //   if (parsedEntryDate.getDate() + 1 == today.getDate() &&
+  //     parsedEntryDate.getFullYear() == today.getFullYear() &&
   //     parsedEntryDate.getMonth() == today.getMonth() ) {
   //       return
   //     }
   //   this.getList()
   // }
-
 
   getList = () => {
     fetch("/journal")
@@ -103,9 +97,9 @@ class Journal extends Component {
 
           //console.log('parsed entry date, today', parsedEntryDate, today)
           return (
-            parsedEntryDate.getDate() + 1 == today.getDate() &&
-            parsedEntryDate.getFullYear() == today.getFullYear() &&
-            parsedEntryDate.getMonth() == today.getMonth()
+            parsedEntryDate.getDate() + 1 === today.getDate() &&
+            parsedEntryDate.getFullYear() === today.getFullYear() &&
+            parsedEntryDate.getMonth() === today.getMonth()
           );
         });
         this.setState({ entries: results });
@@ -145,7 +139,6 @@ class Journal extends Component {
   };
 
   renderFeeling = () => {
-    let arr = [];
     let sum = 0;
 
     if (this.state.entry_today.hasOwnProperty("emotion")) {
@@ -159,7 +152,7 @@ class Journal extends Component {
       for (let key in emotionsObj) {
         let emotionValue = emotionsObj[key] * (100 / sum);
         emotionGauges.push(
-          <div>
+          <div key={key}>
             {key}
             <LiquidGauge key={key} emotion={emotionValue} />
           </div>

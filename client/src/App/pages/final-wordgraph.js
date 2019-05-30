@@ -6,13 +6,13 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-function countWords(incomingData) {
-  incomingData.forEach(element => {
-    // console.log('element ', element)
-    // console.log('elements journal entry ', element)
-    element["word_count"] = superCounter(element["journal_entry"]);
-  });
-}
+// function countWords(incomingData) {
+//   incomingData.forEach(element => {
+//     // console.log('element ', element)
+//     // console.log('elements journal entry ', element)
+//     element["word_count"] = superCounter(element["journal_entry"]);
+//   });
+// }
 
 function superCounter(str) {
   var words = str
@@ -24,11 +24,6 @@ function superCounter(str) {
 }
 
 class ChartViewer extends React.Component {
-  constructor(props) {
-    super(props);
-    // console.log(props.dataArray)
-  }
-
   render() {
     const graphInfo = {
       timeseriesDs: {
