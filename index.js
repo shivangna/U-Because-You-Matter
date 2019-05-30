@@ -64,7 +64,8 @@ app.get("/journal", (req, res) => {
     .select(
       "users.id",
       "journal_entries.journal_entry",
-      "journal_entries.journal_date"
+      "journal_entries.journal_date",
+      "journal_entries.emotion"
     )
     .then(results => {
       res.json(results);
@@ -74,55 +75,64 @@ app.get("/journal", (req, res) => {
 let emotions = "";
 //posts journal entries to db
 app.post("/journal", (req, res) => {
-  new Promise((resolve, reject) => {
+  let analyzeParams = {
+    text: req.body.entry,
+    features: {
+      emotion: {
+        document: true
+      }
+    }
+  };
+
+  let promise1 = new Promise((resolve, reject) => {
     resolve(
       naturalLanguageUnderstanding
-        .analyze({
-          text: req.body.entry,
-          features: {
-            emotion: {
-              document: true
-            }
-          }
-        })
+        .analyze(analyzeParams)
         .then(analysisResults => {
-          emotions = JSON.stringify(analysisResults, null, 2);
+          emotions = analysisResults.emotion.document.emotion;
+          // console.log(
+          //   "Watson Results: ",
+          //   analysisResults.emotion.document.emotion
+          // );
         })
         .catch(err => {
           console.log("error:", err);
         })
-    ).then(() => {
-      knex("journal_entries")
-        .select()
-        .where({ journal_date: req.body.date, user_id: 2 })
-        .then(function(rows) {
-          if (rows && rows.length) {
-            // no matching records found
-            console.log("post request journal date", req.body.date);
-            console.log("post request journal entry", req.body.entry);
-            console.log("post request journal emotion", emotions);
-            knex("journal_entries")
-              .where({ journal_date: req.body.date, user_id: 2 })
-              .update({ journal_entry: req.body.entry, emotion: emotions })
-              .then(() => res.json({ msg: "send ok!" }));
-          } else {
-            console.log("post request journal date", req.body.date);
-            console.log("post request journal entry", req.body.entry);
-            console.log("post request journal emotion", emotions);
-            knex("journal_entries")
-              .insert({
-                user_id: 2,
-                journal_entry: req.body.entry,
-                journal_date: req.body.date
-              })
-              .then(() => res.json({ msg: "send ok!" }));
-          }
-        })
-        .catch(function(ex) {
-          res.send({ error: "err" });
-          console.log("err", ex);
-        });
-    });
+    );
+  });
+
+  promise1.then(() => {
+    knex("journal_entries")
+      .select()
+      .where({ journal_date: req.body.date, user_id: 2 })
+      .then(function(rows) {
+        if (rows && rows.length) {
+          // no matching records found
+          console.log("post request journal date", req.body.date);
+          console.log("post request journal entry", req.body.entry);
+          console.log("post request journal emotion", emotions);
+          knex("journal_entries")
+            .where({ journal_date: req.body.date, user_id: 2 })
+            .update({ journal_entry: req.body.entry, emotion: emotions })
+            .then(() => res.json({ msg: "send ok!" }));
+        } else {
+          console.log("post request journal date", req.body.date);
+          console.log("post request journal entry", req.body.entry);
+          console.log("post request journal emotion", emotions);
+          knex("journal_entries")
+            .insert({
+              user_id: 2,
+              journal_entry: req.body.entry,
+              journal_date: req.body.date,
+              emotion: emotions
+            })
+            .then(() => res.json({ msg: "send ok!" }));
+        }
+      })
+      .catch(function(ex) {
+        res.send({ error: "err" });
+        console.log("err", ex);
+      });
   });
 });
 

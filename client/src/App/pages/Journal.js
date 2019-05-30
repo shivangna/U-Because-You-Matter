@@ -109,7 +109,11 @@ class Journal extends Component {
       .then(res => res.json())
       .then(data => {
         this.getList();
-        console.log(data);
+        // console.log(data);
+        // this.state.entries.forEach(entry => {
+        //   console.log("Emotion: ", entry);
+        // });
+        console.log("Last Entry", this.state.entries[13].emotion);
       })
       .catch(err => console.log(err));
   };
