@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
-import { Modal, Button } from "react-bootstrap";
 
 class Api extends Component {
   constructor(props) {
@@ -112,7 +110,7 @@ class Api extends Component {
             }
           `}
         </style>
-        <h1 id="title">Random Quote Machine</h1>
+        <h2 id="title">Random Quote Machine</h2>
         <div id="quote-box">
           <p id="text">{this.state.text}</p>
           <p id="author"> - {this.state.author}</p>

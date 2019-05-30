@@ -59,7 +59,7 @@ class Mood extends Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
+      <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div>
           <Jumbotron className="App">
             <h1>Mood</h1>
@@ -103,7 +103,6 @@ class Mood extends Component {
             <p />
             <Heatmap values={this.state.moods} />
           </Jumbotron>
-          ;
         </div>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>

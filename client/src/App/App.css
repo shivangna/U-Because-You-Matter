@@ -2,43 +2,95 @@
   text-align: center;
 }
 
-.logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40px;
-  width: 40px;
-  margin-left: -10px;
+/*Background ------------------------------------------------------------------------------------------------------------------------ */
+
+html {
+  height: 100%;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+body {
+  margin: 0;
 }
 
-.App-intro {
-  font-size: large;
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+
+.bg3 {
+  animation-duration: 5s;
+}
+
+.content {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.25em;
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  left: 50%;
+  padding: 10vmin;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  font-family: monospace;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translateX(25%);
   }
 }
 
-.todopic,
-.moodpic,
-.journalpic,
-.challengespic,
-.newpic {
-  width: 300px;
-  height: 300px;
+/*NAVBAR ------------------------------------------------------------------------------------------------------------------------ */
+
+/*MODAL PICS ------------------------------------------------------------------------------------------------------------------------ */
+.modalpic {
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 1.5em;
+  cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 3px 0.25em #999999;
+  width: 350px;
+  height: 350px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+}
+
+.modalpic:focus {
+  transform: scale(1.05);
+}
+
+.modalpic:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.modalpic:active {
+  background-color: #5c6ac4;
+  box-shadow: 0 20.125em #666666;
+  transform: translateY(0.25em);
 }
 
 .moduletitle {
@@ -51,28 +103,102 @@
   margin-top: 20px;
 }
 
-/* TODO LIST*/
+/* MODAL TITLE ------------------------------------------------------------------------------------------------------------------------ */
 
+html,
 body {
-  font-family: Roboto;
-  background: -webkit-linear-gradient(
-    90deg,
-    #2bc0e4 10%,
-    #eaecc6 90%
-  ); /* Chrome 10+, Saf5.1+ */
-  background: -moz-linear-gradient(
-    90deg,
-    #2bc0e4 10%,
-    #eaecc6 90%
-  ); /* FF3.6+ */
-  background: -ms-linear-gradient(90deg, #2bc0e4 10%, #eaecc6 90%); /* IE10 */
-  background: -o-linear-gradient(
-    90deg,
-    #2bc0e4 10%,
-    #eaecc6 90%
-  ); /* Opera 11.10+ */
-  background: linear-gradient(90deg, #2bc0e4 10%, #eaecc6 90%); /* W3C */
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
 }
+
+.svg-wrapper {
+  height: 60px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+}
+
+.shape {
+  fill: transparent;
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  stroke: #19f6e8;
+}
+
+.text {
+  color: #fff;
+  font-family: "Roboto Condensed";
+  font-size: 22px;
+  letter-spacing: 8px;
+  line-height: 32px;
+  position: relative;
+  top: -48px;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 8px;
+  }
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    stroke-width: 2px;
+  }
+}
+
+.svg-wrapper:hover .shape {
+  -webkit-animation: 0.5s draw linear forwards;
+  animation: 0.5s draw linear forwards;
+}
+
+/* MODAL COL ROW ------------------------------------------------------------------------------------------------------------------------ */
+
+.row2 {
+  margin-top: 400px;
+}
+
+.parent {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
+
+  grid-template-rows: 1fr;
+
+  grid-column-gap: 0px;
+
+  grid-row-gap: 0px;
+}
+.div1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.div2 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.div3 {
+  grid-area: 1 / 3 / 2 / 4;
+}
+
+.div4 {
+  grid-area: 1 / 4 / 2 / 5;
+}
+
+.div5 {
+  grid-area: 1 / 5 / 2 / 6;
+}
+
+.div6 {
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+/* TODO LIST ------------------------------------------------------------------------------------------------------------------------ */
 
 ul {
   list-style: none;
@@ -150,7 +276,7 @@ input:focus {
   text-decoration: line-through;
 }
 
-/* DAILY CHALLENGES */
+/* DAILY CHALLENGES ------------------------------------------------------------------------------------------------------------------------ */
 
 .circleOutside {
   align-self: center;
@@ -158,6 +284,7 @@ input:focus {
 
 .ciclegraph {
   position: relative;
+  float: left;
   width: 500px;
   height: 500px;
   margin: calc(100px / 2 + 0px);
@@ -176,7 +303,7 @@ input:focus {
 }
 
 .ciclegraph .circle {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   width: 150px;
