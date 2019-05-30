@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./login.css";
-
+import LoginSteps from "./login-steps.js";
 
 
 class Login extends Component {
@@ -16,12 +16,14 @@ class Login extends Component {
     render () {
         return (
             <div>
+                <LoginSteps/>
+                
             <div className="main">
               <p className="sign" align="center">Sign in</p>
               <form className="form1">
                 <input className="un " type="text" align="center" placeholder="Username" />
                 <input className="pass" type="password" align="center" placeholder="Password" />
-                <a className="submit" align="center">Sign in</a>
+                <button className="submit" align="center">Sign in</button>
                 <p className="forgot" align="center"><a href="#">Forgot Password?</a></p><a href="#">
                 </a></form></div><a href="#">
             </a> 
