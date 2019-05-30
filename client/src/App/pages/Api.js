@@ -102,24 +102,27 @@ class Api extends Component {
   render() {
     return (
       <div id="main">
-        <style>
-          {`
-          :root {
-            --main-bg-color: ${this.state.bgColor};
-            --main-txt-color: ${this.state.bgColor};
-            }
-          `}
-        </style>
-        <h2 id="title">Random Quote Machine</h2>
-        <div id="quote-box">
-          <p id="text">{this.state.text}</p>
-          <p id="author"> - {this.state.author}</p>
-          <button id="tweet-quote" onClick={this.shareOnTwitter}>
-            Twitt
-          </button>
-          <button id="new-quote" onClick={this.handleClick}>
-            New Quote
-          </button>
+        <div class="translucent-form-overlay">
+          <style />
+          <h2 id="title">Random Quote Machine</h2>
+          <div id="quote-box">
+            <p id="text">{this.state.text}</p>
+            <p id="author"> - {this.state.author}</p>
+            <button
+              id="tweet-quote"
+              className="primary button expanded search-button"
+              onClick={this.shareOnTwitter}
+            >
+              Twitt
+            </button>
+            <button
+              id="new-quote"
+              className="primary button expanded search-button"
+              onClick={this.handleClick}
+            >
+              New Quote
+            </button>
+          </div>
         </div>
       </div>
     );

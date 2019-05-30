@@ -123,3 +123,31 @@ class App extends Component {
   }
 }
 export default App;
+
+
+
+
+
+        <div class="translucent-form-overlay">
+  <form>
+    <h3>Search for Properties</h3>
+    <div class="row columns">
+      <label>Keyword
+        <input type="text" name="keyword" placeholder="Any">
+      </label>
+    </div>
+    <div class="row columns">
+      <label>Property Status
+        <select name="status" type="text">
+          <option>Any</option>
+          <option value="rent">Rent</option>
+          <option value="buy">Buy</option>
+        </select>
+      </label>
+    </div>
+  
+    </div>
+    <button type="button" class="primary button expanded search-button">
+      Search
+    </button>
+ </form>
