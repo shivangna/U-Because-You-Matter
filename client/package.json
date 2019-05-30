@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "d3": "^5.9.2",
     "fusioncharts": "^3.13.4",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
@@ -13,6 +14,7 @@
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.6",
     "react-fusioncharts": "^3.0.1",
+    "react-liquid-gauge": "^1.2.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "0.9.5",
     "recharts": "^1.6.2",

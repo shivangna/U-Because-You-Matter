@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
 import Heatmap from "./heatmap.js";
+import LiquidGauge from "./gauge";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -103,6 +104,7 @@ class Mood extends Component {
             <p />
             <Heatmap values={this.state.moods} />
           </Jumbotron>
+          <LiquidGauge />
         </div>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>

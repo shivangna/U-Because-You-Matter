@@ -6,6 +6,10 @@ import ChartViewer from "./final-wordgraph.js";
 import { parse } from "url";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import LiquidGauge from "./gauge";
+
+
+// Format the date input to MM/DD/YYYY
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -24,20 +28,26 @@ class Journal extends Component {
     };
   }
 
+
+  // Sets and format dates and also get journal entry for the chosen day
+
   handleDateChange = date => {
     this.setState({
       startDate: date
     });
-    let parsedEntryDate = new Date(this.state.entry_today.journal_date)
-    let today = new Date(this.state.startDate)
-    //console.log('parsed entry date, today', parsedEntryDate, today)
-    if (parsedEntryDate.getDate() + 1 == today.getDate() && 
-      parsedEntryDate.getFullYear() == today.getFullYear() && 
-      parsedEntryDate.getMonth() == today.getMonth() ) {
-        return 
-      }
-    this.getList()
-  }
+    let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+    let today = new Date(this.state.startDate);
+    if (
+      parsedEntryDate.getDate() + 1 == today.getDate() &&
+      parsedEntryDate.getFullYear() == today.getFullYear() &&
+      parsedEntryDate.getMonth() == today.getMonth()
+    ) {
+      return;
+    }
+    this.getList();
+  };
+
+  //Query through all entries of journal and display for the chosen date
 
   renderTodaysJournal = entries => {
     entries.forEach(element => {
@@ -53,6 +63,9 @@ class Journal extends Component {
   componentDidMount() {
     this.getList();
   }
+
+
+  // Call backend to get journal entries and set State
 
   componentDidUpdate() {
     let parsedEntryDate = new Date(this.state.entry_today.journal_date);
@@ -79,20 +92,23 @@ class Journal extends Component {
   //   this.getList()
   // }
 
+
   getList = () => {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
+        let entry_today = results.find(entry => {
+          let parsedEntryDate = new Date(entry.journal_date);
+          let today = new Date(this.state.startDate);
 
-        let entry_today = results.find((entry) => {
-          let parsedEntryDate = new Date(entry.journal_date)
-          let today = new Date(this.state.startDate)
           //console.log('parsed entry date, today', parsedEntryDate, today)
-          return parsedEntryDate.getDate() + 1 == today.getDate() && 
-            parsedEntryDate.getFullYear() == today.getFullYear() && 
-            parsedEntryDate.getMonth() == today.getMonth() 
-        })
-        this.setState({ entries: results})
+          return (
+            parsedEntryDate.getDate() + 1 == today.getDate() &&
+            parsedEntryDate.getFullYear() == today.getFullYear() &&
+            parsedEntryDate.getMonth() == today.getMonth()
+          );
+        });
+        this.setState({ entries: results });
         if (entry_today) {
           this.setState({
             entry_today: entry_today,
@@ -106,6 +122,7 @@ class Journal extends Component {
       });
   };
 
+  // Post method to save journal entry to DB
   handleSubmit = event => {
     event.preventDefault();
     fetch("/journal", {
@@ -119,14 +136,37 @@ class Journal extends Component {
       .then(res => res.json())
       .then(data => {
         this.getList();
-        console.log(data);
       })
       .catch(err => console.log(err));
   };
 
-
   handleChange = event => {
     this.setState({ value: event.target.value });
+  };
+
+  renderFeeling = () => {
+    let arr = [];
+    let sum = 0;
+
+    if (this.state.entry_today.hasOwnProperty("emotion")) {
+      const arrKey = Object.values(JSON.parse(this.state.entry_today.emotion));
+
+      arrKey.forEach(element => {
+        sum += element;
+      });
+      let emotionsObj = JSON.parse(this.state.entry_today.emotion);
+      let emotionGauges = [];
+      for (let key in emotionsObj) {
+        let emotionValue = emotionsObj[key] * (100 / sum);
+        emotionGauges.push(
+          <div>
+            {key}
+            <LiquidGauge key={key} emotion={emotionValue} />
+          </div>
+        );
+      }
+      return <div> {emotionGauges} </div>;
+    }
   };
 
   render() {
@@ -156,6 +196,12 @@ class Journal extends Component {
                   </label>
                   <input type="submit" value="Submit" />
                 </form>
+              </Form.Group>
+              <div>{this.renderFeeling()}</div>
+
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                <Form.Label>How is your day going?</Form.Label>
+                <Form.Control as="textarea" rows="3" />
               </Form.Group>
               <ChartViewer dataArray={this.state.entries} />
             </Form>

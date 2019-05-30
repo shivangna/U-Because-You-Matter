@@ -4,6 +4,8 @@ const ENV = process.env.ENV || "development";
 const app = express();
 const unirest = require("unirest");
 
+const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1.js");
+
 const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 const knexLogger = require("knex-logger");
@@ -14,6 +16,10 @@ app.use(bodyParser.json());
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
+
+const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
+  version: "2018-11-16"
+});
 
 //posts mood
 app.post("/mood", (req, res) => {
@@ -58,43 +64,76 @@ app.get("/journal", (req, res) => {
     .select(
       "users.id",
       "journal_entries.journal_entry",
-      "journal_entries.journal_date"
+      "journal_entries.journal_date",
+      "journal_entries.emotion"
     )
     .then(results => {
       res.json(results);
     });
 });
 
+let emotions = "";
 //posts journal entries to db
 app.post("/journal", (req, res) => {
-  console.log("post request journal date", req.body.date);
-  console.log("post request journal entry", req.body.entry);
-  let user_id = 2;
-  return knex("journal_entries")
-    .select()
-    .where({ journal_date: req.body.date, user_id: user_id })
-    .then(function(rows) {
-      if (rows && rows.length) {
-        // no matching records found
-        return knex("journal_entries")
-          .where({ journal_date: req.body.date, user_id: user_id })
-          .update({ journal_entry: req.body.entry })
-          .then(() => res.json({ msg: "send ok!" }));
-      } else {
-        console.log("inserting journal entries");
-        knex("journal_entries")
-          .insert({
-            user_id: user_id,
-            journal_entry: req.body.entry,
-            journal_date: req.body.date
-          })
-          .then(() => res.json({ msg: "send ok!" }));
+  let analyzeParams = {
+    text: req.body.entry,
+    features: {
+      emotion: {
+        document: true
       }
-    })
-    .catch(function(ex) {
-      res.send({ error: "err" });
-      console.log("err", ex);
-    });
+    }
+  };
+
+  let promise1 = new Promise((resolve, reject) => {
+    resolve(
+      naturalLanguageUnderstanding
+        .analyze(analyzeParams)
+        .then(analysisResults => {
+          emotions = analysisResults.emotion.document.emotion;
+          // console.log(
+          //   "Watson Results: ",
+          //   analysisResults.emotion.document.emotion
+          // );
+        })
+        .catch(err => {
+          console.log("error:", err);
+        })
+    );
+  });
+
+  promise1.then(() => {
+    knex("journal_entries")
+      .select()
+      .where({ journal_date: req.body.date, user_id: 2 })
+      .then(function(rows) {
+        if (rows && rows.length) {
+          // no matching records found
+          console.log("post request journal date", req.body.date);
+          console.log("post request journal entry", req.body.entry);
+          console.log("post request journal emotion", emotions);
+          knex("journal_entries")
+            .where({ journal_date: req.body.date, user_id: 2 })
+            .update({ journal_entry: req.body.entry, emotion: emotions })
+            .then(() => res.json({ msg: "send ok!" }));
+        } else {
+          console.log("post request journal date", req.body.date);
+          console.log("post request journal entry", req.body.entry);
+          console.log("post request journal emotion", emotions);
+          knex("journal_entries")
+            .insert({
+              user_id: 2,
+              journal_entry: req.body.entry,
+              journal_date: req.body.date,
+              emotion: emotions
+            })
+            .then(() => res.json({ msg: "send ok!" }));
+        }
+      })
+      .catch(function(ex) {
+        res.send({ error: "err" });
+        console.log("err", ex);
+      });
+  });
 });
 
 //gets Todotasks from db
