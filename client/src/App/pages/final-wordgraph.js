@@ -36,7 +36,7 @@ class ChartViewer extends React.Component {
           caption: { text: "Online Sales of a SuperStore in the US" },
           chart: {
             caption: "Word Count by Date",
-            subCaption: "Write Write Write...",
+            subCaption: "",
             xAxisName: "Date",
             yAxisName: "Word Count",
             numberSuffix: "",

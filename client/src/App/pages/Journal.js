@@ -21,7 +21,7 @@ class Journal extends Component {
     this.state = {
       entries: [],
       value: "",
-      entry_today: { journal_entry: "" },
+      entry_today: { journal_entry: "", emotion: "{}" },
       startDate: new Date()
     };
   }
@@ -29,29 +29,49 @@ class Journal extends Component {
   // Sets and format dates and also get journal entry for the chosen day
 
   handleDateChange = date => {
-    let promiseDate = new Promise((resolve, reject) => {
-      resolve(
-        this.setState({
-          startDate: date
-        })
-      );
-    });
+    // let promiseDate = new Promise((resolve, reject) => {
+    //   resolve(
+    //     this.setState({
+    //       startDate: date
+    //     })
+    //   );
+    // });
+    // promiseDate.then(() => {
+    //   let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+    //   let today = new Date(this.state.startDate);
+    //   if (
+    //     parsedEntryDate.getDate() + 1 === today.getDate() &&
+    //     parsedEntryDate.getFullYear() === today.getFullYear() &&
+    //     parsedEntryDate.getMonth() === today.getMonth()
+    //   ) {
+    //     return;
+    //   }
+    //   this.getList();
+    // });
+    // promiseDate.then(() => {
+    //   this.renderFeeling();
+    // });
 
-    promiseDate.then(() => {
-      let parsedEntryDate = new Date(this.state.entry_today.journal_date);
-      let today = new Date(this.state.startDate);
-      if (
-        parsedEntryDate.getDate() + 1 === today.getDate() &&
-        parsedEntryDate.getFullYear() === today.getFullYear() &&
-        parsedEntryDate.getMonth() === today.getMonth()
-      ) {
-        return;
+    this.setState(
+      {
+        startDate: date
+      },
+      () => {
+        let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+        let today = new Date(this.state.startDate);
+        if (
+          parsedEntryDate.getDate() + 1 === today.getDate() &&
+          parsedEntryDate.getFullYear() === today.getFullYear() &&
+          parsedEntryDate.getMonth() === today.getMonth()
+        ) {
+          return;
+        }
+        this.getList(() => {
+          this.renderFeeling(this.state.entry_today);
+          this.forceUpdate();
+        });
       }
-      this.getList();
-    });
-    promiseDate.then(() => {
-      this.renderFeeling();
-    });
+    );
   };
 
   //Query through all entries of journal and display for the chosen date
@@ -69,7 +89,6 @@ class Journal extends Component {
 
   componentDidMount() {
     this.getList();
-    this.renderFeeling();
   }
 
   // Call backend to get journal entries and set State
@@ -99,28 +118,27 @@ class Journal extends Component {
   //   this.getList()
   // }
 
-  renderFeeling = () => {
+  renderFeeling = entryToday => {
     let sum = 0;
     let emotionGauges = [];
 
-    if (this.state.entry_today.hasOwnProperty("emotion")) {
-      const arrValues = Object.values(
-        JSON.parse(this.state.entry_today.emotion)
-      );
+    if (entryToday.hasOwnProperty("emotion")) {
+      const arrValues = Object.values(JSON.parse(entryToday.emotion));
 
       arrValues.forEach(element => {
         sum += element;
       });
 
-      let emotionsObj = JSON.parse(this.state.entry_today.emotion);
+      let emotionsObj = JSON.parse(entryToday.emotion);
 
       for (let key in emotionsObj) {
-        let emotionValue = emotionsObj[key] * (100 / sum);
-
+        let emotionValue = emotionsObj[key] * 100;
+        console.log("entry_today: ", entryToday.journal_date);
+        console.log("value: ", key, emotionValue);
         emotionGauges.push(
           <div key={key}>
             {key}
-            <LiquidGauge key={key} emotion={emotionValue} />
+            <LiquidGauge emotion={emotionValue} />
           </div>
         );
       }
@@ -128,7 +146,7 @@ class Journal extends Component {
     }
   };
 
-  getList = () => {
+  getList = cb => {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
@@ -145,10 +163,13 @@ class Journal extends Component {
         });
         this.setState({ entries: results });
         if (entry_today) {
-          this.setState({
-            entry_today: entry_today,
-            value: entry_today.journal_entry
-          });
+          this.setState(
+            {
+              entry_today: entry_today,
+              value: entry_today.journal_entry
+            },
+            cb
+          );
         } else {
           this.setState({
             value: ""
@@ -173,7 +194,7 @@ class Journal extends Component {
         this.getList();
       })
       .then(data => {
-        this.renderFeeling();
+        this.renderFeeling(this.state.entry_today);
       })
       .catch(err => console.log(err));
   };
@@ -183,6 +204,7 @@ class Journal extends Component {
   };
 
   render() {
+    let emotionsObj = JSON.parse(this.state.entry_today.emotion);
     return (
       <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
@@ -210,7 +232,8 @@ class Journal extends Component {
                   <input type="submit" value="Submit" />
                 </form>
               </Form.Group>
-              <div>{this.renderFeeling()}</div>
+
+              <div>{this.renderFeeling(this.state.entry_today)}</div>
 
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>How is your day going?</Form.Label>
