@@ -30,19 +30,7 @@ class Login extends Component {
                 <p className="forgot" align="center"><a href="#">Forgot Password?</a></p><a href="#">
                 </a></div><a href="#">
             </a> 
-        
-            <ul className="circles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+    
    
             </div>
     )};
