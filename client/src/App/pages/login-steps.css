@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900");
 
 .progress {
-  height: 0;
+  height:
 }
 
 body .progress_inner #step-5:checked + div + div + div + div > .box_base, body .progress_inner #step-4:checked + input + div + div + div + div > .box_base, body .progress_inner #step-2:checked + input + input + input + div + div + div + div > .box_base, body .progress_inner #step-3:checked + input + input + div + div + div + div > .box_base, body .progress_inner #step-1:checked + input + input + input + input + div + div + div + div > .box_base {
