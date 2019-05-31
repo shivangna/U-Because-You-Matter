@@ -101,7 +101,7 @@ class Api extends Component {
 
   render() {
     return (
-      <div className="quotebox" onClick={this.handleClick}>
+      <footer onClick={this.handleClick}>
         <div class="translucent-form-overlay">
           <style />
           <div id="quote-box">
@@ -123,7 +123,7 @@ class Api extends Component {
             </button> */}
           </div>
         </div>
-      </div>
+      </footer>
     );
   }
 }

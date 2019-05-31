@@ -61,49 +61,41 @@ class Mood extends Component {
     return (
       <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div>
-          <Jumbotron className="App">
-            <h1>Mood</h1>
-            <p>
-              <Button
-                onClick={this.createSetMood("ReallyGreat")}
-                variant="outline-info"
-              >
-                Really Great!
-              </Button>
-              <Button
-                onClick={this.createSetMood("Good")}
-                variant="outline-info"
-              >
-                Good!
-              </Button>
-              <Button onClick={this.createSetMood("Ok")} variant="outline-info">
-                Ok
-              </Button>
-            </p>
-            <p>
-              <Button
-                onClick={this.createSetMood("Bad")}
-                variant="outline-info"
-              >
-                Bad
-              </Button>
-              <Button
-                onClick={this.createSetMood("VeryBad")}
-                variant="outline-info"
-              >
-                Very Bad!
-              </Button>
-              <Button
-                onClick={this.createSetMood("Worst")}
-                variant="outline-info"
-              >
-                Worst
-              </Button>
-            </p>
-            <p />
-            <Heatmap values={this.state.moods} />
-          </Jumbotron>
-          <LiquidGauge />
+          <h1>Mood</h1>
+          <p>
+            <Button
+              onClick={this.createSetMood("ReallyGreat")}
+              variant="outline-info"
+            >
+              Really Great!
+            </Button>
+            <Button onClick={this.createSetMood("Good")} variant="outline-info">
+              Good!
+            </Button>
+            <Button onClick={this.createSetMood("Ok")} variant="outline-info">
+              Ok
+            </Button>
+          </p>
+          <p>
+            <Button onClick={this.createSetMood("Bad")} variant="outline-info">
+              Bad
+            </Button>
+            <Button
+              onClick={this.createSetMood("VeryBad")}
+              variant="outline-info"
+            >
+              Very Bad!
+            </Button>
+            <Button
+              onClick={this.createSetMood("Worst")}
+              variant="outline-info"
+            >
+              Worst
+            </Button>
+          </p>
+          <p />
+          <Heatmap className="heatmap" values={this.state.moods} />
+          <LiquidGauge className="gauge" />
         </div>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>

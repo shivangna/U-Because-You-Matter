@@ -132,9 +132,7 @@ class Challenges extends Component {
         onHide={this.props.onHide}
       >
         <div className="App">
-          <Jumbotron className="App">
-            <h1>Challenge</h1>
-          </Jumbotron>{" "}
+          <h1>Challenge</h1>
         </div>
         <div className="circleOutside">
           <CircularProgressbar

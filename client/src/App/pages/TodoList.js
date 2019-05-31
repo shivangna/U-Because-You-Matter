@@ -80,29 +80,24 @@ class TodoList extends Component {
     return (
       <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
-          <Jumbotron className="App">
-            <h1>To Do</h1>
-            <div id="container">
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  id="input1"
-                  onChange={this.submitHandler}
-                  type="text"
-                  value={this.state.task}
-                  placeholder="Add New Todo"
-                />
-                <button type="submit"> Add Task </button>
-              </form>
-              <ul className="thelist">{listItems}</ul>
-            </div>
-          </Jumbotron>
+          <h1>To Do</h1>
+          <div id="container">
+            <form onSubmit={this.handleSubmit}>
+              <input
+                id="input1"
+                onChange={this.submitHandler}
+                type="text"
+                value={this.state.task}
+                placeholder="Add New Todo"
+              />
+              <button type="submit"> Add Task </button>
+            </form>
+            <ul className="thelist">{listItems}</ul>
+          </div>
         </div>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>
             Close
-          </Button>
-          <Button variant="primary" onClick={this.props.onHide}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
