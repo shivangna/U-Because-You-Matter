@@ -141,6 +141,7 @@ body {
 body .progress_inner {
   height: 200px;
   width: 700px;
+  
 }
 body .progress_inner #step-5:checked + div {
   width: 80%;
@@ -282,14 +283,14 @@ body .progress_inner__status .box_item {
 body .progress_inner__status .box_ribbon {
   width: 10px;
   height: 42px;
-  background: #ee0f29;
+  background: #1a1818;
   z-index: 4;
   border-radius: 1px;
 }
 body .progress_inner__status .box_bow__left, body .progress_inner__status .box_bow__right {
   width: 6px;
   height: 10px;
-  background: #be0c21;
+  background: #040102;
   position: absolute;
   z-index: 3;
   opacity: 1;
@@ -311,25 +312,7 @@ body .progress_inner__status .box_bow__right {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
-body .progress_inner__status .box_tag {
-  width: 20px;
-  height: 10px;
-  background: #487ac7;
-  z-index: 4;
-  -webkit-transform: rotate(-10deg) translateX(-40px) translateY(0px);
-          transform: rotate(-10deg) translateX(-40px) translateY(0px);
-  border-radius: 2px;
-  -webkit-transition-delay: 500ms;
-          transition-delay: 500ms;
-}
-body .progress_inner__status .box_string {
-  width: 17px;
-  height: 2px;
-  background: #343434;
-  z-index: 4;
-  -webkit-transform: rotate(-39deg) translateX(-22px) translateY(-12px);
-          transform: rotate(-39deg) translateX(-22px) translateY(-12px);
-}
+
 body .progress_inner input[type="radio"] {
   display: none;
 }
