@@ -29,19 +29,29 @@ class Journal extends Component {
   // Sets and format dates and also get journal entry for the chosen day
 
   handleDateChange = date => {
-    this.setState({
-      startDate: date
+    let promiseDate = new Promise((resolve, reject) => {
+      resolve(
+        this.setState({
+          startDate: date
+        })
+      );
     });
-    let parsedEntryDate = new Date(this.state.entry_today.journal_date);
-    let today = new Date(this.state.startDate);
-    if (
-      parsedEntryDate.getDate() + 1 === today.getDate() &&
-      parsedEntryDate.getFullYear() === today.getFullYear() &&
-      parsedEntryDate.getMonth() === today.getMonth()
-    ) {
-      return;
-    }
-    this.getList();
+
+    promiseDate.then(() => {
+      let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+      let today = new Date(this.state.startDate);
+      if (
+        parsedEntryDate.getDate() + 1 === today.getDate() &&
+        parsedEntryDate.getFullYear() === today.getFullYear() &&
+        parsedEntryDate.getMonth() === today.getMonth()
+      ) {
+        return;
+      }
+      this.getList();
+    });
+    promiseDate.then(() => {
+      this.renderFeeling();
+    });
   };
 
   //Query through all entries of journal and display for the chosen date
@@ -59,22 +69,24 @@ class Journal extends Component {
 
   componentDidMount() {
     this.getList();
+    this.renderFeeling();
   }
 
   // Call backend to get journal entries and set State
 
-  componentDidUpdate() {
-    let parsedEntryDate = new Date(this.state.entry_today.journal_date);
-    let today = new Date(this.state.startDate);
-    if (
-      parsedEntryDate.getDate() + 1 === today.getDate() &&
-      parsedEntryDate.getFullYear() === today.getFullYear() &&
-      parsedEntryDate.getMonth() === today.getMonth()
-    ) {
-      return;
-    }
-    this.getList();
-  }
+  // componentDidUpdate() {
+  //   let parsedEntryDate = new Date(this.state.entry_today.journal_date);
+  //   let today = new Date(this.state.startDate);
+  //   if (
+  //     parsedEntryDate.getDate() + 1 === today.getDate() &&
+  //     parsedEntryDate.getFullYear() === today.getFullYear() &&
+  //     parsedEntryDate.getMonth() === today.getMonth()
+  //   ) {
+  //     return;
+  //   }
+  //   this.getList();
+  //   this.renderFeeling();
+  // }
   // componentDidUpdate() {
   //   let parsedEntryDate = new Date(this.state.entry_today.journal_date)
   //   let today = new Date(this.state.startDate)
@@ -86,6 +98,35 @@ class Journal extends Component {
   //     }
   //   this.getList()
   // }
+
+  renderFeeling = () => {
+    let sum = 0;
+    let emotionGauges = [];
+
+    if (this.state.entry_today.hasOwnProperty("emotion")) {
+      const arrValues = Object.values(
+        JSON.parse(this.state.entry_today.emotion)
+      );
+
+      arrValues.forEach(element => {
+        sum += element;
+      });
+
+      let emotionsObj = JSON.parse(this.state.entry_today.emotion);
+
+      for (let key in emotionsObj) {
+        let emotionValue = emotionsObj[key] * (100 / sum);
+
+        emotionGauges.push(
+          <div key={key}>
+            {key}
+            <LiquidGauge key={key} emotion={emotionValue} />
+          </div>
+        );
+      }
+      return <div> {emotionGauges} </div>;
+    }
+  };
 
   getList = () => {
     fetch("/journal")
@@ -131,35 +172,14 @@ class Journal extends Component {
       .then(data => {
         this.getList();
       })
+      .then(data => {
+        this.renderFeeling();
+      })
       .catch(err => console.log(err));
   };
 
   handleChange = event => {
     this.setState({ value: event.target.value });
-  };
-
-  renderFeeling = () => {
-    let sum = 0;
-
-    if (this.state.entry_today.hasOwnProperty("emotion")) {
-      const arrKey = Object.values(JSON.parse(this.state.entry_today.emotion));
-
-      arrKey.forEach(element => {
-        sum += element;
-      });
-      let emotionsObj = JSON.parse(this.state.entry_today.emotion);
-      let emotionGauges = [];
-      for (let key in emotionsObj) {
-        let emotionValue = emotionsObj[key] * (100 / sum);
-        emotionGauges.push(
-          <div key={key}>
-            {key}
-            <LiquidGauge key={key} emotion={emotionValue} />
-          </div>
-        );
-      }
-      return <div> {emotionGauges} </div>;
-    }
   };
 
   render() {
