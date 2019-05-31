@@ -6,64 +6,97 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex("journal_entries").insert([
         {
-          journal_entry:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          journal_entry: "I like apples and oranges",
           journal_date: "2019-05-24",
-          user_id: 1
+          user_id: 1,
+          emotion:
+            '{"joy": 0.143049,"fear": 0.433691,"disgust": 0.0868,"anger": 0.163999,"sadness": 0.127595}'
         },
         {
-          journal_entry:
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+          journal_entry: "My day was not very great!",
           journal_date: "2019-05-23",
-          user_id: 1
+          user_id: 1,
+          emotion:
+            '{"joy": 0.66739,"fear": 0.058716,"disgust": 0.015399,"anger": 0.036355,"sadness": 0.24077}'
         },
         {
-          journal_entry:
-            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+          journal_entry: "Some days I don't think I can make it",
           journal_date: "2019-05-22",
-          user_id: 1
+          user_id: 1,
+          emotion:
+            '{"joy": 0.673682,"fear": 0.060896,"disgust": 0.03382,"anger": 0.051862,"sadness": 0.211044}'
         },
         {
-          journal_entry:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          journal_entry: "The class today was very interesting",
           journal_date: "2019-05-21",
-          user_id: 1
+          user_id: 1,
+          emotion:
+            '{"joy": 0.691169,"fear": 0.055615,"disgust": 0.007559,"anger": 0.062869,"sadness": 0.18642}'
         },
         {
-          journal_entry:
-            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+          journal_entry: "We should contribute more to our community",
           journal_date: "2019-05-20",
-          user_id: 1
+          user_id: 1,
+          emotion:
+            '{"joy":0.408229,"fear": 0.040541,"disgust": 0.029022,"anger": 0.075862,"sadness": 0.337553}'
         },
         {
-          journal_entry:
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+          journal_entry: "Today was the day I lost part of me",
           journal_date: "2019-05-19",
-          user_id: 1
+          user_id: 1,
+          emotion:
+            '{"joy": 0.07003,"fear": 0.16923,"disgust": 0.038923,"anger": 0.104142,"sadness": 0.767931}'
         },
         {
           journal_entry:
-            "Cursus turpis massa tincidunt dui ut ornare lectus sit. Viverra orci sagittis eu volutpat odio. Cursus risus at ultrices mi tempus. Consectetur adipiscing elit pellentesque habitant morbi tristique. Id ornare arcu odio ut sem nulla. Orci a scelerisque purus semper eget duis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Morbi tristique senectus et netus et malesuada fames. Condimentum mattis pellentesque id nibh tortor id. Tristique senectus et netus et malesuada fames.",
-          journal_date: "2019-05-24",
-          user_id: 2
+            "Today I heard a joke about programming and it was very funny",
+          journal_date: "2019-05-25",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.632835,"fear": 0.037746,"disgust": 0.199849,"anger": 0.113228,"sadness": 0.06328}'
+        },
+        {
+          journal_entry: "Some days you just want to vanish from this planet",
+          journal_date: "2019-05-26",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.335928,"fear": 0.098959,"disgust": 0.073401,"anger": 0.187585,"sadness": 0.137999}'
+        },
+        {
+          journal_entry: "I can do it. One step at a time",
+          journal_date: "2019-05-27",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.198108,"fear": 0.169026,"disgust": 0.046386,"anger": 0.103118,"sadness": 0.281906}'
+        },
+        {
+          journal_entry: "I am going to miss this place",
+          journal_date: "2019-05-28",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.019634,"fear": 0.393573,"disgust": 0.01356,"anger": 0.06648,"sadness": 0.72547}'
+        },
+        {
+          journal_entry: "Am I ready to go outside and face the world?",
+          journal_date: "2019-05-29",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.339354,"fear": 0.342764,"disgust": 0.141509,"anger": 0.046709,"sadness": 0.225907}'
+        },
+        {
+          journal_entry: "Every day is a new chance to start over",
+          journal_date: "2019-05-30",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.703171,"fear": 0.092714,"disgust": 0.005633,"anger": 0.031278,"sadness": 0.169099}'
         },
         {
           journal_entry:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          journal_date: "2019-05-23",
-          user_id: 2
-        },
-        {
-          journal_entry:
-            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
-          journal_date: "2019-05-22",
-          user_id: 2
-        },
-        {
-          journal_entry:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          journal_date: "2019-05-24",
-          user_id: 3
+            "I really learned a lot in here and will be forever grateful for them ",
+          journal_date: "2019-05-31",
+          user_id: 1,
+          emotion:
+            '{"joy": 0.851836,"fear": 0.018314,"disgust": 0.015063,"anger": 0.023458,"sadness": 0.097654}'
         }
       ]);
     });
