@@ -33,11 +33,11 @@ class LoginSteps extends Component {
             <div className="progress_inner__tabs">
               <div className="tab tab-0">
                 <h2>Input your Journal</h2>
-                <p> Enter your daily journal entries </p>
+                <p> Enter your daily journal entries you do something </p>
               </div>
               <div className="tab tab-1">
                 <h2>Mood Analyzer</h2>
-                <p> API will analyze your emotions </p>
+                <p> API will analyze your emotions you do and something you do </p>
               </div>
               <div className="tab tab-2">
                 <h2>Conduct Daily Challenges </h2>
@@ -45,7 +45,7 @@ class LoginSteps extends Component {
               </div>
               <div className="tab tab-3">
                 <h2> View Visuals</h2>
-                <p> Something </p>
+                <p> Something you do then something you do then something you do </p>
               </div>
               <div className="tab tab-4">
                 <h2> Personalize your own space </h2>
