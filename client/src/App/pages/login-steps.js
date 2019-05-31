@@ -9,19 +9,19 @@ class LoginSteps extends Component {
         <div className="progress">
           <div className="progress_inner">
             <div className="progress_inner__step">
-              <label htmlFor="step-1">Start order</label>
+              <label htmlFor="step-1">Input your Journal</label>
             </div>
             <div className="progress_inner__step">
-              <label htmlFor="step-2">Prepare gift</label>
+              <label htmlFor="step-2">Mood Analyzer</label>
             </div>
             <div className="progress_inner__step">
-              <label htmlFor="step-3">Pack gift</label>
+              <label htmlFor="step-3">Conduct Daily Challenges</label>
             </div>
             <div className="progress_inner__step">
-              <label htmlFor="step-4">Decorate box</label>
+              <label htmlFor="step-4">View Visuals</label>
             </div>
             <div className="progress_inner__step">
-              <label htmlFor="step-5">Send gift</label>
+              <label htmlFor="step-5">Personalize Your Space</label>
             </div>
             <input defaultChecked="checked" id="step-1" name="step" type="radio" />
             <input id="step-2" name="step" type="radio" />
@@ -32,40 +32,35 @@ class LoginSteps extends Component {
             <div className="progress_inner__bar--set" />
             <div className="progress_inner__tabs">
               <div className="tab tab-0">
-                <h1>Start order</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
+                <h2>Input your Journal</h2>
+                <p> Enter your daily journal entries </p>
               </div>
               <div className="tab tab-1">
-                <h1>Prepare gift</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
+                <h2>Mood Analyzer</h2>
+                <p> API will analyze your emotions </p>
               </div>
               <div className="tab tab-2">
-                <h1>Pack gift</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
+                <h2>Conduct Daily Challenges </h2>
+                <p> Complete daily challenges to balance your emotions </p>
               </div>
               <div className="tab tab-3">
-                <h1>Decorate box</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
+                <h2> View Visuals</h2>
+                <p> Something </p>
               </div>
               <div className="tab tab-4">
-                <h1>Send gift</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
+                <h2> Personalize your own space </h2>
+                <p> Add your own modules like to-do lists to customize your space further</p>
               </div>
             </div>
             <div className="progress_inner__status">
-              <div className="box_base" />
-              <div className="box_lid" />
-              <div className="box_ribbon" />
-              <div className="box_bow">
+       
                 <div className="box_bow__left" />
                 <div className="box_bow__right" />
               </div>
-              <div className="box_item" />
-              <div className="box_tag" />
-              <div className="box_string" />
+ 
             </div>
           </div>
-        </div>
+
         </body>
       );
       }
