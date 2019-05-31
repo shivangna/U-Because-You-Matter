@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import Navbarr from "./pages/Navbarr.js";
 import Journal from "./pages/Journal.js";
 import Mood from "./pages/Mood.js";
 import Challenges from "./pages/Challenges.js";
 import TodoList from "./pages/TodoList.js";
+import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Api from "./pages/Api.js";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 class App extends Component {
   constructor(props, context) {
@@ -27,14 +32,15 @@ class App extends Component {
     return (
       <div>
         <Navbarr />
+        <div className="imadiv">im a div</div>
         <Container>
           <div className="journal">
             <span onClick={() => this.setState({ lgShowJournal: true })}>
-              <div className="svg-wrapper">
-                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="shape" height="60" width="320" />
+              <div class="svg-wrapper">
+                <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="40" width="250" />
                 </svg>
-                <div className="text">Journal</div>
+                <div class="text">Journal</div>
                 <Image
                   className="modalpic"
                   src="./Images/journal.png"
@@ -48,11 +54,11 @@ class App extends Component {
 
           <div className="mood">
             <span onClick={() => this.setState({ lgShowMood: true })}>
-              <div className="svg-wrapper">
-                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="shape" height="60" width="320" />
+              <div class="svg-wrapper">
+                <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="40" width="250" />
                 </svg>
-                <div className="text">Mood</div>
+                <div class="text">Mood</div>
 
                 <Image
                   className="modalpic"
@@ -66,11 +72,11 @@ class App extends Component {
 
           <div className="challenges">
             <span onClick={() => this.setState({ lgShowChallenges: true })}>
-              <div className="svg-wrapper">
-                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="shape" height="60" width="320" />
+              <div class="svg-wrapper">
+                <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="40" width="250" />
                 </svg>
-                <div className="text">Challenges</div>
+                <div class="text">Challenges</div>
 
                 <Image
                   className="modalpic"
@@ -88,11 +94,11 @@ class App extends Component {
 
           <div className="todo">
             <span onClick={() => this.setState({ lgShowTodo: true })}>
-              <div className="svg-wrapper">
-                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="shape" height="60" width="320" />
+              <div class="svg-wrapper">
+                <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="40" width="250" />
                 </svg>
-                <div className="text">Todo</div>
+                <div class="text">Todo</div>
 
                 <Image
                   className="modalpic"
@@ -106,11 +112,11 @@ class App extends Component {
 
           <div className="new">
             <span onClick={() => this.setState({ modalShowTodo: true })}>
-              <div className="svg-wrapper">
-                <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="shape" height="60" width="320" />
+              <div class="svg-wrapper">
+                <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="shape" height="40" width="250" />
                 </svg>
-                <div className="text">New</div>
+                <div class="text">New</div>
 
                 <Image
                   className="modalpic"
@@ -118,11 +124,11 @@ class App extends Component {
                   roundedCircle
                 />
               </div>{" "}
+              <Api classname="api" />
             </span>
           </div>
-
-          <Api />
         </Container>
+
         <div />
       </div>
     );

@@ -1,7 +1,12 @@
 .App {
   text-align: center;
 }
-
+.imadiv {
+  width: 500px;
+  height: 100%;
+  background-color: rgba(54, 54, 54, 0.8);
+  border: solid black 2px;
+}
 #root {
   z-index: 2;
 }
@@ -32,6 +37,8 @@ body {
 }
 
 .area {
+  background: #4e54c8;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
   width: 100%;
   height: 100vh;
 }
@@ -44,7 +51,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -100;
+  z-index: 0;
 }
 
 .circles li {
@@ -149,7 +156,7 @@ body {
 
 /*NAVBAR ------------------------------------------------------------------------------------------------------------------------ */
 
-/*MODAL PICS ------------------------------------------------------------------------------------------------------------------------ */
+/*MODAL PICS GRID ------------------------------------------------------------------------------------------------------------------------ */
 .modalpic {
   opacity: 0.85;
   display: inline-block;
@@ -158,12 +165,19 @@ body {
   text-decoration: none;
   color: #ffffff;
   box-shadow: 3px 0.25em rgba(54, 54, 54, 0.8);
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
   display: block;
   margin: auto;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
+  border: solid 1px #555;
+  background-color: #eed;
+  box-shadow: 3px 3 rgba(54, 54, 54, 0.8);
+  -moz-box-shadow: 10px -10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 10px -10px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 10px -10px rgba(0, 0, 0, 0.6);
+  border-radius: 100px;
 }
 
 .modalpic:focus {
@@ -183,14 +197,15 @@ body {
 
 .moduletitle {
   text-align: center;
-  font-size: 150%;
-  margin-bottom: 2px;
+  font-size: 100%;
+  margin-bottom: 1px;
 }
 
 .container {
+  margin: 0px;
   display: grid;
-  grid-template-columns: auto 250px 250px 250px 250px 250px auto;
-  grid-template-rows: 100px 450px 450px 150px;
+  grid-template-columns: 8em 13em 13em 13em 13em 8em;
+  grid-template-rows: 1em 22em 22em 1em;
   grid-template-areas:
     ". . . . . . ."
     ". journal . mood . challenges ."
@@ -227,13 +242,14 @@ body {
 
 html,
 body {
+  width: 100%;
   height: 100%;
   overflow: hidden;
   text-align: center;
 }
 
 .svg-wrapper {
-  height: 60px;
+  height: 40px;
   margin: 0 auto;
   position: relative;
   top: 50%;
@@ -252,11 +268,11 @@ body {
 .text {
   color: #fff;
   font-family: "Roboto Condensed";
-  font-size: 22px;
-  letter-spacing: 8px;
-  line-height: 32px;
+  font-size: 15px;
+  letter-spacing: 5px;
+  line-height: 25px;
   position: relative;
-  top: -48px;
+  top: -34px;
 }
 
 @keyframes draw {
@@ -277,7 +293,65 @@ body {
   animation: 0.5s draw linear forwards;
 }
 
-/* MODAL COL ROW ------------------------------------------------------------------------------------------------------------------------ */
+/* JOURNAL ------------------------------------------------------------------------------------------------------------------------ */
+.form-control {
+  width: 83%;
+  position: relative;
+  float: right;
+  margin-right: 5px;
+}
+
+.journalcomponent {
+  margin: 0px;
+  display: grid;
+  grid-template-columns: 90% 10%;
+  grid-template-rows: 10% 5% 40% 5% 40%;
+  grid-template-areas:
+    "tittle tittle"
+    "LiquidFillGauge datepicker "
+    "LiquidFillGauge journalbox "
+    "LiquidFillGauge journalsubmit "
+    "LiquidFillGauge wordcount ";
+}
+.tittle {
+  grid-area: tittle;
+}
+
+.datepicker {
+  grid-area: datepicker;
+  position: relative;
+  float: right;
+  text: #2980b9;
+  border: solid #2980b9 1px;
+  margin-right: -100px;
+  margin-top: 5px;
+}
+.journalbox {
+  grid-area: journalbox;
+}
+.journalsubmit {
+  grid-area: journalsubmit;
+  position: relative;
+  float: right;
+  width: 83%;
+  margin-right: 5px;
+}
+.LiquidFillGauge {
+  grid-area: LiquidFillGauge;
+  width: 10%px;
+  position: relative;
+  float: left;
+  margin-top: -190px;
+  margin-left: 1em;
+  text-align: center;
+}
+
+.wordcount {
+  grid-area: wordcount;
+  position: relative;
+  float: right;
+  width: 130%;
+}
 
 /* TODO LIST ------------------------------------------------------------------------------------------------------------------------ */
 
@@ -285,6 +359,11 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+jumbotron {
+  padding: 0px;
+  margin-bottom: 0px;
 }
 
 h1 {
@@ -299,6 +378,7 @@ h1 {
 
 .fa-plus {
   float: right;
+  margin-left: 50px;
 }
 
 li {
@@ -346,28 +426,32 @@ input:focus {
 }
 
 #container {
-  width: 360px;
-  margin: 100px auto;
+  width: 100%;
+  margin: 0;
   background: #f7f7f7;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-.completed {
-  color: gray;
-  text-decoration: line-through;
+/* MOOD ------------------------------------------------------------------------------------------------------------------------ */
+.heatmap {
+  color: red;
 }
 
 /* DAILY CHALLENGES ------------------------------------------------------------------------------------------------------------------------ */
 
 .circleOutside {
   align-self: center;
+  width: 500px;
+  height: 500px;
+  margin-top: 80px;
+  margin-bottom: 100px;
 }
 
 .ciclegraph {
   position: relative;
   float: left;
-  width: 500px;
-  height: 500px;
+  width: 200px;
+  height: 200px;
   margin: calc(100px / 2 + 0px);
 }
 
@@ -376,16 +460,17 @@ input:focus {
   position: absolute;
   top: 0;
   left: 0;
+  margin-top: -100px;
+
   /* border: 10px solid rebeccapurple; */
   width: calc(100% - 2px * 2);
   height: calc(100% - 2px * 2);
   border-radius: 50%;
-  border: 5px solid rebeccapurple;
 }
 
 .ciclegraph .circle {
   position: relative;
-  top: 50%;
+  top: -150%;
   left: 50%;
   width: 150px;
   height: 150px;
@@ -415,43 +500,47 @@ input:focus {
 } */
 
 .ciclegraph .circle:nth-child(1) {
-  transform: rotate(0deg) translate(250px);
+  transform: rotate(-30deg) translate(250px);
+}
+.ciclegraph .circle:nth-child(1) p {
+  transform: rotate(-20deg);
 }
 .ciclegraph .circle:nth-child(2) {
-  transform: rotate(60deg) translate(250px);
+  transform: rotate(30deg) translate(250px);
 }
 .ciclegraph .circle:nth-child(2) p {
-  transform: rotate(-60deg);
+  transform: rotate(-30deg);
 }
 .ciclegraph .circle:nth-child(3) {
-  transform: rotate(120deg) translate(250px);
+  transform: rotate(90deg) translate(250px);
 }
 .ciclegraph .circle:nth-child(3) p {
-  transform: rotate(-120deg);
+  transform: rotate(-90deg);
 }
 .ciclegraph .circle:nth-child(4) {
-  transform: rotate(180deg) translate(250px);
+  transform: rotate(150deg) translate(250px);
 }
 .ciclegraph .circle:nth-child(4) p {
-  transform: rotate(-180deg);
+  transform: rotate(-150deg);
 }
 .ciclegraph .circle:nth-child(5) {
-  transform: rotate(240deg) translate(250px);
+  transform: rotate(210deg) translate(250px);
 }
 .ciclegraph .circle:nth-child(5) p {
-  transform: rotate(-240deg);
+  transform: rotate(-210deg);
 }
 .ciclegraph .circle:nth-child(6) {
-  transform: rotate(300deg) translate(250px);
+  transform: rotate(270deg) translate(250px);
 }
 .ciclegraph .circle:nth-child(6) p {
-  transform: rotate(-300deg);
+  transform: rotate(-270deg);
 }
 
 /* API ------------------------------------------------------------------------------------------------------------------------ */
 
 .translucent-form-overlay {
   width: 100%;
+  box-shadow: 4px 0.25em rgba(54, 54, 54, 0.8);
   background-color: rgba(54, 54, 54, 0.8);
   padding: 20px;
   color: white;

@@ -184,48 +184,56 @@ class Journal extends Component {
 
   render() {
     return (
-      <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
-        <div className="App">
-          <Jumbotron>
-            <h1>Journal</h1>
+      <Modal
+        className="journalcomponent"
+        size="lg"
+        show={this.props.show}
+        onHide={this.props.onHide}
+      >
+        <div>
+          <h1 className="tittle">Journal</h1>
 
-            <DatePicker
-              selected={this.state.startDate}
-              onChange={this.handleDateChange}
-            />
+          <Form>
+            <Form.Group
+              controlId="exampleForm.ControlTextarea1"
+              onSubmit={this.handleSubmit}
+            >
+              <DatePicker
+                className="datepicker"
+                selected={this.state.startDate}
+                onChange={this.handleDateChange}
+              />
+              <Form.Label>How is your day going?</Form.Label>{" "}
+              <Form.Control
+                classname="journalbox"
+                placeholder="How is your day going?"
+                as="textarea"
+                rows="5"
+                type="text"
+                value={this.state.value}
+                defaultValue={this.state.entry_today.journal_entry}
+                onChange={this.handleChange}
+              />
+              <Button
+                className="journalsubmit"
+                variant="primary"
+                size="lg"
+                block
+                type="submit"
+                value="Submit"
+              >
+                Submit{" "}
+              </Button>
+            </Form.Group>
 
-            <Form>
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <form onSubmit={this.handleSubmit}>
-                  <label>
-                    {" "}
-                    add your text
-                    <input
-                      type="text"
-                      value={this.state.value}
-                      defaultValue={this.state.entry_today.journal_entry}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                  <input type="submit" value="Submit" />
-                </form>
-              </Form.Group>
-              <div>{this.renderFeeling()}</div>
+            <div className="LiquidFillGauge">{this.renderFeeling()}</div>
 
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>How is your day going?</Form.Label>
-                <Form.Control as="textarea" rows="3" />
-              </Form.Group>
-              <ChartViewer dataArray={this.state.entries} />
-            </Form>
-          </Jumbotron>
+            <ChartViewer className="wordcount" dataArray={this.state.entries} />
+          </Form>
         </div>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onHide}>
             Close
-          </Button>
-          <Button variant="primary" onClick={this.props.onHide}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

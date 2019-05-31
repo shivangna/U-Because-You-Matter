@@ -19,8 +19,8 @@ class Heatmap extends Component {
     return (
       <div className="heatmap">
         <CalendarHeatmap
-          startDate={new Date("2019-05-01")}
-          endDate={new Date("2019-06-31")}
+          startDate={new Date("2019-01-01")}
+          endDate={new Date("2019-12-31")}
           values={dataToRender}
           classForValue={value => {
             if (!value) {
