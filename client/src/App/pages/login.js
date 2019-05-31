@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./login.css";
 import LoginSteps from "./login-steps.js";
-
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -17,17 +17,20 @@ class Login extends Component {
         return (
             <div>
                 <LoginSteps/>
-                
             <div className="main">
-              <p className="sign" align="center">Sign in</p>
+          
+              <p className="sign" align="center">Log in to your account</p>
               <form className="form1">
                 <input className="un " type="text" align="center" placeholder="Username" />
                 <input className="pass" type="password" align="center" placeholder="Password" />
-                <button className="submit" align="center">Sign in</button>
+                </form>
+                <Link to = "/app" >
+                <button className="submit" align="center"> LOG IN</button>
+                </Link>
                 <p className="forgot" align="center"><a href="#">Forgot Password?</a></p><a href="#">
-                </a></form></div><a href="#">
+                </a></div><a href="#">
             </a> 
-    
+        
             <ul className="circles">
                 <li></li>
                 <li></li>
@@ -40,6 +43,7 @@ class Login extends Component {
                 <li></li>
                 <li></li>
             </ul>
+   
             </div>
     )};
 }

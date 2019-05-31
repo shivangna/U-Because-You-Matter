@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900");
+
+.progress {
+  height: 0;
+}
+
 body .progress_inner #step-5:checked + div + div + div + div > .box_base, body .progress_inner #step-4:checked + input + div + div + div + div > .box_base, body .progress_inner #step-2:checked + input + input + input + div + div + div + div > .box_base, body .progress_inner #step-3:checked + input + input + div + div + div + div > .box_base, body .progress_inner #step-1:checked + input + input + input + input + div + div + div + div > .box_base {
   top: 50%;
   left: 0px;
@@ -98,18 +103,16 @@ body .progress_inner__step:before {
   background: white;
   line-height: 30px;
   border: 3px solid #a6cde2;
-  font-size: 20px;
   top: 3px;
   border-radius: 100%;
-  -webkit-transition: all .4s;
-  transition: all .4s;
+  -webkit-transition: all .5s;
+  transition: all .5s;
   cursor: pointer;
   pointer-events: none;
 }
 
 body .progress_inner__step {
   width: 20%;
-  font-size: 20px;
   padding: 0 10px;
   -webkit-transition: all .4s;
   transition: all .4s;
@@ -123,6 +126,7 @@ body .progress_inner__step label {
   display: block;
   position: relative;
   cursor: pointer;
+  font-size: 20px;
 }
 body .progress_inner__step:hover {
   color: white;
@@ -134,7 +138,7 @@ body .progress_inner__step:hover:before {
 
 body {
   font-family: "Nunito", sans-serif;
-  color: rgb(236, 30, 126);
+  color: rgb(0, 0, 0);
   text-align: center;
   font-weight: 900;
 }
@@ -221,7 +225,7 @@ body .progress_inner__tabs .tab {
   top: 40px;
   text-align: center;
   margin-top: 110px;
-  margin-left: 325px;
+  margin-left: 300px;
   box-shadow: 0px 2px 1px #80b7d5;
   padding: 30px;
   background: white;
