@@ -6,14 +6,6 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-// function countWords(incomingData) {
-//   incomingData.forEach(element => {
-//     // console.log('element ', element)
-//     // console.log('elements journal entry ', element)
-//     element["word_count"] = superCounter(element["journal_entry"]);
-//   });
-// }
-
 function superCounter(str) {
   var words = str
     .trim()
@@ -35,8 +27,6 @@ class ChartViewer extends React.Component {
         dataSource: {
           caption: { text: "Online Sales of a SuperStore in the US" },
           chart: {
-            caption: "Word Count by Date",
-            subCaption: "Write Write Write...",
             xAxisName: "Date",
             yAxisName: "Word Count",
             numberSuffix: "",
@@ -48,7 +38,7 @@ class ChartViewer extends React.Component {
             })
             .map(function(entry) {
               return {
-                label: entry.journal_date,
+                label: entry.journal_date.slice(0, 10),
                 value: superCounter(entry.journal_entry)
               };
             })

@@ -98,18 +98,18 @@ app.post("/journal", (req, res) => {
   promise1.then(() => {
     knex("journal_entries")
       .select()
-      .where({ journal_date: req.body.date, user_id: 2 })
+      .where({ journal_date: req.body.date, user_id: 1 })
       .then(function(rows) {
         if (rows && rows.length) {
           // no matching records found
           knex("journal_entries")
-            .where({ journal_date: req.body.date, user_id: 2 })
+            .where({ journal_date: req.body.date, user_id: 1 })
             .update({ journal_entry: req.body.entry, emotion: emotions })
             .then(() => res.json({ msg: "send ok!" }));
         } else {
           knex("journal_entries")
             .insert({
-              user_id: 2,
+              user_id: 1,
               journal_entry: req.body.entry,
               journal_date: req.body.date,
               emotion: emotions
