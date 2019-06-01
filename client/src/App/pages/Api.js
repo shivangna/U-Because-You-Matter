@@ -102,7 +102,7 @@ class Api extends Component {
   render() {
     return (
       <footer onClick={this.handleClick}>
-        <div class="translucent-form-overlay">
+        <div className="translucent-form-overlay">
           <style />
           <div id="quote-box">
             <p id="text">{this.state.text}</p>
