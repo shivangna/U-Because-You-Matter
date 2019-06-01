@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
-//import ChartViewer from "./wordgraph.js"
 import ChartViewer from "./final-wordgraph.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,36 +21,25 @@ class Journal extends Component {
       entries: [],
       value: "",
       entry_today: { journal_entry: "" },
-      startDate: new Date()
+      startDate: this.getToday()
     };
   }
+
+  getToday = () => {
+    return new Date().toLocaleDateString("en-ca");
+  };
 
   // Sets and format dates and also get journal entry for the chosen day
 
   handleDateChange = date => {
-    let promiseDate = new Promise((resolve, reject) => {
-      resolve(
-        this.setState({
-          startDate: date
-        })
-      );
-    });
-
-    promiseDate.then(() => {
-      let parsedEntryDate = new Date(this.state.entry_today.journal_date);
-      let today = new Date(this.state.startDate);
-      if (
-        parsedEntryDate.getDate() + 1 === today.getDate() &&
-        parsedEntryDate.getFullYear() === today.getFullYear() &&
-        parsedEntryDate.getMonth() === today.getMonth()
-      ) {
-        return;
+    this.setState(
+      {
+        startDate: date.toLocaleDateString("en-ca")
+      },
+      () => {
+        this.getList();
       }
-      this.getList();
-    });
-    promiseDate.then(() => {
-      this.renderFeeling();
-    });
+    );
   };
 
   //Query through all entries of journal and display for the chosen date
@@ -69,35 +57,7 @@ class Journal extends Component {
 
   componentDidMount() {
     this.getList();
-    this.renderFeeling();
   }
-
-  // Call backend to get journal entries and set State
-
-  // componentDidUpdate() {
-  //   let parsedEntryDate = new Date(this.state.entry_today.journal_date);
-  //   let today = new Date(this.state.startDate);
-  //   if (
-  //     parsedEntryDate.getDate() + 1 === today.getDate() &&
-  //     parsedEntryDate.getFullYear() === today.getFullYear() &&
-  //     parsedEntryDate.getMonth() === today.getMonth()
-  //   ) {
-  //     return;
-  //   }
-  //   this.getList();
-  //   this.renderFeeling();
-  // }
-  // componentDidUpdate() {
-  //   let parsedEntryDate = new Date(this.state.entry_today.journal_date)
-  //   let today = new Date(this.state.startDate)
-  //   console.log('parsed entry date, today', parsedEntryDate, today)
-  //   if (parsedEntryDate.getDate() + 1 == today.getDate() &&
-  //     parsedEntryDate.getFullYear() == today.getFullYear() &&
-  //     parsedEntryDate.getMonth() == today.getMonth() ) {
-  //       return
-  //     }
-  //   this.getList()
-  // }
 
   renderFeeling = () => {
     let sum = 0;
@@ -132,28 +92,17 @@ class Journal extends Component {
     fetch("/journal")
       .then(res => res.json())
       .then(results => {
-        let entry_today = results.find(entry => {
-          let parsedEntryDate = new Date(entry.journal_date);
-          let today = new Date(this.state.startDate);
-
-          //console.log('parsed entry date, today', parsedEntryDate, today)
-          return (
-            parsedEntryDate.getDate() + 1 === today.getDate() &&
-            parsedEntryDate.getFullYear() === today.getFullYear() &&
-            parsedEntryDate.getMonth() === today.getMonth()
-          );
+        let entry_today = results.find(
+          entry => entry.journal_date.slice(0, 10) == this.state.startDate
+        );
+        this.setState({
+          entries: results,
+          entry_today: entry_today || "",
+          value: entry_today ? entry_today.journal_entry : ""
         });
-        this.setState({ entries: results });
-        if (entry_today) {
-          this.setState({
-            entry_today: entry_today,
-            value: entry_today.journal_entry
-          });
-        } else {
-          this.setState({
-            value: ""
-          });
-        }
+      })
+      .then(() => {
+        this.renderFeeling();
       });
   };
 
@@ -172,9 +121,6 @@ class Journal extends Component {
       .then(data => {
         this.getList();
       })
-      .then(data => {
-        this.renderFeeling();
-      })
       .catch(err => console.log(err));
   };
 
@@ -183,6 +129,7 @@ class Journal extends Component {
   };
 
   render() {
+    const selected = ymdToDate(this.state.startDate);
     return (
       <Modal
         className="journalcomponent"
@@ -194,18 +141,15 @@ class Journal extends Component {
           <h1 className="tittle">Journal</h1>
 
           <Form>
-            <Form.Group
-              controlId="exampleForm.ControlTextarea1"
-              onSubmit={this.handleSubmit}
-            >
+            <Form.Group controlId="exampleForm.ControlTextarea1">
               <DatePicker
                 className="datepicker"
-                selected={this.state.startDate}
+                selected={selected}
                 onChange={this.handleDateChange}
               />
               <Form.Label>How is your day going?</Form.Label>{" "}
               <Form.Control
-                classname="journalbox"
+                className="journalbox"
                 placeholder="How is your day going?"
                 as="textarea"
                 rows="5"
@@ -221,6 +165,9 @@ class Journal extends Component {
                 block
                 type="submit"
                 value="Submit"
+                onClick={e => {
+                  this.handleSubmit(e);
+                }}
               >
                 Submit{" "}
               </Button>
@@ -242,3 +189,9 @@ class Journal extends Component {
 }
 
 export default Journal;
+
+function ymdToDate(date) {
+  const [year, month, day] = date.split("-");
+
+  return new Date(year, month - 1, day);
+}
