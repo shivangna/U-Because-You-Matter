@@ -72,18 +72,79 @@ class Journal extends Component {
         sum += element;
       });
 
+      let weightedSum = 100 / sum;
       let emotionsObj = JSON.parse(this.state.entry_today.emotion);
 
-      for (let key in emotionsObj) {
-        let emotionValue = emotionsObj[key] * (100 / sum);
-
+      if (emotionsObj["joy"]) {
         emotionGauges.push(
-          <div key={key}>
-            {key}
-            <LiquidGauge key={key} emotion={emotionValue} />
+          <div style={{ color: "yellow" }}>
+            JOY
+            <LiquidGauge
+              key={"joy"}
+              emotion={emotionsObj["joy"] * weightedSum}
+            />
           </div>
         );
       }
+
+      if (emotionsObj["sadness"]) {
+        emotionGauges.push(
+          <div style={{ color: "blue" }}>
+            SADNESS
+            <LiquidGauge
+              key={"sadness"}
+              emotion={emotionsObj["sadness"] * weightedSum}
+            />
+          </div>
+        );
+      }
+
+      if (emotionsObj["fear"]) {
+        emotionGauges.push(
+          <div style={{ color: "purple" }}>
+            FEAR
+            <LiquidGauge
+              key={"fear"}
+              emotion={emotionsObj["fear"] * weightedSum}
+            />
+          </div>
+        );
+      }
+
+      if (emotionsObj["anger"]) {
+        emotionGauges.push(
+          <div style={{ color: "red" }}>
+            ANGER
+            <LiquidGauge
+              key={"anger"}
+              emotion={emotionsObj["anger"] * weightedSum}
+            />
+          </div>
+        );
+      }
+
+      if (emotionsObj["disgust"]) {
+        emotionGauges.push(
+          <div style={{ color: "green" }}>
+            DISGUST
+            <LiquidGauge
+              key={"disgust"}
+              emotion={emotionsObj["disgust"] * weightedSum}
+            />
+          </div>
+        );
+      }
+
+      // for (let key in emotionsObj) {
+      //   let emotionValue = emotionsObj[key] * (100 / sum);
+
+      //   emotionGauges.push(
+      //     <div key={key}>
+      //       {key}
+      //       <LiquidGauge key={key} emotion={emotionValue} />
+      //     </div>
+      //   );
+      // }
       return <div> {emotionGauges} </div>;
     }
   };
