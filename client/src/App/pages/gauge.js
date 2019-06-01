@@ -95,26 +95,7 @@ export default class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-          // onClick={() => {
-          //   this.setState({ value: Math.random() * 100 });
-          // }}
         />
-        {/* <div
-          style={{
-            margin: "20px auto",
-            width: 120
-          }}
-        >
-          <button
-            type="button"
-            className="btn btn-default btn-block"
-            onClick={() => {
-              this.setState({ value: Math.random() * 100 });
-            }}
-          >
-            Refresh
-          </button>
-        </div> */}
       </div>
     );
   }
