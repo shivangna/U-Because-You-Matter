@@ -62,43 +62,54 @@ class Mood extends Component {
       <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div>
           <h1>Mood</h1>
-          <p>
-            <Button
-              onClick={this.createSetMood("ReallyGreat")}
-              variant="outline-info"
-            >
-              Really Great!
-            </Button>
-            <Button onClick={this.createSetMood("Good")} variant="outline-info">
-              Good!
-            </Button>
-            <Button onClick={this.createSetMood("Ok")} variant="outline-info">
-              Ok
-            </Button>
-          </p>
-          <p>
-            <Button onClick={this.createSetMood("Bad")} variant="outline-info">
-              Bad
-            </Button>
-            <Button
-              onClick={this.createSetMood("VeryBad")}
-              variant="outline-info"
-            >
-              Very Bad!
-            </Button>
-            <Button
-              onClick={this.createSetMood("Worst")}
-              variant="outline-info"
-            >
-              Worst
-            </Button>
-          </p>
-          <p />
+          <img
+            className="emotionsimages"
+            src="./Images/joy.png"
+            onClick={this.createSetMood("ReallyGreat")}
+            variant="outline-info"
+          />
+          {/* <p>Joy</p> */}
+          <img
+            className="emotionsimages"
+            src="./Images/anger.png"
+            onClick={this.createSetMood("Good")}
+            variant="outline-info"
+          />
+          {/* <p>Anger</p> */}
+          <img
+            className="emotionsimages"
+            src="./Images/sad.png"
+            onClick={this.createSetMood("Ok")}
+            variant="outline-info"
+          />
+          {/* <p>Sad</p> */}
+          <img
+            className="emotionsimages"
+            src="./Images/fear.png"
+            onClick={this.createSetMood("Bad")}
+            variant="outline-info"
+          />
+          {/* <p>Fear</p> */}
+          <img
+            className="emotionsimages"
+            src="./Images/disgust.png"
+            onClick={this.createSetMood("VeryBad")}
+            variant="outline-info"
+          />
+          {/* <p>Disgust</p> */}
+          {/* 
+          <Button onClick={this.createSetMood("Worst")} variant="outline-info">
+            
+          </Button> */}
           <Heatmap className="heatmap" values={this.state.moods} />
           <LiquidGauge className="gauge" />
         </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.onHide}>
+          <Button
+            className="close"
+            variant="secondary"
+            onClick={this.props.onHide}
+          >
             Close
           </Button>
         </Modal.Footer>

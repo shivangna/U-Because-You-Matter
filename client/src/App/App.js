@@ -32,7 +32,8 @@ class App extends Component {
     return (
       <div>
         <Navbarr />
-        <div className="imadiv">im a div</div>
+
+        {/* <div className="imadiv">im a div</div> */}
         <Container>
           <div className="journal">
             <span onClick={() => this.setState({ lgShowJournal: true })}>
@@ -49,7 +50,11 @@ class App extends Component {
                 />
               </div>{" "}
             </span>
-            <Journal show={this.state.lgShowJournal} onHide={lgCloseJournal} />
+            <Journal
+              className="modalbox"
+              show={this.state.lgShowJournal}
+              onHide={lgCloseJournal}
+            />
           </div>
 
           <div className="mood">
@@ -67,7 +72,11 @@ class App extends Component {
                 />
               </div>{" "}
             </span>
-            <Mood show={this.state.lgShowMood} onHide={lgCloseMood} />
+            <Mood
+              className="modalbox"
+              show={this.state.lgShowMood}
+              onHide={lgCloseMood}
+            />
           </div>
 
           <div className="challenges">
@@ -87,6 +96,7 @@ class App extends Component {
             </span>
 
             <Challenges
+              className="modalbox"
               show={this.state.lgShowChallenges}
               onHide={lgCloseChallenges}
             />
@@ -107,7 +117,11 @@ class App extends Component {
                 />
               </div>{" "}
             </span>
-            <TodoList show={this.state.lgShowTodo} onHide={lgCloseTodo} />
+            <TodoList
+              className="modalbox"
+              show={this.state.lgShowTodo}
+              onHide={lgCloseTodo}
+            />
           </div>
 
           <div className="new">
@@ -116,18 +130,18 @@ class App extends Component {
                 <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
                   <rect className="shape" height="40" width="250" />
                 </svg>
-                <div className="text">New</div>
+                <div className="text">Coming soon!</div>
 
                 <Image
                   className="modalpic"
-                  src="./Images/new.png"
+                  src="./Images/head.jpg"
                   roundedCircle
                 />
               </div>{" "}
-              <Api className="api" />
             </span>
           </div>
         </Container>
+        <Api className="api" />
 
         <div />
       </div>

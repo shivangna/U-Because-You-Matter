@@ -194,7 +194,11 @@ class Challenges extends Component {
           </div>
         </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.onHide}>
+          <Button
+            className="close"
+            variant="secondary"
+            onClick={this.props.onHide}
+          >
             Close
           </Button>
         </Modal.Footer>

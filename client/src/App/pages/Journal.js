@@ -208,7 +208,7 @@ class Journal extends Component {
                 selected={selected}
                 onChange={this.handleDateChange}
               />
-              <Form.Label>How is your day going?</Form.Label>{" "}
+              <br />
               <Form.Control
                 className="journalbox"
                 placeholder="How is your day going?"
@@ -240,7 +240,7 @@ class Journal extends Component {
           </Form>
         </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.onHide}>
+          <Button className="close" onClick={this.props.onHide}>
             Close
           </Button>
         </Modal.Footer>

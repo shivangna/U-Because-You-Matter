@@ -1,6 +1,8 @@
 .react-calendar-heatmap text {
   font-size: 10px;
-  fill: #aaa;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  fill: rgb(54, 84, 132);
 }
 
 .react-calendar-heatmap .react-calendar-heatmap-small-text {
@@ -8,7 +10,7 @@
 }
 
 .react-calendar-heatmap rect:hover {
-  stroke: #555;
+  stroke: rgb(54, 84, 132);
   stroke-width: 1px;
 }
 
@@ -32,20 +34,20 @@
   fill: #eeeeee;
 }
 .react-calendar-heatmap .color-ReallyGreat {
-  fill: #d6e685;
+  fill: #f4d24d;
 }
 .react-calendar-heatmap .color-Good {
-  fill: #8cc665;
+  fill: #cd4d36;
 }
 .react-calendar-heatmap .color-Ok {
-  fill: #44a340;
+  fill: #549bd2;
 }
 .react-calendar-heatmap .color-Bad {
-  fill: #1e6823;
+  fill: #bf87de;
 }
 .react-calendar-heatmap .color-VeryBad {
-  fill: rebeccapurple;
+  fill: #a4d73c;
 }
 .react-calendar-heatmap .color-Worst {
-  fill: tomato;
+  fill: #a4d73c;
 }

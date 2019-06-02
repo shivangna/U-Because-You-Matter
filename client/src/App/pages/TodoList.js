@@ -84,19 +84,27 @@ class TodoList extends Component {
           <div id="container">
             <form onSubmit={this.handleSubmit}>
               <input
+                className="todoinput"
                 id="input1"
                 onChange={this.submitHandler}
                 type="text"
                 value={this.state.task}
                 placeholder="Add New Todo"
               />
-              <button type="submit"> Add Task </button>
+              <button className="todosubmit" type="submit">
+                {" "}
+                Add Task{" "}
+              </button>
             </form>
             <ul className="thelist">{listItems}</ul>
           </div>
         </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.onHide}>
+          <Button
+            className="close"
+            variant="secondary"
+            onClick={this.props.onHide}
+          >
             Close
           </Button>
         </Modal.Footer>

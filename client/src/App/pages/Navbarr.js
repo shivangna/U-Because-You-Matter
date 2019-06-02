@@ -7,6 +7,7 @@ class Navbarr extends Component {
         <div className="navbar">
           <div className="navWide" />
           <div className="navNarrow">
+            <img className="logo" src="./Images/head.jpg" />
             <a className="navbar-brand" href="#">
               U{" "}
             </a>
