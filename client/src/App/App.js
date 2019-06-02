@@ -108,7 +108,7 @@ class App extends Component {
                 <svg height="40" width="250" xmlns="http://www.w3.org/2000/svg">
                   <rect className="shape" height="40" width="250" />
                 </svg>
-                <div className="text">Todo</div>
+                <div className="text">To Do</div>
 
                 <Image
                   className="modalpic"

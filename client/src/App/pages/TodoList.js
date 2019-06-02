@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
+import CompleteMessages from "./completeMessages";
 class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -68,12 +69,11 @@ class TodoList extends Component {
   };
 
   submitHandler = e => {
-    // if (e.key === "Enter") console.log("e =", e.target.value);
     this.setState({ task: e.target.value });
   };
 
   completeHandler = key => {
-    alert("Congrats, you complete one more task!");
+    alert(CompleteMessages());
     fetch("/todo", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
