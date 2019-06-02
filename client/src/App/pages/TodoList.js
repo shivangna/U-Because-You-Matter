@@ -14,6 +14,34 @@ class TodoList extends Component {
     this.getList();
   }
 
+  onDragStart = (e, index) => {
+    this.draggedItem = this.state.todos[index];
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", e.target.parentNode);
+    e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
+  };
+
+  onDragOver = index => {
+    const draggedOverItem = this.state.todos[index];
+
+    //if the item is dragged over iteself, ignore
+    if (this.draggedItem === draggedOverItem) {
+      return;
+    }
+
+    //filter out the currently dragged item
+    let items = this.state.todos.filter(item => item != this.draggedItem);
+
+    //add the dragged item after the dragged over item
+    items.splice(index, 0, this.draggedItem);
+
+    this.setState({ todos: items });
+  };
+
+  onDragEnd = () => {
+    this.draggedIdx = null;
+  };
+
   getList = () => {
     fetch("/todo")
       .then(res => res.json())
@@ -23,8 +51,8 @@ class TodoList extends Component {
   };
 
   deleteHandler = key => {
-    alert("trying to complete item with an id of " + this.state.task.id);
-    console.log("key", key);
+    // alert("trying to complete item with an id of " + this.state.task.id);
+    // console.log("key", key);
     fetch("/todo", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -44,7 +72,21 @@ class TodoList extends Component {
     this.setState({ task: e.target.value });
   };
 
-  handleComplete = e => {};
+  completeHandler = key => {
+    alert("Congrats, you complete one more task!");
+    fetch("/todo", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        key: key
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.getList();
+      })
+      .catch(err => console.log(err));
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -66,17 +108,35 @@ class TodoList extends Component {
 
   render() {
     const todoEntries = this.state.todos;
-    // task_state = this.todos.task_state;
-    const listItems = todoEntries.map(todos => {
+
+    const listItems = todoEntries.map((todos, index) => {
       return (
-        <li key={todos.id}>
+        <li key={todos.id} onDragOver={() => this.onDragOver(index)}>
+          <span
+            className="drag"
+            draggable
+            onDragStart={e => this.onDragStart(e, index)}
+            onDragEnd={this.onDragEnd}
+          >
+            <i className="fas fa-bars" />
+          </span>
           {todos.task}
-          <span onClick={() => this.deleteHandler(todos.id)}>
-            <i className="fas fa-check-square" key={todos.id} />
-          </span>{" "}
+          <span
+            className="checkDone"
+            onClick={() => this.completeHandler(todos.id)}
+          >
+            <i className="fas fa-check" key={todos.id} />
+          </span>
+          <span
+            className="checkDone"
+            onClick={() => this.deleteHandler(todos.id)}
+          >
+            <i class="fas fa-trash" key={todos.id} />
+          </span>
         </li>
       );
     });
+
     return (
       <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
         <div className="App">
