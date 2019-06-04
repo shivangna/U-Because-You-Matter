@@ -65,35 +65,35 @@ class Mood extends Component {
           <img
             className="emotionsimages"
             src="./Images/joy.png"
-            onClick={this.createSetMood("ReallyGreat")}
+            onClick={this.createSetMood("joy")}
             variant="outline-info"
           />
           {/* <p>Joy</p> */}
           <img
             className="emotionsimages"
             src="./Images/anger.png"
-            onClick={this.createSetMood("Good")}
+            onClick={this.createSetMood("anger")}
             variant="outline-info"
           />
           {/* <p>Anger</p> */}
           <img
             className="emotionsimages"
             src="./Images/sad.png"
-            onClick={this.createSetMood("Ok")}
+            onClick={this.createSetMood("sadness")}
             variant="outline-info"
           />
           {/* <p>Sad</p> */}
           <img
             className="emotionsimages"
             src="./Images/fear.png"
-            onClick={this.createSetMood("Bad")}
+            onClick={this.createSetMood("fear")}
             variant="outline-info"
           />
           {/* <p>Fear</p> */}
           <img
             className="emotionsimages"
             src="./Images/disgust.png"
-            onClick={this.createSetMood("VeryBad")}
+            onClick={this.createSetMood("disgust")}
             variant="outline-info"
           />
           {/* <p>Disgust</p> */}
@@ -102,7 +102,6 @@ class Mood extends Component {
             
           </Button> */}
           <Heatmap className="heatmap" values={this.state.moods} />
-          <LiquidGauge className="gauge" />
         </div>
         <Modal.Footer>
           <Button
