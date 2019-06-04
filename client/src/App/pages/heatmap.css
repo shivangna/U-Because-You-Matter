@@ -33,18 +33,18 @@
 .react-calendar-heatmap .color-0 {
   fill: #eeeeee;
 }
-.react-calendar-heatmap .color-Joy {
+.react-calendar-heatmap .color-joy {
   fill: #f4d24d;
 }
-.react-calendar-heatmap .color-Anger {
+.react-calendar-heatmap .color-fear {
   fill: #cd4d36;
 }
-.react-calendar-heatmap .color-Sadness {
+.react-calendar-heatmap .color-anger {
   fill: #549bd2;
 }
-.react-calendar-heatmap .color-Fear {
+.react-calendar-heatmap .color-disgust {
   fill: #bf87de;
 }
-.react-calendar-heatmap .color-Disgust {
+.react-calendar-heatmap .color-sadness {
   fill: #a4d73c;
 }
