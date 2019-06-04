@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Navbarr from "./pages/Navbarr.js";
-import Journal from "./pages/Journal.js";
-import Mood from "./pages/Mood.js";
-import Challenges from "./pages/Challenges.js";
-import TodoList from "./pages/TodoList.js";
-import Col from "react-bootstrap/Col";
+import Journal from "./pages/JournalModule/Journal.js";
+import Mood from "./pages/MoodModule/Mood.js";
+import Challenges from "./pages/ChallengesModule/Challenges.js";
+import TodoList from "./pages/ToDoModule/TodoList.js";
 import Image from "react-bootstrap/Image";
 import Api from "./pages/Api.js";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 
 class App extends Component {
   constructor(props, context) {
@@ -32,8 +27,6 @@ class App extends Component {
     return (
       <div>
         <Navbarr />
-
-        {/* <div className="imadiv">im a div</div> */}
         <Container>
           <div className="journal">
             <span onClick={() => this.setState({ lgShowJournal: true })}>

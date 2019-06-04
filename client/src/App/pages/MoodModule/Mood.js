@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
 import Heatmap from "./heatmap.js";
-import LiquidGauge from "./gauge";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -17,15 +15,6 @@ class Mood extends Component {
       moods: []
     };
   }
-
-  // componentDidUpdate(prevState) {
-  //   // Typical usage (don't forget to compare props):
-  //   console.log("previous props", prevState)
-  //   if (this.state.moods !== prevState.moods) {
-  //     console.log('are you in the ifff??')
-  //     this.getList()
-  //   }
-  // }
 
   componentDidMount() {
     this.getList();
@@ -67,36 +56,36 @@ class Mood extends Component {
             src="./Images/joy.png"
             onClick={this.createSetMood("joy")}
             variant="outline-info"
+            alt="character with joy face"
           />
-          {/* <p>Joy</p> */}
           <img
             className="emotionsimages"
             src="./Images/anger.png"
             onClick={this.createSetMood("anger")}
             variant="outline-info"
+            alt="character with anger face"
           />
-          {/* <p>Anger</p> */}
           <img
             className="emotionsimages"
             src="./Images/sad.png"
             onClick={this.createSetMood("sadness")}
             variant="outline-info"
+            alt="character with sad face"
           />
-          {/* <p>Sad</p> */}
           <img
             className="emotionsimages"
             src="./Images/fear.png"
             onClick={this.createSetMood("fear")}
             variant="outline-info"
+            alt="character with fear face"
           />
-
           <img
             className="emotionsimages"
             src="./Images/disgust.png"
             onClick={this.createSetMood("disgust")}
             variant="outline-info"
+            alt="character with disgust face"
           />
-
           <Heatmap className="heatmap" values={this.state.moods} />
         </div>
         <Modal.Footer>

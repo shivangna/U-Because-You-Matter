@@ -9,7 +9,7 @@ class Navbarr extends Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="#home">
-          <img src="./Images/u.svg" className="logo" />
+          <img src="./Images/u.svg" alt="U logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 import ChartViewer from "./final-wordgraph.js";
 import DatePicker from "react-datepicker";
@@ -135,16 +134,6 @@ class Journal extends Component {
         );
       }
 
-      // for (let key in emotionsObj) {
-      //   let emotionValue = emotionsObj[key] * (100 / sum);
-
-      //   emotionGauges.push(
-      //     <div key={key}>
-      //       {key}
-      //       <LiquidGauge key={key} emotion={emotionValue} />
-      //     </div>
-      //   );
-      // }
       return <div> {emotionGauges} </div>;
     }
   };
@@ -154,7 +143,7 @@ class Journal extends Component {
       .then(res => res.json())
       .then(results => {
         let entry_today = results.find(
-          entry => entry.journal_date.slice(0, 10) == this.state.startDate
+          entry => entry.journal_date.slice(0, 10) === this.state.startDate
         );
         this.setState({
           entries: results,

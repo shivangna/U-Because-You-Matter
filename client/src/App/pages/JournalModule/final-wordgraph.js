@@ -11,7 +11,6 @@ function superCounter(str) {
     .trim()
     .replace(/\s+/gi, " ")
     .split(" ").length;
-  // console.log('number of words', str, words)
   return words;
 }
 
@@ -20,7 +19,6 @@ class ChartViewer extends React.Component {
     const graphInfo = {
       timeseriesDs: {
         type: "column2d",
-        // renderAt: 'container',
         width: "600",
         height: "400",
         dataFormat: "json",
