@@ -12,7 +12,7 @@
 #root {
   z-index: 2;
 }
-/*Background ------------------------------------------------------------------------------------------------------------------------ */
+/*BACKGROUND ------------------------------------------------------------------------------------------------------------------------ */
 
 @import url("https://fonts.googleapis.com/css?family=Exo:400,700");
 
@@ -163,8 +163,40 @@ body {
 /*NAVBAR ------------------------------------------------------------------------------------------------------------------------ */
 
 .logo {
-  height: 20px;
+  height: 40px;
   width: auto;
+  color: black;
+}
+
+.welcome {
+  margin-left: 900px;
+  margin-top: -60px;
+  color: black;
+}
+.logout {
+  margin-left: 5px;
+  margin-left: 15px;
+  cursor: pointer;
+  border-radius: 5em;
+  font-weight: 700;
+  font-size: 14px;
+  background-image: linear-gradient(
+    to left top,
+    #5a3f9a,
+    #364d9c,
+    #095596,
+    #005b8b,
+    #0b5e7e
+  );
+  color: white;
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin-top: -60px;
 }
 
 /*MODAL PICS GRID ------------------------------------------------------------------------------------------------------------------------ */
@@ -466,6 +498,7 @@ ul {
 }
 
 .todosubmit {
+  margin-left: 15px;
   cursor: pointer;
   border-radius: 5em;
   font-weight: 700;
@@ -486,7 +519,7 @@ ul {
   padding-top: 10px;
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 h1 {
