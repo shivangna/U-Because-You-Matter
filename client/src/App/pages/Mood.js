@@ -89,18 +89,14 @@ class Mood extends Component {
             onClick={this.createSetMood("fear")}
             variant="outline-info"
           />
-          {/* <p>Fear</p> */}
+
           <img
             className="emotionsimages"
             src="./Images/disgust.png"
             onClick={this.createSetMood("disgust")}
             variant="outline-info"
           />
-          {/* <p>Disgust</p> */}
-          {/* 
-          <Button onClick={this.createSetMood("Worst")} variant="outline-info">
-            
-          </Button> */}
+
           <Heatmap className="heatmap" values={this.state.moods} />
         </div>
         <Modal.Footer>

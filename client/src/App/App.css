@@ -600,6 +600,10 @@ input:focus {
   width: 100px;
   height: auto;
   margin: 10px 30px 30px 10px;
+  opacity: 0.5;
+}
+.emotionsimages:hover {
+  opacity: 1;
 }
 
 /* DAILY CHALLENGES ------------------------------------------------------------------------------------------------------------------------ */
