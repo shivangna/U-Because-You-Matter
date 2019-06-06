@@ -104,10 +104,11 @@ class Api extends Component {
       <footer onClick={this.handleClick}>
         <div className="translucent-form-overlay">
           <style />
-          <div id="quote-box">
-            <p id="text">{this.state.text}</p>
-            <p id="author"> - {this.state.author}</p>
-            {/* <button
+          <p id="text">
+            {this.state.text}
+            <span id="author"> - {this.state.author}</span>
+          </p>
+          {/* <button
               id="tweet-quote"
               className="primary button expanded search-button"
               onClick={this.shareOnTwitter}
@@ -121,7 +122,6 @@ class Api extends Component {
             >
               New Quote
             </button> */}
-          </div>
         </div>
       </footer>
     );

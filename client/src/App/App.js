@@ -141,8 +141,15 @@ class App extends Component {
             </span>
           </div>
         </Container>
-        <Api className="api" />
 
+        <div class="footer">
+          <p>
+            <Api />
+          </p>
+          <p className="footertext">
+            Made with 🧡 by Shivangna, Mike and Jocelyne!{" "}
+          </p>
+        </div>
         <div />
       </div>
     );

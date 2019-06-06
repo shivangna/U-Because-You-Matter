@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900");
 
-.progress {
-  height: ;
-}
-
 body .progress_inner #step-5:checked + div + div + div + div > .box_base,
 body
   .progress_inner
@@ -360,8 +356,9 @@ body {
 }
 body .progress_inner {
   height: 200px;
-  width: 1000px;
-  margin-left: 70px;
+  width: 850px;
+  margin-left: 55px;
+  margin-top: -45px;
 }
 body .progress_inner #step-5:checked + div {
   width: 80%;
@@ -493,7 +490,7 @@ body .progress_inner__tabs .tab {
   position: absolute;
   top: 40px;
   text-align: center;
-  margin-top: 110px;
+  margin-top: 130px;
   margin-left: calc(20% - 30px);
   margin-right: calc(20% - 30px);
   box-shadow: 0px 2px 1px #80b7d5;

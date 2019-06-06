@@ -22,7 +22,7 @@ class Challenges extends Component {
 
   render() {
     const changeColor1 = () => {
-      var newColor = this.state.color1 === "white" ? "green" : "white";
+      var newColor = this.state.color1 === "white" ? "#3d98c6" : "white";
       this.setState({ color1: newColor });
       if (this.state.color1 === "white") {
         new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ class Challenges extends Component {
       }
     };
     const changeColor2 = () => {
-      var newColor = this.state.color2 === "white" ? "green" : "white";
+      var newColor = this.state.color2 === "white" ? "#3d98c6" : "white";
       this.setState({ color2: newColor });
       if (this.state.color2 === "white") {
         new Promise((resolve, reject) => {
@@ -56,7 +56,7 @@ class Challenges extends Component {
       }
     };
     const changeColor3 = () => {
-      var newColor = this.state.color3 === "white" ? "green" : "white";
+      var newColor = this.state.color3 === "white" ? "#3d98c6" : "white";
       this.setState({ color3: newColor });
       if (this.state.color3 === "white") {
         new Promise((resolve, reject) => {
@@ -73,7 +73,7 @@ class Challenges extends Component {
       }
     };
     const changeColor4 = () => {
-      var newColor = this.state.color4 === "white" ? "green" : "white";
+      var newColor = this.state.color4 === "white" ? "#3d98c6" : "white";
       this.setState({ color4: newColor });
       if (this.state.color4 === "white") {
         new Promise((resolve, reject) => {
@@ -90,7 +90,7 @@ class Challenges extends Component {
       }
     };
     const changeColor5 = () => {
-      var newColor = this.state.color5 === "white" ? "green" : "white";
+      var newColor = this.state.color5 === "white" ? "#3d98c6" : "white";
       this.setState({ color5: newColor });
       if (this.state.color5 === "white") {
         new Promise((resolve, reject) => {
@@ -107,7 +107,7 @@ class Challenges extends Component {
       }
     };
     const changeColor6 = () => {
-      var newColor = this.state.color6 === "white" ? "green" : "white";
+      var newColor = this.state.color6 === "white" ? "#3d98c6" : "white";
       this.setState({ color6: newColor });
       if (this.state.color6 === "white") {
         new Promise((resolve, reject) => {

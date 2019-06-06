@@ -77,7 +77,7 @@ class Journal extends Component {
 
       if (emotionsObj["joy"]) {
         emotionGauges.push(
-          <div style={{ color: "yellow" }}>
+          <div style={{ color: "#f4d24f" }}>
             JOY
             <LiquidGauge
               key={"joy"}
@@ -208,7 +208,7 @@ class Journal extends Component {
                 selected={selected}
                 onChange={this.handleDateChange}
               />
-              <br />
+
               <Form.Control
                 className="journalbox"
                 placeholder="How is your day going?"

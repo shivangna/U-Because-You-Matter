@@ -8,26 +8,29 @@ class Navbarr extends Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
-          <img src="./Images/u.svg" className="logo" />
-        </Navbar.Brand>
+        <Navbar.Brand href="#home" />
+        <span className="u">U</span>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#features">Because You matter! </Nav.Link>
+            <p className="dot">: Because You matter!</p>
+            <Nav.Link className="welcome" href="#">
+              {" "}
+            </Nav.Link>
             <Nav.Link href="#profil">Profile</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Journal</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Mood</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Challenges</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Todo</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item href="#journal">Journal</NavDropdown.Item>
+              <NavDropdown.Item href="#mood">Mood</NavDropdown.Item>
+              <NavDropdown.Item href="#challenges">Challenges</NavDropdown.Item>
+              <NavDropdown.Item href="#todo">Todo</NavDropdown.Item>
+              <NavDropdown.Item href="#comingsoon">
                 Coming soon!
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Welcome Mike!</Nav.Link>
+            <Nav.Link>Welcome Mike!</Nav.Link>
             <Button variant="outline-light">Logout</Button>
           </Nav>
         </Navbar.Collapse>
