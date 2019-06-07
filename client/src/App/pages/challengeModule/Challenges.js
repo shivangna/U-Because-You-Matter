@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
-// import { VictoryPie, VictoryAnimation, VictoryLabel } from "victory";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -21,6 +19,7 @@ class Challenges extends Component {
   }
 
   render() {
+    //Succession of functions that controls the individual color of each node
     const changeColor1 = () => {
       var newColor = this.state.color1 === "white" ? "#3d98c6" : "white";
       this.setState({ color1: newColor });

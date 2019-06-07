@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
 import Heatmap from "./heatmap.js";
-import LiquidGauge from "./gauge";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -18,25 +16,18 @@ class Mood extends Component {
     };
   }
 
-  // componentDidUpdate(prevState) {
-  //   // Typical usage (don't forget to compare props):
-  //   console.log("previous props", prevState)
-  //   if (this.state.moods !== prevState.moods) {
-  //     console.log('are you in the ifff??')
-  //     this.getList()
-  //   }
-  // }
-
   componentDidMount() {
     this.getList();
   }
 
+  //GET request to get all saved mood entries from DB
   getList = () => {
     fetch("/mood")
       .then(res => res.json())
       .then(results => this.setState({ moods: results }));
   };
 
+  // POST request to save mood entry to DB
   createSetMood = mood => {
     return () => {
       console.log("clicked", mood);
@@ -67,27 +58,28 @@ class Mood extends Component {
             src="./Images/joy.png"
             onClick={this.createSetMood("joy")}
             variant="outline-info"
+            alt="joy emotion"
           />
-          {/* <p>Joy</p> */}
           <img
             className="emotionsimages"
             src="./Images/anger.png"
             onClick={this.createSetMood("anger")}
             variant="outline-info"
+            alt="anger emotion"
           />
-          {/* <p>Anger</p> */}
           <img
             className="emotionsimages"
             src="./Images/sad.png"
             onClick={this.createSetMood("sadness")}
             variant="outline-info"
+            alt="sad emotion"
           />
-          {/* <p>Sad</p> */}
           <img
             className="emotionsimages"
             src="./Images/fear.png"
             onClick={this.createSetMood("fear")}
             variant="outline-info"
+            alt="fear emotion"
           />
 
           <img
@@ -95,6 +87,7 @@ class Mood extends Component {
             src="./Images/disgust.png"
             onClick={this.createSetMood("disgust")}
             variant="outline-info"
+            alt="disgust emotion"
           />
 
           <Heatmap className="heatmap" values={this.state.moods} />

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./login.css";
-import LoginSteps from "./login/login-steps.js/index.js";
+import LoginSteps from "./login-steps.js";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
 import CompleteMessages from "./completeMessages";
 class TodoList extends Component {
@@ -11,6 +10,7 @@ class TodoList extends Component {
       currentItem: { text: "", key: "" }
     };
   }
+
   componentDidMount() {
     this.getList();
   }
@@ -31,7 +31,7 @@ class TodoList extends Component {
     }
 
     //filter out the currently dragged item
-    let items = this.state.todos.filter(item => item != this.draggedItem);
+    let items = this.state.todos.filter(item => item !== this.draggedItem);
 
     //add the dragged item after the dragged over item
     items.splice(index, 0, this.draggedItem);
@@ -43,6 +43,7 @@ class TodoList extends Component {
     this.draggedIdx = null;
   };
 
+  // GET request for all task saved to DB
   getList = () => {
     fetch("/todo")
       .then(res => res.json())
@@ -51,9 +52,8 @@ class TodoList extends Component {
       });
   };
 
+  // DELETE request to delete tasks from DB
   deleteHandler = key => {
-    // alert("trying to complete item with an id of " + this.state.task.id);
-    // console.log("key", key);
     fetch("/todo", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -72,6 +72,8 @@ class TodoList extends Component {
     this.setState({ task: e.target.value });
   };
 
+  // DELETE request to delete tasks from DB
+  // Also calls function that display messages
   completeHandler = key => {
     alert(CompleteMessages());
     fetch("/todo", {

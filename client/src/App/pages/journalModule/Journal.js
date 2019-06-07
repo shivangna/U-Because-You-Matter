@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Form, Modal, Button } from "react-bootstrap";
 import ChartViewer from "./final-wordgraph.js";
 import DatePicker from "react-datepicker";
@@ -30,7 +29,6 @@ class Journal extends Component {
   };
 
   // Sets and format dates and also get journal entry for the chosen day
-
   handleDateChange = date => {
     this.setState(
       {
@@ -43,7 +41,6 @@ class Journal extends Component {
   };
 
   //Query through all entries of journal and display for the chosen date
-
   renderTodaysJournal = entries => {
     entries.forEach(element => {
       let journalDateSpliced = element["journal_date"].split("T")[0];
@@ -59,6 +56,7 @@ class Journal extends Component {
     this.getList();
   }
 
+  //Render all emotions using Liquid Gauge graphs based on weighted average
   renderFeeling = () => {
     let sum = 0;
     let emotionGauges = [];
@@ -134,17 +132,6 @@ class Journal extends Component {
           </div>
         );
       }
-
-      // for (let key in emotionsObj) {
-      //   let emotionValue = emotionsObj[key] * (100 / sum);
-
-      //   emotionGauges.push(
-      //     <div key={key}>
-      //       {key}
-      //       <LiquidGauge key={key} emotion={emotionValue} />
-      //     </div>
-      //   );
-      // }
       return <div> {emotionGauges} </div>;
     }
   };
@@ -154,7 +141,7 @@ class Journal extends Component {
       .then(res => res.json())
       .then(results => {
         let entry_today = results.find(
-          entry => entry.journal_date.slice(0, 10) == this.state.startDate
+          entry => entry.journal_date.slice(0, 10) === this.state.startDate
         );
         this.setState({
           entries: results,

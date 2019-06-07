@@ -6,11 +6,9 @@ class Heatmap extends Component {
   render() {
     const changeIncomingData = data => {
       let newData = [];
-      // console.log("newdata", newData);
       data.forEach(element => {
         let newDate = element.mood_date.split("T")[0];
         newData.push({ date: newDate, mood: element.mood });
-        // console.log("newdata", newData);
       });
       return newData;
     };

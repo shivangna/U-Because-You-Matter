@@ -1,9 +1,3 @@
-let completeMessages = () => {
-  let min = 0;
-  let max = Math.floor(messagesLength);
-  return messages[Math.floor(Math.random() * (max - min) + min)];
-};
-
 const messages = [
   "Congratulations and BRAVO!",
   "This calls for celebrating! Congratulations!",
@@ -25,6 +19,14 @@ const messages = [
   "Celebrating the record you just set and looking forward to watching you cross your next finish line!",
   "I commend you on this latest success, and I look forward to seeing even more great things from you."
 ];
+
 const messagesLength = messages.length;
+
+// Function that generates a random number between 0 and the size of the array and returns an entry from the messages array
+let completeMessages = () => {
+  let min = 0;
+  let max = Math.floor(messagesLength);
+  return messages[Math.floor(Math.random() * (max - min) + min)];
+};
 
 export default completeMessages;
