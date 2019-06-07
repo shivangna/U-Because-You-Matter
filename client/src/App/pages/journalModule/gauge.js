@@ -11,11 +11,6 @@ export default class LiquidGauge extends Component {
   endColor = "#dc143c"; // crimson
 
   render() {
-    // console.log("Emotion inside component: ", this.state.value);
-    // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    // let sum = Object.values(this.state.value).reduce(reducer);
-    // console.log("This is sum inside component: ", sum);
-
     const radius = 50;
     const interpolate = interpolateRgb(this.startColor, this.endColor);
     const fillColor = interpolate(this.state.value / 100);

@@ -2,8 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 
-//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from "./App/pages/login.js";
+import Login from "./App/pages/login/login.js";
 import "./index.css";
 import App from "./App/App";
 

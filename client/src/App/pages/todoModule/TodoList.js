@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
 import CompleteMessages from "./completeMessages";
 class TodoList extends Component {
@@ -31,7 +30,7 @@ class TodoList extends Component {
     }
 
     //filter out the currently dragged item
-    let items = this.state.todos.filter(item => item != this.draggedItem);
+    let items = this.state.todos.filter(item => item !== this.draggedItem);
 
     //add the dragged item after the dragged over item
     items.splice(index, 0, this.draggedItem);
@@ -52,8 +51,6 @@ class TodoList extends Component {
   };
 
   deleteHandler = key => {
-    // alert("trying to complete item with an id of " + this.state.task.id);
-    // console.log("key", key);
     fetch("/todo", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

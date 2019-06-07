@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+// Quote Generator API
+
 class Api extends Component {
   constructor(props) {
     super(props);
@@ -85,20 +87,6 @@ class Api extends Component {
     }
   };
 
-  shareOnTwitter = () => {
-    // found on https://gist.github.com/McKinneyDigital/2884508#file-share-twitter-js
-    var url = "twitter.com";
-    let text = `${this.state.author} - ${this.state.text}`;
-    window.open(
-      "http://twitter.com/share?url=" +
-        encodeURIComponent(url) +
-        "&text=" +
-        encodeURIComponent(text),
-      "",
-      "left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0"
-    );
-  };
-
   render() {
     return (
       <footer onClick={this.handleClick}>
@@ -108,20 +96,6 @@ class Api extends Component {
             {this.state.text}
             <span id="author"> - {this.state.author}</span>
           </p>
-          {/* <button
-              id="tweet-quote"
-              className="primary button expanded search-button"
-              onClick={this.shareOnTwitter}
-            >
-              Twitt
-            </button>
-            <button
-              id="new-quote"
-              className="primary button expanded search-button"
-              onClick={this.handleClick}
-            >
-              New Quote
-            </button> */}
         </div>
       </footer>
     );
