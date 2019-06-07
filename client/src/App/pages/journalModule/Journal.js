@@ -29,7 +29,6 @@ class Journal extends Component {
   };
 
   // Sets and format dates and also get journal entry for the chosen day
-
   handleDateChange = date => {
     this.setState(
       {
@@ -42,7 +41,6 @@ class Journal extends Component {
   };
 
   //Query through all entries of journal and display for the chosen date
-
   renderTodaysJournal = entries => {
     entries.forEach(element => {
       let journalDateSpliced = element["journal_date"].split("T")[0];
@@ -58,6 +56,7 @@ class Journal extends Component {
     this.getList();
   }
 
+  //Render all emotions using Liquid Gauge graphs based on weighted average
   renderFeeling = () => {
     let sum = 0;
     let emotionGauges = [];

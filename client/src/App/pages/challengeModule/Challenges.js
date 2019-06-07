@@ -19,6 +19,7 @@ class Challenges extends Component {
   }
 
   render() {
+    //Succession of functions that controls the individual color of each node
     const changeColor1 = () => {
       var newColor = this.state.color1 === "white" ? "#3d98c6" : "white";
       this.setState({ color1: newColor });

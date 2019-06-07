@@ -20,12 +20,14 @@ class Mood extends Component {
     this.getList();
   }
 
+  //GET request to get all saved mood entries from DB
   getList = () => {
     fetch("/mood")
       .then(res => res.json())
       .then(results => this.setState({ moods: results }));
   };
 
+  // POST request to save mood entry to DB
   createSetMood = mood => {
     return () => {
       console.log("clicked", mood);

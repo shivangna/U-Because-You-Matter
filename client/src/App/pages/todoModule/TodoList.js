@@ -10,6 +10,7 @@ class TodoList extends Component {
       currentItem: { text: "", key: "" }
     };
   }
+
   componentDidMount() {
     this.getList();
   }
@@ -42,6 +43,7 @@ class TodoList extends Component {
     this.draggedIdx = null;
   };
 
+  // GET request for all task saved to DB
   getList = () => {
     fetch("/todo")
       .then(res => res.json())
@@ -50,6 +52,7 @@ class TodoList extends Component {
       });
   };
 
+  // DELETE request to delete tasks from DB
   deleteHandler = key => {
     fetch("/todo", {
       method: "DELETE",
@@ -69,6 +72,8 @@ class TodoList extends Component {
     this.setState({ task: e.target.value });
   };
 
+  // DELETE request to delete tasks from DB
+  // Also calls function that display messages
   completeHandler = key => {
     alert(CompleteMessages());
     fetch("/todo", {

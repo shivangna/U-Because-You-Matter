@@ -22,6 +22,7 @@ const messages = [
 
 const messagesLength = messages.length;
 
+// Function that generates a random number between 0 and the size of the array and returns an entry from the messages array
 let completeMessages = () => {
   let min = 0;
   let max = Math.floor(messagesLength);
