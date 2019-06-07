@@ -4,8 +4,6 @@ _Main Contributors_: [Shivangna](https://github.com/shivangna), [Jocelyne](https
 
 "U:" is a mental health journaling app that provides users with a space to get real-time insights into their mental well-being
 
-"U:" is a single page app built using:
-
 ## SCREENSHOTS
 
 ### LOGIN PAGE
@@ -27,6 +25,8 @@ _Main Contributors_: [Shivangna](https://github.com/shivangna), [Jocelyne](https
 ### TODO LIST MODULE
 
 !["A To Do list to help the users focused on what's important. Whenever the user completes a task, a positive reinforcement message is displayed"](https://github.com/shivangna/lhl-final-project/blob/master/Docs/TodoList.gif)
+
+"U:" is a single page app built using:
 
 _FRONT-END_
 
