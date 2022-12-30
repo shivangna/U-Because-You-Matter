@@ -16,7 +16,7 @@
     "react-fusioncharts": "^3.0.1",
     "react-liquid-gauge": "^1.2.4",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "0.9.5",
+    "react-scripts": "5.0.1",
     "react-sticky-footer": "0.1.0-rc3",
     "recharts": "^1.6.2",
     "victory": "^32.2.3"
